@@ -10,14 +10,13 @@
 
   <body>
   	<div class = "container-fluid">
-	<center>
-	<h1>Follow ze steps </h1>
-	<p>
+	<br><center><img class = "img-responsive" src = "stormtrooper.jpg" width = "200" height="200"></center>
+	<center><h1>Follow ze steps </h1></center>
+	<p class = "text-center">
 	<br>Step 1: Initialize Database
 	<br>Step 2: Add a person to the Database
 	<br>Step 3: Add a visit to a person 
 	</p>
-	</center>
 	</div>
   </body>
 </html>
