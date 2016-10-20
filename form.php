@@ -10,7 +10,7 @@
 
   <body>
   	<div class = "container-fluid">
-	<br><center><img class = "img-responsive" src = "stormtrooper.jpg" width = "200" height="200"></center>
+	<br><center><img class = "img-responsive" src = "stormtrooper.jpg" alt = "Stormtrooper" width = "200" height="200"></center>
 	<center><h1>Follow ze steps </h1></center>
 	<p class = "text-center">
 	<br>Step 1: Initialize Database
