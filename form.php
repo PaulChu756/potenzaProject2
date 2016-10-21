@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="js/bootstrap.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="jquery"></script>
   </head>
 
 	<body>
@@ -20,8 +20,6 @@
 		</div>
 	</body>
 </html>
-
-		
 
 <?php
 $host = "localhost";
@@ -57,6 +55,7 @@ $connection->close();
 
 <!--This is the drop down box with names-->
 <center>
+<div id = "form">
 <form action = "form.php" method = "post">
 <br><br>Select a human and learn where they're from and favor food
 	<br><select name="Name" class="btn btn-info dropdown-toggle">
@@ -65,18 +64,16 @@ $connection->close();
 	echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?> 
 	</select>
 		
-	<input type = "submit" value = "Submit" class = "btn btn-success"/>
+	<input type = "submit" value = "Submit" class = "btn btn-success" onclick = "sendInfo()"/>
 </center>
 </form>
+</div>
 
 <script>
-/*
 // Javascript
-var str = ""
-function selectPerson(str)
+function sendInfo()
 {
         var xmlhttp = new XMLHttpRequest();
-
         xmlhttp.onreadystatechange = function()
         {
             // readyState 4 means complete && 200 means complete
@@ -87,18 +84,18 @@ function selectPerson(str)
 	        }
 	        
 	        else
-                {
-                        console.log("error");
-                }
+			{
+					console.log("error");
+			}
         };
 
-        xmlhttp.open("GET","api.php?q="+str, true);
+        xmlhttp.open("POST","api.php", true);
         xmlhttp.send();
 }
-*/
 </script>
 
 <?php
+/*
 $host = "localhost";
 $user = "root";
 $password = "root";
@@ -151,4 +148,5 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	}
 }
 $connection->close();
+*/
 ?>
