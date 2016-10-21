@@ -4,22 +4,22 @@
     <title>Project 1 with BootStrap</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	 <link href="css/bootstrap.css" rel="stylesheet">
-	 <script src="js/bootstrap.js"></script>
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<script src="js/bootstrap.js"></script>
   </head>
 
-  <body>
-  	<div class = "container-fluid">
-	<br><center><img class = "img-responsive" src = "stormtrooper.jpg" alt = "Stormtrooper" width = "200" height="200"></center>
-	<center><h1>Follow ze steps </h1></center>
-	<p class = "text-center">
-	<br>Step 1: Initialize Database
-	<br>Step 2: Add a person to the Database
-	<br>Step 3: Add a visit to a person 
-	</p>
-	</div>
-  </body>
-</html>
+	<body>
+		<div class = "container">
+		<br><center><img class = "img-responsive" src = "stormtrooper.jpg" alt = "Stormtrooper" width = "200" height="200"></center>
+		<center><h1>Follow ze steps </h1></center>
+		<p class = "text-center">
+		<strong>
+		<br>Step 1: Initialize Database
+		<br>Step 2: Add a person to the Database
+		<br>Step 3: Add a visit to a person
+		</strong> 
+		</p>
+		</div>
 
 <?php
 $host = "localhost";
@@ -38,25 +38,26 @@ $connection->close();
 
 <!-- Start Init -->
 <form action = "init.php" method = "get">
-<input type ="submit" value = "Initialize Database" style = "float: right;"/>
+<input type ="submit" class = "btn btn-info" value = "Initialize Database" style = "float: right;"/>
 </form>
 
 <!--Add Person -->
 <form action = "people.php" method = "get">
 <br><br>
-<input type ="submit" value = "Add a Person" style = "float: right;"/>
+<input type ="submit" class = "btn btn-primary" value = "Add a Person" style = "float: right;"/>
 </form>
 
 <!--Add Visit -->
 <form action = "visit.php" method = "get">
 <br><br>
-<input type = "submit" value = "Add a Visit" style = "float: right;"/>
+<input type = "submit" class = "btn btn-success" value = "Add a Visit" style = "float: right;"/>
 </form>
 
 <!--This is the drop down box with names-->
-<form action = "form.php" method = "post">
-<br><br><center>Select a human and learn where they're from and favor food</center>
-	<br><center><select name="Name">
+<center>
+<form action = "form.php" class = "btn btn-primary dropdown-toggle" data-toggle = "dropdown" method = "post">
+<br><br>Select a human and learn where they're from and favor food
+	<br><select name="Name">
 	<?php 
 	while($row = mysqli_fetch_array($result)) {
 	echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?> 
@@ -140,7 +141,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 
 			echo "<br> Their favor food is : " . $foodName;
 		}
-		
+
 		else
 		{
 			echo "<br> You need to add a visit";
@@ -149,3 +150,5 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 }
 $connection->close();
 ?>
+	</body>
+</html>
