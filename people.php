@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project 1 with BootStrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<script src="js/bootstrap.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+</html>
+
 <?php
 $host = "localhost";
 $user = "root";
@@ -49,12 +60,12 @@ Last Name: <input type = "text" name = "lastName">
 <span class = "error">* <?php echo $lastNameError;?></span><br><br>
 Favorite Food: <input type = "text" name = "food">
 <span class = "error">* <?php echo $foodError;?></span><br><br>
-<input type = "submit" value = "Submit"/>
+<input type = "submit" value = "Submit" class = "btn btn-success"/>
 </form>
 
 <!--Return button-->
 <form action = "form.php" method = "get">
-<input type = "submit" value = "Return back to form" style = "float: right;"/>
+<input type = "submit" value = "Return back to form" class = "btn btn-success" style = "float: right;"/>
 </form>
 
 <?php

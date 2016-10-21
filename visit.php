@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project 1 with BootStrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<script src="js/bootstrap.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+</html>
+
 <?php
 $host = "localhost";
 $user = "root";
@@ -33,7 +44,7 @@ $connection->close();
 
 <!--Select human-->
 <br>Select a human and learn their name
-<br><select name="humanName">
+<br><select name="humanName" class="btn btn-primary dropdown-toggle">
 <?php 
 while($row = mysqli_fetch_array($humanResult)) {
 echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?> 
@@ -41,7 +52,7 @@ echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?>
 
 <!--Select States-->
 <br><br><br><br><br><br>Select a state 
-<br><select name="stateName">
+<br><select name="stateName" class="btn btn-info dropdown-toggle">
 <?php 
 while($row = mysqli_fetch_array($stateResult)) {
 echo "<option value='" . $row['id'] . "'>" . $row['statename'] . "</option>";}?> 
@@ -55,12 +66,12 @@ Format: YYYY/MM/DD<br>
 Example: 1994/07/14<br>
 <input type = "text" name = "visit">
 <span class = "error">* <?php echo $visitError;?></span><br><br>
-<input type = "submit" value = "Enter ze data"/>
+<input type = "submit" class = "btn btn-success" value = "Enter ze data"/>
 </form>
 
 <!--Return button-->
 <form action = "form.php" method = "get">
-<input type = "submit" value = "Return back to form" style = "float: right;"/>
+<input type = "submit" value = "Return back to form" class = "btn btn-success" style = "float: right;"/>
 </form>
 
 <?php
