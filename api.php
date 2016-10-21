@@ -1,3 +1,14 @@
+<?php
+$host = "localhost";
+$user = "root";
+$password = "root";
+$database = "myDB";
+
+$connection = mysqli_connect($host, $user, $password);
+if(!$connection){
+die("Could not connect: " . mysqli_connect_error());}
+$connection->select_db($database);
+?>
 
 <script>
 function callBack(url, cFunction)

@@ -64,33 +64,34 @@ $connection->close();
 	echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?> 
 	</select>
 		
-	<input type = "submit" value = "Submit" class = "btn btn-success" onclick = "sendInfo()"/>
+	<input type = "submit" value = "Submit" class = "btn btn-success" onclick = sendInfo(this.value)/>
 </center>
 </form>
 </div>
 
 <script>
 // Javascript
-function sendInfo()
+function sendInfo(str)
 {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function()
-        {
-            // readyState 4 means complete && 200 means complete
-	        if(this.readyState == 4 && this.status == 200) 
-	        {
-	            console.log("Went through");
-	            //document.getElementByID(grab ID).innerHTML = this.responseText;
-	        }
-	        
-	        else
-			{
-					console.log("error");
-			}
-        };
+	var_dump(str);
+	console.log("Butt");
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		// readyState 4 means complete && 200 means complete
+		if(this.readyState == 4 && this.status == 200) 
+		{
+			console.log("Went through");
+			//document.getElementByID(grab ID).innerHTML = this.responseText;
+		}
+		else
+		{
+				console.log("error");
+		}
+	};
 
-        xmlhttp.open("POST","api.php", true);
-        xmlhttp.send();
+	xmlhttp.open("POST","api.php"+str, true);
+	xmlhttp.send();
 }
 </script>
 
