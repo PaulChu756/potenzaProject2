@@ -85,7 +85,6 @@ function sendInfo(str)
 	<?php 
 	while($row = mysqli_fetch_array($result)) {
 	echo "
-	<option value="">Select a person:</option>
 	<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?> 
 	</select>	
 	<!--<input type = "submit" value = "Submit" class = "btn btn-success" onclick = sendInfo(this.value)/>-->
