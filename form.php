@@ -53,47 +53,45 @@ $connection->close();
 <input type = "submit" class = "btn btn-success" value = "Add a Visit" style = "float: right;"/>
 </form>
 
-<!--This is the drop down box with names-->
-<center>
-<div id = "form">
-<form action = "form.php" method = "post">
-<br><br>Select a human and learn where they're from and favor food
-	<br><select name="Name" class="btn btn-info dropdown-toggle">
-	<?php 
-	while($row = mysqli_fetch_array($result)) {
-	echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?> 
-	</select>
-		
-	<input type = "submit" value = "Submit" class = "btn btn-success" onclick = sendInfo(this.value)/>
-</center>
-</form>
-</div>
-
 <script>
-// Javascript
 function sendInfo(str)
 {
-	var_dump(str);
-	console.log("Butt");
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function()
+	if(str == "")
 	{
-		// readyState 4 means complete && 200 means complete
-		if(this.readyState == 4 && this.status == 200) 
+		return document.getElementById("form").innerHTML = "";
+	}
+	else 
+	{
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function()
 		{
-			console.log("Went through");
-			//document.getElementByID(grab ID).innerHTML = this.responseText;
-		}
-		else
-		{
-				console.log("error");
-		}
-	};
-
-	xmlhttp.open("POST","api.php"+str, true);
-	xmlhttp.send();
+			// readyState 4 means complete && 200 means complete
+			if(this.readyState == 4 && this.status == 200) 
+			{
+				document.getElementById("form").innerHTML = this.responseText;
+			}
+		};
+		xmlhttp.open("POST","api.php?q="+str, true);
+		xmlhttp.send();
+	}
 }
 </script>
+
+<center>
+<!--<form action = "form.php" method = "post">-->
+<form>
+<br><br>Select a human and learn where they're from and favor food
+	<br><select name="Name" onchange = "sendInfo(this.value)">
+	<?php 
+	while($row = mysqli_fetch_array($result)) {
+	echo "
+	<option value="">Select a person:</option>
+	<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?> 
+	</select>	
+	<!--<input type = "submit" value = "Submit" class = "btn btn-success" onclick = sendInfo(this.value)/>-->
+</center>
+</form>
+<div id = "form"><center><strong>Selected person info will be here</strong></center></div>
 
 <?php
 /*

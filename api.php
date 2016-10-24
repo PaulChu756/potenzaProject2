@@ -1,4 +1,6 @@
 <?php
+$id = intval($_GET['q']);
+
 $host = "localhost";
 $user = "root";
 $password = "root";
@@ -7,10 +9,43 @@ $database = "myDB";
 $connection = mysqli_connect($host, $user, $password);
 if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
+
 $connection->select_db($database);
+$resultSql =	"SELECT p.firstname, s.statename, p.food
+				FROM Visits v
+				INNER JOIN People p ON v.p_id = p.id
+				INNER JOIN States s ON v.s_id = s.id
+				WHERE v.p_id =" . $id;
+
+$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
+$row2 = mysqli_fetch_array($query);
+	
+		$firstName = $row2["firstname"];
+		$stateName = $row2["statename"];
+		$foodName = $row2["food"];
+
+		if(!empty($firstName) && !empty($stateName) && !empty($foodName))
+		{
+			echo "<br> The human you select is : " . $firstName;
+		
+			echo "<br> The state they're visited : " . $stateName;
+			while($row3 = mysqli_fetch_array($query))
+			{
+				$stateName = $row3["statename"];
+				echo "<br> The state they're visited : " . $stateName;				
+			}
+
+			echo "<br> Their favor food is : " . $foodName;
+		}
+
+		else
+		{
+			echo "<br> You need to add a visit";
+		}
 ?>
 
 <script>
+/*
 function callBack(url, cFunction)
 {
 	var xhttp = new XMLHttpRequest();
@@ -39,4 +74,5 @@ function getAllPeople(xhttp)
 {
 	document.getElementById("form").innerHTML = xhttp.responseText;
 }
+*/
 </script>
