@@ -71,7 +71,7 @@ function sendInfo(str)
 				document.getElementById("form").innerHTML = this.responseText;
 			}
 		};
-		xmlhttp.open("POST","api.php?q="+str, true);
+		xmlhttp.open("POST","api.php?q=" + str, true);
 		xmlhttp.send();
 	}
 }
@@ -84,10 +84,9 @@ function sendInfo(str)
 	<br><select name="Name" onchange = "sendInfo(this.value)">
 	<?php 
 	while($row = mysqli_fetch_array($result)) {
-	echo "
-	<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?> 
+	echo "<option value=" . $row['id'] . ">" . $row['firstname'] . "</option>";}?> 
 	</select>	
 	<!--<input type = "submit" value = "Submit" class = "btn btn-success" onclick = sendInfo(this.value)/>-->
 </center>
 </form>
-<div id = "form"><center><strong>Selected person info will be here</strong></center></div>
+<div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
