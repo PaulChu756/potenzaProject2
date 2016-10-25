@@ -81,8 +81,9 @@ function sendInfo(str)
 <!--<form action = "form.php" method = "post">-->
 <form>
 <br><br>Select a human and learn where they're from and favor food
-	<br><select name="Name" onchange = "sendInfo(this.value)">
+	<br><br><select name="Name" onchange = "sendInfo(this.value)">
 	<?php 
+	echo '<option value="">Select a human:</option>';
 	while($row = mysqli_fetch_array($result)) {
 	echo "<option value=" . $row['id'] . ">" . $row['firstname'] . "</option>";}?> 
 	</select>	

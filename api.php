@@ -26,9 +26,10 @@ $row2 = mysqli_fetch_array($query);
 
 		if(!empty($firstName) && !empty($stateName) && !empty($foodName))
 		{
-			echo "<br><center> The human you select is : " . $firstName . "</center>";
+			echo "<br><br><center> The human you select is : " . $firstName . "</center>";
 		
 			echo "<br><center> The state they're visited : " . $stateName . "</center>";
+
 			while($row3 = mysqli_fetch_array($query))
 			{
 				$stateName = $row3["statename"];
