@@ -26,21 +26,21 @@ $row2 = mysqli_fetch_array($query);
 
 		if(!empty($firstName) && !empty($stateName) && !empty($foodName))
 		{
-			echo "<br> The human you select is : " . $firstName;
+			echo "<br><center> The human you select is : " . $firstName . "</center>";
 		
-			echo "<br> The state they're visited : " . $stateName;
+			echo "<br><center> The state they're visited : " . $stateName . "</center>";
 			while($row3 = mysqli_fetch_array($query))
 			{
 				$stateName = $row3["statename"];
-				echo "<br> The state they're visited : " . $stateName;				
+				echo "<br><center> The state they're visited : " . $stateName . "</center>";				
 			}
 
-			echo "<br> Their favor food is : " . $foodName;
+			echo "<br><center> Their favor food is : " . $foodName . "</center>";
 		}
 
 		else
 		{
-			echo "<br> You need to add a visit";
+			echo "<br><center> You need to add a visit </center>";
 		}
 ?>
 
