@@ -71,7 +71,7 @@ function sendInfo(str)
 				document.getElementById("form").innerHTML = this.responseText;
 			}
 		};
-		xmlhttp.open("GET","api.php?q=" + str, true);
+		xmlhttp.open("POST","api.php?q="+str, true);
 		xmlhttp.send();
 	}
 }

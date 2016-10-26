@@ -1,5 +1,6 @@
 <?php
-$id = intval($_GET['q']);
+$id = $_GET['q'];
+//var_dump($id);
 
 $host = "localhost";
 $user = "root";
