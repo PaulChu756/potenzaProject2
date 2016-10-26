@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/var/www/app/public
 # My first script
+alias l='ls -l'
 
 echo "Hello World!"
 
