@@ -72,8 +72,8 @@ Favorite Food: <input type = "text" name = "food">
 </form>
 
 <?php
-echo "First name entered: " . $firstNameEnter . "<br>";
-echo "Last name entered: " . $lastNameEnter . "<br>";
-echo "Favorite food: " . $foodEnter . "<br>";
+echo "<br>First name entered: " . $firstNameEnter . "<br>";
+echo "<br>Last name entered: " . $lastNameEnter . "<br>";
+echo "<br>Favorite food: " . $foodEnter . "<br>";
 ?>
 
