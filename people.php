@@ -32,16 +32,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	$lastNameEnter = $_POST["lastName"];
 	$foodEnter = $_POST["food"];
 
-	if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter)){
+	if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter))
+	{
 	// Insert values into table
 	$sql = "INSERT INTO People (firstname, lastname, food) 
 	VALUES('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
 		// Check if insert is good
-		if($connection->query($sql) === FALSE){
+		if($connection->query($sql) === FALSE)
+		{
 		echo "Error: " . $sql . "<br>" . $connection->error;
 		}
 	}
-	else {
+	else 
+	{
 	$firstNameError = "First Name is required";
 	$lastNameError = "Last Name is required";
 	$foodError = "Food is required NOW!";
@@ -69,7 +72,6 @@ Favorite Food: <input type = "text" name = "food">
 </form>
 
 <?php
-//Print out first and last names
 echo "First name entered: " . $firstNameEnter . "<br>";
 echo "Last name entered: " . $lastNameEnter . "<br>";
 echo "Favorite food: " . $foodEnter . "<br>";
