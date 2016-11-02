@@ -14,9 +14,9 @@
 	<center>
 	<h1>Follow ze steps </h1>
 	<p>
-	<br>Step 1: Initialize Database
-	<br>Step 2: Add a person to the Database
-	<br>Step 3: Add a visit to a person 
+	<br>Step 1: Add a person to the Database
+	<br>Step 2: Add a visit to a person
+	<br>Step 3: Select a human! 
 	</p>
 	</center>
 	</div>
@@ -38,14 +38,14 @@ $result = mysqli_query($connection,$sql);
 $connection->close();
 ?>
 
-<!-- Start Init -->
+<!-- Start Init
 <form action = "init.php" method = "get">
 <input type ="submit" value = "Initialize Database" style = "float: right;"/>
 </form>
+-->
 
 <!--Add Person -->
 <form action = "people.php" method = "get">
-<br><br>
 <input type ="submit" value = "Add a Person" style = "float: right;"/>
 </form>
 
@@ -67,35 +67,6 @@ $connection->close();
 	<input type = "submit" value = "Submit"/>
 </center>
 </form>
-
-<script>
-/*
-// Javascript
-var str = ""
-function selectPerson(str)
-{
-        var xmlhttp = new XMLHttpRequest();
-
-        xmlhttp.onreadystatechange = function()
-        {
-            // readyState 4 means complete && 200 means complete
-	        if(this.readyState == 4 && this.status == 200) 
-	        {
-	            console.log("Went through");
-	            //document.getElementByID(grab ID).innerHTML = this.responseText;
-	        }
-	        
-	        else
-                {
-                        console.log("error");
-                }
-        };
-
-        xmlhttp.open("GET","api.php?q="+str, true);
-        xmlhttp.send();
-}
-*/
-</script>
 
 <?php
 $host = "localhost";

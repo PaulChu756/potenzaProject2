@@ -6,7 +6,7 @@ $password = "root";
 $database = "myDB";
 
 //Create connection
-$connection = new mysqli($host, $user, $password);
+$connection = mysqli_connect($host, $user, $password);
 
 // Check connection
 if(!$connection){
@@ -133,6 +133,7 @@ else
 $connection->close();
 ?>
 
-<!--Return button-->
+<!--Return button
 <form action = "form.php" method = "get">
 <input type = "submit" value = "Return back to form" style = "float: right;"/>
+-->

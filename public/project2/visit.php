@@ -103,6 +103,7 @@ Example: 1994/07/14<br>
 <input type = "text" name = "visit">
 <span class = "error">* <?php echo $visitError;?></span><br><br>
 <input type = "submit" class = "btn btn-success" value = "Enter ze data"/>
+<br><br>
 </form>
 
 <!--Return button-->

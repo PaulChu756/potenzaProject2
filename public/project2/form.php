@@ -13,9 +13,9 @@
 			<br><center><img class = "img-responsive" src = "stormtrooper.jpg" alt = "Stormtrooper" width = "200" height="200"></center>
 			<center><h1>Follow ze steps </h1></center>
 			<p class = "text-center">
-			<br>Step 1: Initialize Database
-			<br>Step 2: Add a person to the Database
-			<br>Step 3: Add a visit to a person
+			<br>Step 1: Add a person to the Database
+			<br>Step 2: Add a visit to a person
+			<br>Step 3: Select a human!
 			</p>	
 		</div>
 	</body>
@@ -36,14 +36,14 @@ $result = mysqli_query($connection,$sql);
 $connection->close();
 ?>
 
-<!-- Start Init -->
+<!-- Start Init
 <form action = "init.php" method = "get">
 <input type ="submit" class = "btn btn-danger" value = "Initialize Database" style = "float: right;"/>
 </form>
+-->
 
 <!--Add Person -->
 <form action = "people.php" method = "get">
-<br><br>
 <input type ="submit" class = "btn btn-warning" value = "Add a Person" style = "float: right;"/>
 </form>
 
@@ -86,8 +86,7 @@ function sendInfo(str)
 	echo '<option value="">Select a human:</option>';
 	while($row = mysqli_fetch_array($result)) {
 	echo "<option value=" . $row['id'] . ">" . $row['firstname'] . "</option>";}?> 
-	</select>	
-	<!--<input type = "submit" value = "Submit" class = "btn btn-success" onclick = sendInfo(this.value)/>-->
+	</select>
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
