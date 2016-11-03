@@ -13,9 +13,10 @@
 			<br><center><img class = "img-responsive" src = "stormtrooper.jpg" alt = "Stormtrooper" width = "200" height="200"></center>
 			<center><h1>Follow ze steps </h1></center>
 			<p class = "text-center">
-			<br>Step 1: Add a person to the Database
-			<br>Step 2: Add a visit to a person
-			<br>Step 3: Select a human!
+			<br>Step 1: Must initialize init.php, cli php init.php.
+			<br>Step 2: Add a person to the Database
+			<br>Step 3: Add a visit to a person
+			<br>Step 4: Select a human!
 			</p>	
 		</div>
 	</body>
@@ -35,12 +36,6 @@ $sql = "SELECT id, firstname FROM People";
 $result = mysqli_query($connection,$sql);
 $connection->close();
 ?>
-
-<!-- Start Init
-<form action = "init.php" method = "get">
-<input type ="submit" class = "btn btn-danger" value = "Initialize Database" style = "float: right;"/>
-</form>
--->
 
 <!--Add Person -->
 <form action = "people.php" method = "get">
@@ -78,7 +73,6 @@ function sendInfo(str)
 </script>
 
 <center>
-<!--<form action = "form.php" method = "post">-->
 <form>
 <br><br>Select a human and learn where they're from and favor food
 	<br><br><select name="Name" onchange = "sendInfo(this.value)">

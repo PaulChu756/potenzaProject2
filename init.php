@@ -97,33 +97,56 @@ else
 }
 
 // Insert data into states table
-$stateData = "INSERT INTO States (stateabb, statename) 
-VALUES ('LA', 'Louisiana');";
-$stateData .= "INSERT INTO States (stateabb, statename) 
-VALUES ('FL', 'Florida');";
-$stateData .= "INSERT INTO States (stateabb, statename) 
-VALUES ('TX', 'Texas');";
-$stateData .= "INSERT INTO States (stateabb, statename) 
-VALUES ('NM', 'New Mexico');";
-$stateData .= "INSERT INTO States (stateabb, statename) 
-VALUES ('ID', 'Idaho');";
-$stateData .= "INSERT INTO States (stateabb, statename) 
-VALUES ('IA', 'Iowa');";
-$stateData .= "INSERT INTO States (stateabb, statename) 
-VALUES ('ME', 'Maine');";
-$stateData .= "INSERT INTO States (stateabb, statename) 
-VALUES ('NV', 'Nevada');";
-$stateData .= "INSERT INTO States (stateabb, statename) 
-VALUES ('NY', 'New York');";
-$stateData .= "INSERT INTO States (stateabb, statename) 
-VALUES ('UT', 'Utah');";
+$insertData = "	INSERT INTO States (stateabb, statename) 
+				VALUES ('LA', 'Louisiana');";
+$insertData .= "INSERT INTO States (stateabb, statename) 
+				VALUES ('FL', 'Florida');";
+$insertData .= "INSERT INTO States (stateabb, statename) 
+				VALUES ('TX', 'Texas');";
+$insertData .= "INSERT INTO States (stateabb, statename) 
+				VALUES ('NM', 'New Mexico');";
+$insertData .= "INSERT INTO States (stateabb, statename) 
+				VALUES ('ID', 'Idaho');";
+$insertData .= "INSERT INTO States (stateabb, statename) 
+				VALUES ('IA', 'Iowa');";
+$insertData .= "INSERT INTO States (stateabb, statename) 
+				VALUES ('ME', 'Maine');";
+$insertData .= "INSERT INTO States (stateabb, statename) 
+				VALUES ('NV', 'Nevada');";
+$insertData .= "INSERT INTO States (stateabb, statename) 
+				VALUES ('NY', 'New York');";
+$insertData .= "INSERT INTO States (stateabb, statename) 
+				VALUES ('UT', 'Utah');";
 
-// Check Data in table
-if($connection->multi_query($stateData) === TRUE)
+// Insert data into people table
+$insertData .= "INSERT INTO People (firstname, lastname, food) 
+				VALUES ('Paul', 'Chu', 'Rice');";
+$insertData .= "INSERT INTO People (firstname, lastname, food) 
+				VALUES ('Chui', 'Chu', 'Steak');";
+$insertData .= "INSERT INTO People (firstname, lastname, food) 
+				VALUES ('Pandalord', 'Chu', 'Cookies');";
+$insertData .= "INSERT INTO People (firstname, lastname, food) 
+				VALUES ('LordBabyPanda', 'Chu', 'Milk');";
+
+// Insert data into Visits table
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+				VALUES ('1', '1', '1994/07/14');";
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+				VALUES ('1', '2', '1994/07/14');";
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+				VALUES ('2', '10', '1994/07/14');";
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+				VALUES ('3', '9', '1994/07/14');";
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+				VALUES ('4', '7', '1994/07/14');";
+
+// Check stateData in table
+if($connection->multi_query($insertData) === TRUE)
 {
 	$lastID = $connection->insert_id;
-	echo "<br>New data create successfully. Last inserted ID is: " . $lastID;
+	echo "<br> insertData create successfully. Last inserted ID is: " . $lastID;
 }
+
 else
 {
 	echo "<br>Error: " . $connection->error;
@@ -132,8 +155,3 @@ else
 //Close Connection
 $connection->close();
 ?>
-
-<!--Return button
-<form action = "form.php" method = "get">
-<input type = "submit" value = "Return back to form" style = "float: right;"/>
--->
