@@ -63,7 +63,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 $connection->close();
 ?>
 
-<form action = "visit.php" method = "post">
+<form action = "index.php" method = "post">
 <!--Select human-->
 <br>Select a human
 <br><select name="humanName" class="btn btn-primary dropdown-toggle">
@@ -93,7 +93,7 @@ Example: 1994/07/14<br>
 </form>
 
 <!--Return button-->
-<form action = "form.php" method = "get">
+<form action = "index.php" method = "get">
 <input type = "submit" value = "Return back to form" class = "btn btn-success" style = "float: right;"/>
 </form>
 

@@ -67,7 +67,7 @@ Favorite Food: <input type = "text" name = "food">
 </form>
 
 <!--Return button-->
-<form action = "form.php" method = "get">
+<form action = "index.php" method = "get">
 <input type = "submit" value = "Return back to form" class = "btn btn-success" style = "float: right;"/>
 </form>
 
