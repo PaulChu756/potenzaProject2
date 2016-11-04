@@ -35,20 +35,6 @@ $visitSql = "SELECT People.firstname, States.statename
 	INNER JOIN People p ON v.p_id = p.id
 	INNER JOIN States s ON v.s_id = s.id";
 
-$connection->close();
-?>
-
-<?php
-$host = "localhost";
-$user = "root";
-$password = "root";
-$database = "myDB";
-
-//Connection and check connect
-$connection = mysqli_connect($host, $user, $password);
-if(!$connection) {die("Could not connect: " . mysqli_connect_error());}
-$connection->select_db($database);
-
 // Put visit error blank
 $visitError = $visitEnter = "";
 
@@ -103,6 +89,7 @@ Example: 1994/07/14<br>
 <input type = "text" name = "visit">
 <span class = "error">* <?php echo $visitError;?></span><br><br>
 <input type = "submit" class = "btn btn-success" value = "Enter ze data"/>
+<br><br>
 </form>
 
 <!--Return button-->

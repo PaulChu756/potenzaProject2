@@ -1,5 +1,6 @@
 <?php
-$id = $_POST['q'];
+// Instead of doing POST, I'm getting information from form.php
+$id = $_GET['q'];
 //var_dump($id);
 
 $host = "localhost";
@@ -37,7 +38,7 @@ $row2 = mysqli_fetch_array($query);
 				echo "<br><center> The state they're visited : " . $stateName . "</center>";				
 			}
 
-			echo "<br><center> Their favor food is : " . $foodName . "</center>";
+			echo "<br><center> Their favor food is : " . $foodName . "<br><br><br><br></center>";
 		}
 
 		else
