@@ -49,7 +49,24 @@ $connection->close();
 </form>
 
 <script>
-//Need to redo ajax
+function sendInfo(str)
+{
+	$.ajax({
+		// type of request
+		type: "GET",
+		//url for request
+		url:"api.php",
+		//data to send, convert to string
+		data: {str},
+		// type of data we expect back
+		dataType : "json",
+	})
+	.done(function(json))
+		console.log("success");
+}
+
+/*
+// Pure javascript, doesn't use Jquery at all
 function sendInfo(str)
 {
 	if(str == "")
@@ -67,10 +84,11 @@ function sendInfo(str)
 				document.getElementById("form").innerHTML = this.responseText;
 			}
 		};
-		xmlhttp.open("GET","api.php?q="+str, true);
+		xmlhttp.open("GET","api.php?q=" + str, true);
 		xmlhttp.send();
 	}
 }
+*/
 </script>
 
 <center>
