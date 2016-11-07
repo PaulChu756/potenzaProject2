@@ -49,6 +49,7 @@ $connection->close();
 </form>
 
 <script>
+//Need to redo ajax
 function sendInfo(str)
 {
 	if(str == "")
@@ -66,7 +67,7 @@ function sendInfo(str)
 				document.getElementById("form").innerHTML = this.responseText;
 			}
 		};
-		xmlhttp.open("POST","api.php?q="+str, true);
+		xmlhttp.open("GET","api.php?q="+str, true);
 		xmlhttp.send();
 	}
 }
