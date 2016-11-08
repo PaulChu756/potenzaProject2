@@ -6,7 +6,7 @@
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="js/bootstrap.js"></script>
 	<script type = "text/javascript"
-			src="jquery"></script>
+			src="jquery.js"></script>
   </head>
 
 	<body>
@@ -50,9 +50,39 @@ $connection->close();
 </form>
 
 <script type = "text/javascript">
+$("document").ready(function(){
+	function getInfo(str){
+	$.ajax({
+			url: "10.10.10.10/project2/api.php",
+			type: "GET",
+			//data: {php},
+			//success: function(php){
+			//	alert("success");
+			//}
+			// type of data we expect back
+			//dataType : "json",
+		});
+	}
+)};
+</script>
+
+<center>
+<form>
+<br><br>Select a human and learn where they're from and favor food
+	<br><br><select name="Name" onchange = "getInfo(this.value)">
+	<?php 
+	echo '<option value="">Select a human:</option>';
+	while($row = mysqli_fetch_array($result)) {
+	echo "<option value=" . $row['id'] . ">" . $row['firstname'] . "</option>";}?> 
+	</select>
+</center>
+</form>
+<div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
+
+<script>
 /*
-// Pure javascript, doesn't use Jquery at all
-function sendInfo(str)
+Pure javascript, doesn't use Jquery at all
+function getInfo(str)
 {
 	if(str == "")
 	{
@@ -69,40 +99,9 @@ function sendInfo(str)
 				document.getElementById("form").innerHTML = this.responseText;
 			}
 		};
-		xmlhttp.open("GET","api.php?q=" + str, true);
+		xmlhttp.open("GET","api.php?q="+str, true);
 		xmlhttp.send();
 	}
 }
 */
-$("document").ready(function() {
-	function getInfo(str){
-	$.ajax({
-			type: "GET",
-			url:"10.10.10.10/project2/api.php",
-			data: {str},
-			success: function(){
-				console.log("success");
-			}
-			error: function(){
-				console.log("error");
-			}
-			// type of data we expect back
-			//dataType : "json",
-		});
-	}
-)};
-
 </script>
-
-<center>
-<form>
-<br><br>Select a human and learn where they're from and favor food
-	<br><br><select name="Name" onchange = "getInfo(this.value)">
-	<?php 
-	echo '<option value="">Select a human:</option>';
-	while($row = mysqli_fetch_array($result)) {
-	echo "<option value=" . $row['id'] . ">" . $row['firstname'] . "</option>";}?> 
-	</select>
-</center>
-</form>
-<div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
