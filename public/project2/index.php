@@ -62,6 +62,7 @@ $connection->close();
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
 
 <script>
+console.log("ugDNOJAODBAWIDBAWONSDLDNAWKNJ!h");
 $(document).ready(function(){
 	$('#Name').change(function(){
 		var getInfo = $(this).val();
@@ -72,6 +73,10 @@ $(document).ready(function(){
 				success: function(data)
 				{
 					console.log("success");
+				}
+				error: function(jqXHR, textStatus, errorThrown)
+				{
+					console.log(textStatus, errorThrown);
 				}
 			});
 		});
