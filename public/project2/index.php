@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="js/bootstrap.js"></script>
-	<script type = "text/javascript"
-			src="jquery.js"></script>
+	<script src="jquery.js"></script>
   </head>
 
 	<body>
@@ -30,10 +29,9 @@ $password = "root";
 $database = "myDB";
 
 $connection = mysqli_connect($host, $user, $password);
-if(!$connection){
-die("Could not connect: " . mysqli_connect_error());}
+if(!$connection) {die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
-$sql = "SELECT id, firstname FROM People";
+$sql = "SELECT * FROM People";
 $result = mysqli_query($connection,$sql);
 $connection->close();
 ?>
@@ -49,27 +47,11 @@ $connection->close();
 <input type = "submit" class = "btn btn-success" value = "Add a Visit" style = "float: right;"/>
 </form>
 
-<script type = "text/javascript">
-$("document").ready(function(){
-	function getInfo(str){
-	$.ajax({
-			url: "10.10.10.10/project2/api.php",
-			type: "GET",
-			//data: {php},
-			//success: function(php){
-			//	alert("success");
-			//}
-			// type of data we expect back
-			//dataType : "json",
-		});
-	}
-)};
-</script>
-
 <center>
 <form>
 <br><br>Select a human and learn where they're from and favor food
-	<br><br><select name="Name" onchange = "getInfo(this.value)">
+<!--onchange = "getInfo(this.value)"-->
+	<br><br><select name="Name" id="Name">
 	<?php 
 	echo '<option value="">Select a human:</option>';
 	while($row = mysqli_fetch_array($result)) {
@@ -80,6 +62,22 @@ $("document").ready(function(){
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
 
 <script>
+$(document).ready(function(){
+	$('#Name').change(function(){
+		var getInfo = $(this).val();
+		$.ajax({
+				url: "api.php",
+				type: "GET",
+				data: {personID:getInfo},
+				success: function(data)
+				{
+					console.log("success");
+				}
+			});
+		});
+	)};
+		// type of data we expect back
+		//dataType : "json",
 /*
 Pure javascript, doesn't use Jquery at all
 function getInfo(str)
