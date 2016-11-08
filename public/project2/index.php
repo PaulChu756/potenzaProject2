@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="js/bootstrap.js"></script>
-	<script src="jquery"></script>
+	<script type = "text/javascript"
+			src="jquery"></script>
   </head>
 
 	<body>
@@ -48,23 +49,7 @@ $connection->close();
 <input type = "submit" class = "btn btn-success" value = "Add a Visit" style = "float: right;"/>
 </form>
 
-<script>
-function sendInfo(str)
-{
-	$.ajax({
-		// type of request
-		type: "GET",
-		//url for request
-		url:"api.php",
-		//data to send, convert to string
-		data: {str},
-		// type of data we expect back
-		dataType : "json",
-	})
-	.done(function(json))
-		console.log("success");
-}
-
+<script type = "text/javascript">
 /*
 // Pure javascript, doesn't use Jquery at all
 function sendInfo(str)
@@ -89,12 +74,30 @@ function sendInfo(str)
 	}
 }
 */
+$("document").ready(function() {
+	function getInfo(str){
+	$.ajax({
+			type: "GET",
+			url:"10.10.10.10/project2/api.php",
+			data: {str},
+			success: function(){
+				console.log("success");
+			}
+			error: function(){
+				console.log("error");
+			}
+			// type of data we expect back
+			//dataType : "json",
+		});
+	}
+)};
+
 </script>
 
 <center>
 <form>
 <br><br>Select a human and learn where they're from and favor food
-	<br><br><select name="Name" onchange = "sendInfo(this.value)">
+	<br><br><select name="Name" onchange = "getInfo(this.value)">
 	<?php 
 	echo '<option value="">Select a human:</option>';
 	while($row = mysqli_fetch_array($result)) {
