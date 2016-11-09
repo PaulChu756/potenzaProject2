@@ -29,8 +29,8 @@ function getPeople($connection)
     <title>Project 1 with BootStrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8"/>
-	<script src="jquery.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet">
+	<script src="jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
   </head>
   
@@ -76,48 +76,3 @@ function getPeople($connection)
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
-
-<script>
-$(document).ready(function(){
-	$('#Name').change(function(){
-		var getInfo = $(this).val();
-		$.ajax({
-				url: "api.php",
-				type: "POST",
-				// Key | Value 
-				data:{personID:getInfo},
-				success: function(data)
-				{
-					$('#showPerson').html(data);
-				}
-				// type of data we expect back
-				//dataType : "json",
-		});
-	});
-});
-		
-/*
-Pure javascript, doesn't use Jquery at all
-function getInfo(str)
-{
-	if(str == "")
-	{
-		return document.getElementById("form").innerHTML = "";
-	}
-	else 
-	{
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function()
-		{
-			// readyState 4 means complete && 200 means complete
-			if(this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("form").innerHTML = this.responseText;
-			}
-		};
-		xmlhttp.open("GET","api.php?q="+str, true);
-		xmlhttp.send();
-	}
-}
-*/
-</script>
