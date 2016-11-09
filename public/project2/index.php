@@ -19,6 +19,7 @@ function getPeople($connection)
 	}
 	return $output;
 }
+//don't need to close connection anymore because exc function and ends
 //$connection->close();
 ?>
 
@@ -32,7 +33,7 @@ function getPeople($connection)
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="js/bootstrap.js"></script>
   </head>
-
+  
 	<body>
 		<div class = "container">
 			<br><center><img class = "img-responsive" src = "stormtrooper.jpg" alt = "Stormtrooper" width = "200" height="200"></center>
@@ -67,6 +68,11 @@ function getPeople($connection)
 	echo getPeople($connection);
 	?> 
 	</select>
+	<div class="row" id="showPerson">
+	<?php
+	echo getPeople($connection);
+	?>
+	</div>
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
@@ -77,12 +83,12 @@ $(document).ready(function(){
 		var getInfo = $(this).val();
 		$.ajax({
 				url: "api.php",
-				type: "GET",
+				type: "POST",
 				// Key | Value 
 				data:{personID:getInfo},
 				success: function(data)
 				{
-					console.log(data);
+					$('#showPerson').html(data);
 				}
 				// type of data we expect back
 				//dataType : "json",
