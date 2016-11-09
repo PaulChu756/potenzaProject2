@@ -1,13 +1,11 @@
 <script src="jquery.js"></script>
-console.log("cookies");
-die();
 
 $(document).ready(function(){
 	$('#Name').change(function(){
 		var getInfo = $(this).val();
 		$.ajax({
-				url: "api.php",
 				type: "POST",
+				url: "api.php",
 				// Key | Value 
 				data:{personID:getInfo},
 				success: function(data)

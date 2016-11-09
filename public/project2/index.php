@@ -1,17 +1,10 @@
 <?php
-$host = "localhost";
-$user = "root";
-$password = "root";
-$database = "myDB";
-
-$connection = mysqli_connect($host, $user, $password);
-if(!$connection) {die("Could not connect: " . mysqli_connect_error());}
-$connection->select_db($database);
-
-function getPeople($connection)
+/*
+function getPeople()
 {
 	$output = '';
 	$sql = "SELECT * FROM People";
+	var_dump($sql);
 	$result = mysqli_query($connection,$sql);
 	while($row = mysqli_fetch_array($result)) 
 	{
@@ -19,8 +12,7 @@ function getPeople($connection)
 	}
 	return $output;
 }
-//don't need to close connection anymore because exc function and ends
-//$connection->close();
+*/
 ?>
 
 <!DOCTYPE html>
@@ -64,15 +56,6 @@ function getPeople($connection)
 	<br><br>Select a human and learn where they're from and favor food
 	<br><br><select name="Name" id="Name">
 	<option value="">Select a human:</option>
-	<?php 
-	echo getPeople($connection);
-	?> 
-	</select>
-	<div class="row" id="showPerson">
-	<?php
-	echo getPeople($connection);
-	?>
-	</div>
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
