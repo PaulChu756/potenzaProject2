@@ -7,6 +7,7 @@ $database = "myDB";
 $connection = mysqli_connect($host, $user, $password);
 if(!$connection) {die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
+
 function getPeople($connection)
 {
 	$output = '';
@@ -71,7 +72,7 @@ function getPeople($connection)
 
 <script>
 console.log("cookies");
-/*console.log("ugDNOJAODBAWIDBAWONSDLDNAWKNJ!h");
+/*
 $(document).ready(function(){
 	$('#Name').change(function(){
 		var getInfo = $(this).val();
