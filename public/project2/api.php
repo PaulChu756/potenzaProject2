@@ -1,4 +1,7 @@
 <?php
+
+var_dump($_GET);
+die();
 // Instead of doing POST, I'm getting information from form.php
 // if just running api.php by itself, it will throw error because input is null
 $id = $_GET["personID"];

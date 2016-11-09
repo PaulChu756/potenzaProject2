@@ -27,9 +27,9 @@ function getPeople($connection)
   <head>
     <title>Project 1 with BootStrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="jquery.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="js/bootstrap.js"></script>
-	<script src="jquery.js"></script>
   </head>
 
 	<body>
@@ -72,30 +72,25 @@ function getPeople($connection)
 
 <script>
 console.log("cookies");
-/*
+
 $(document).ready(function(){
 	$('#Name').change(function(){
 		var getInfo = $(this).val();
-		console.log(getInfo);
 		$.ajax({
 				url: "api.php",
 				type: "GET",
 				// Key | Value 
-				data: {personID:getInfo},
+				data:{personID:getInfo},
 				success: function(data)
 				{
-					console.log("success");
+					console.log(data);
 				}
-				error: function(jqXHR, textStatus, errorThrown)
-				{
-					console.log(textStatus, errorThrown);
-				}
-			});
 		});
-	)};
+	});
+});
 		// type of data we expect back
 		//dataType : "json",
-
+/*
 Pure javascript, doesn't use Jquery at all
 function getInfo(str)
 {
