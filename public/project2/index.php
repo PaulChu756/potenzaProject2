@@ -1,3 +1,17 @@
+<?php
+$host = "localhost";
+$user = "root";
+$password = "root";
+$database = "myDB";
+
+$connection = mysqli_connect($host, $user, $password);
+if(!$connection) {die("Could not connect: " . mysqli_connect_error());}
+$connection->select_db($database);
+$sql = "SELECT * FROM People";
+$result = mysqli_query($connection,$sql);
+$connection->close();
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,20 +35,6 @@
 		</div>
 	</body>
 </html>
-
-<?php
-$host = "localhost";
-$user = "root";
-$password = "root";
-$database = "myDB";
-
-$connection = mysqli_connect($host, $user, $password);
-if(!$connection) {die("Could not connect: " . mysqli_connect_error());}
-$connection->select_db($database);
-$sql = "SELECT * FROM People";
-$result = mysqli_query($connection,$sql);
-$connection->close();
-?>
 
 <!--Add Person -->
 <form action = "people.php" method = "get">
@@ -62,7 +62,6 @@ $connection->close();
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
 
 <script>
-console.log("ugDNOJAODBAWIDBAWONSDLDNAWKNJ!h");
 $(document).ready(function(){
 	$('#Name').change(function(){
 		var getInfo = $(this).val();
