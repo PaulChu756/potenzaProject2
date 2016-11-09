@@ -27,6 +27,7 @@ function getPeople($connection)
   <head>
     <title>Project 1 with BootStrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8"/>
 	<script src="jquery.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="js/bootstrap.js"></script>
@@ -71,8 +72,6 @@ function getPeople($connection)
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
 
 <script>
-console.log("cookies");
-
 $(document).ready(function(){
 	$('#Name').change(function(){
 		var getInfo = $(this).val();
@@ -85,11 +84,12 @@ $(document).ready(function(){
 				{
 					console.log(data);
 				}
+				// type of data we expect back
+				//dataType : "json",
 		});
 	});
 });
-		// type of data we expect back
-		//dataType : "json",
+		
 /*
 Pure javascript, doesn't use Jquery at all
 function getInfo(str)
