@@ -140,4 +140,5 @@ function insertVisit()
 		$visitError = "Data visit is required";
 	}
 }
+$connection->close();
 ?>
