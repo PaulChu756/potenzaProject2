@@ -37,6 +37,7 @@ else
 	die();
 }
 
+// works
 function getPerson($id=0)
 {
 	global $connection;

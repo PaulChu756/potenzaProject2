@@ -1,20 +1,3 @@
-<?php
-/*
-function getPeople()
-{
-	$output = '';
-	$sql = "SELECT * FROM People";
-	var_dump($sql);
-	$result = mysqli_query($connection,$sql);
-	while($row = mysqli_fetch_array($result)) 
-	{
-		$output .= "<option value=" . $row['id'] . ">" . $row['firstname'] . "</option>";
-	}
-	return $output;
-}
-*/
-?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -55,7 +38,7 @@ function getPeople()
 <form>
 	<br><br>Select a human and learn where they're from and favor food
 	<br><br><select name="Name" id="Name">
-	<option value="">Select a human:</option>
+	<option value=""></option>
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
