@@ -79,7 +79,7 @@ function getPerson($id=0)
 	
 	$response = array();
 	$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
-	while($row = mysqlit_fetch_array($query))
+	while($row = mysqli_fetch_array($query))
 	{
 		$response[] = $row;
 	}
