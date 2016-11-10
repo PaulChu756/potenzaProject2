@@ -37,13 +37,13 @@ else
 	die();
 }
 
-function getPerson()
+function getPerson($id=0)
 {
 	global $connection;
 	$resultSql = "SELECT * FROM People";
 	if($id != 0)
 	{
-		$resultSql .= "SELECT p.firstname, s.statename, p.food
+		$resultSql = "SELECT p.firstname, s.statename, p.food
 					FROM Visits v
 					INNER JOIN People p ON v.p_id = p.id
 					INNER JOIN States s ON v.s_id = s.id
