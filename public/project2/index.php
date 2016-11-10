@@ -38,7 +38,7 @@
 <form>
 	<br><br>Select a human and learn where they're from and favor food
 	<br><br><select name="Name" id="Name">
-	<option value=""></option>
+	<option></option>
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>

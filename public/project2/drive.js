@@ -2,7 +2,6 @@
 
 function populatePeople()
 {
-	$('#Name').change(function(){
 	var getInfo = $(this).val();
 		$.ajax({
 			type:"GET",
@@ -21,10 +20,12 @@ function populatePeople()
 						.attr("value", value).text(key));
 				});
 			}
-		})
 	})
 }
 
 $(document).ready(function(){
+	console.log("cookies");
+	$('#Name').change(function(){
 	populatePeople();
-});
+	})
+})
