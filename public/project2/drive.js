@@ -1,5 +1,12 @@
 <script src="jquery.js"></script>
 
+$(document).ready(function(){
+	console.log("cookies");
+	$('#Name').change(function(){
+	populatePeople();
+	});
+});
+
 function populatePeople()
 {
 	var getInfo = $(this).val();
@@ -20,12 +27,6 @@ function populatePeople()
 						.attr("value", value).text(key));
 				});
 			}
-	})
+	});
 }
 
-$(document).ready(function(){
-	console.log("cookies");
-	$('#Name').change(function(){
-	populatePeople();
-	})
-})
