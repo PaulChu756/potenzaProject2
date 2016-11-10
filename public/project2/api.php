@@ -8,15 +8,13 @@ if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
-// testing
-var_dump($_GET);
-var_dump($_POST);
-
-if($_SERVER["REQUEST_METHOD"] === "GET")
+$requestMethod = $_SERVER["REQUEST_METHOD"];
+if($requestMethod === "GET")
 {
 	if(!empty($_GET["personID"]))
 	{
 		// select one person
+		var_dump($_GET);
 		$id= intval($_GET["personID"]);
 		getPerson($id);
 	}
@@ -27,8 +25,9 @@ if($_SERVER["REQUEST_METHOD"] === "GET")
 	}
 }
 
-elseif($_SERVER["REQUEST_METHOD"] === "POST")
+elseif($requestMethod === "POST")
 {
+	var_dump($_POST);
 	insertPerson();
 }
 
@@ -38,12 +37,13 @@ else
 	die();
 }
 
-function getPerson($id=0)
+function getPerson()
 {
+	global $connection;
 	$resultSql = "SELECT * FROM People";
 	if($id != 0)
 	{
-		$resultSql .=	"SELECT p.firstname, s.statename, p.food
+		$resultSql .= "SELECT p.firstname, s.statename, p.food
 					FROM Visits v
 					INNER JOIN People p ON v.p_id = p.id
 					INNER JOIN States s ON v.s_id = s.id
@@ -87,8 +87,11 @@ function getPerson($id=0)
 	echo json_encode($response);
 }
 
+// haven't test
 function insertPerson()
 {
+	global $connection;
+
 	// define variables to be all empty
 	$firstNameError = $lastNameError = $foodError = "";
 	$firstNameEnter = $lastNameEnter = $foodEnter = "";
@@ -116,8 +119,11 @@ function insertPerson()
 	}
 }
 
+// haven't test
 function insertVisit()
 {
+	global $connection;
+
 	$visitError = $visitEnter = "";
 
 	$personEnter = $_POST["humanName"];

@@ -4,16 +4,20 @@ $(document).ready(function(){
 	$('#Name').change(function(){
 		var getInfo = $(this).val();
 		$.ajax({
-				type: "POST",
-				url: "api.php",
-				// Key | Value 
+				type: "GET",
 				data:{personID:getInfo},
-				success: function(data)
-				{
-					$('#showPerson').html(data);
+				url: "api.php",
+				dataType:'json',
+				success: function(json) {
+					var $el = $("#Name");
+					$el.empty();
+					$el.append($("<option></option>")
+						.attr("value", '').text('Select a human'));
+					$.each(json, function(value,key){
+						$el.append($("<option></option>")
+							.attr("value", value).text(key));
+					});
 				}
-				// type of data we expect back
-				//dataType : "json",
 		});
 	});
 });
