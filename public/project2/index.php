@@ -45,11 +45,37 @@
 <form>
 <br><br>
 <button type="button" class="btn btn-success" style="float: right;" data-toggle="collapse" data-target="#visit">Add Visit</button>
-<div id="visit" class="collapse">
-<p class="text-right">
-<br><br><br>Add a visit
-</p>
-</div>
+	<div id="visit" class="collapse">
+		<center>
+		<!--Select human-->
+		<br><br>Select a human
+		<br><select name="humanName" class="btn btn-primary dropdown-toggle">
+		
+		<?php 
+		//while($row = mysqli_fetch_array($humanResult)) {
+		//echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?>
+		</select>
+
+		<!--Select States-->
+		<br><br><br><br><br><br>Select a state 
+		<br><select name="stateName" class="btn btn-info dropdown-toggle">
+		<?php 
+		//while($row = mysqli_fetch_array($stateResult)) {
+		//echo "<option value='" . $row['id'] . "'>" . $row['statename'] . "</option>";}?> 
+		</select>
+
+		<!--Add visit-->
+		<br><br><br><br><br><br><br><br><br><br><br>Add a visit to the table
+		<br><span class="error">* required field. </span><br><br>
+		Date Visited:<br>
+		Format: YYYY/MM/DD<br>
+		Example: 1994/07/14<br>
+		<input type = "text" name = "visit">
+		<span class = "error">* <?php echo $visitError;?></span><br><br>
+		<input type = "submit" class = "btn btn-success" value = "Enter ze data"/>
+		<br><br>
+		</center>
+	</div>
 </form>
 
 <center>
