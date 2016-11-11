@@ -4,9 +4,9 @@
     <title>Project 1 with BootStrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8"/>
-	<script src="drive.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="jquery.js"></script>
+	<script src="drive.js"></script>
 	<script src="js/bootstrap.js"></script>
   </head>
   

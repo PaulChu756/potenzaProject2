@@ -1,5 +1,3 @@
-<script src="jquery.js"></script>
-
 $(document).ready(function(){
 	console.log("cookies");
 	$('#Name').change(function(){
@@ -29,4 +27,3 @@ function populatePeople()
 			}
 	});
 }
-
