@@ -25,12 +25,12 @@
 </html>
 
 <!--Add Person -->
-<form action = "people.php" method = "get">
+<form>
 <input type ="submit" class = "btn btn-warning" value = "Add a Person" style = "float: right;"/>
 </form>
 
 <!--Add Visit -->
-<form action = "visit.php" method = "get">
+<form>
 <br><br>
 <input type = "submit" class = "btn btn-success" value = "Add a Visit" style = "float: right;"/>
 </form>
@@ -39,7 +39,7 @@
 <form>
 	<br><br>Select a human and learn where they're from and favor food
 	<br><br><select name="Name" id="Name">
-	<option></option>
+	<option value ="">Select a human</option>
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>

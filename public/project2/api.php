@@ -28,7 +28,14 @@ if($requestMethod === "GET")
 elseif($requestMethod === "POST")
 {
 	var_dump($_POST);
-	insertPerson();
+	if($_POST["insertPerson"])
+	{
+		insertPerson();	
+	}
+	elseif($_POST["insertVisit"])
+	{
+		insertVisit();	
+	}
 }
 
 else
