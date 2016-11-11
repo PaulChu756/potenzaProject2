@@ -1,4 +1,6 @@
-$(document).ready(function(){
+console.log("hello");
+
+/*$(document).ready(function(){
 	console.log("cookies");
 	$('#Name').change(function(){
 	populatePeople();
@@ -27,3 +29,4 @@ function populatePeople()
 			}
 	});
 }
+*/

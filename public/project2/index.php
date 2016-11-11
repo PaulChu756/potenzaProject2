@@ -6,8 +6,8 @@
 	<meta charset="utf-8"/>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="jquery.js"></script>
-	<script src="test.js"></script>
 	<script src="js/bootstrap.js"></script>
+	<script src="drive.js"></script>
   </head>
   
 	<body>
