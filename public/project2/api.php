@@ -9,6 +9,7 @@ die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
+
 if($requestMethod === "GET")
 {
 	if(!empty($_GET["personID"]))

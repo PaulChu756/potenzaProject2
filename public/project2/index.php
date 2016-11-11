@@ -6,7 +6,7 @@
 	<meta charset="utf-8"/>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="jquery.js"></script>
-	<script src="drive.js"></script>
+	<script src="test.js"></script>
 	<script src="js/bootstrap.js"></script>
   </head>
   
@@ -39,7 +39,7 @@
 <form>
 	<br><br>Select a human and learn where they're from and favor food
 	<br><br><select name="Name" id="Name">
-	<option value ="">Select a human</option>
+	<option value="">Select a human</option>
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
