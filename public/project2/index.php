@@ -26,13 +26,30 @@
 
 <!--Add Person -->
 <form>
-<input type ="submit" class = "btn btn-warning" value = "Add a Person" style = "float: right;"/>
+	<button type="button" class="btn btn-warning" style="float: right;" data-toggle="collapse" data-target="#person">Add Person</button>
+		<div id="person" class="collapse">
+			<br><br><center>Add a person to the table<br>
+			<span class="error">* required field. </span><br><br>
+			First Name: <input type = "text" name = "firstName">
+			<span class = "error">* <?php echo $firstNameError;?></span><br><br>
+			Last Name: <input type = "text" name = "lastName">
+			<span class = "error">* <?php echo $lastNameError;?></span><br><br>
+			Favorite Food: <input type = "text" name = "food">
+			<span class = "error">* <?php echo $foodError;?></span><br><br>
+			<input type = "submit" value = "Submit" class = "btn btn-success"/>
+			</center>
+		</div>
 </form>
 
 <!--Add Visit -->
 <form>
 <br><br>
-<input type = "submit" class = "btn btn-success" value = "Add a Visit" style = "float: right;"/>
+<button type="button" class="btn btn-success" style="float: right;" data-toggle="collapse" data-target="#visit">Add Visit</button>
+<div id="visit" class="collapse">
+<p class="text-right">
+<br><br><br>Add a visit
+</p>
+</div>
 </form>
 
 <center>

@@ -55,8 +55,7 @@ $connection->close();
 
 <!--Add Person into Table-->
 <form action = "people.php" method = "post">
-<center>Add a person to the table</center><br>
-<center><span class="error">* required field. </span></center><br><br>
+<center><span class="error">* required field. </span><br><br>
 First Name: <input type = "text" name = "firstName">
 <span class = "error">* <?php echo $firstNameError;?></span><br><br>
 Last Name: <input type = "text" name = "lastName">
@@ -64,6 +63,7 @@ Last Name: <input type = "text" name = "lastName">
 Favorite Food: <input type = "text" name = "food">
 <span class = "error">* <?php echo $foodError;?></span><br><br>
 <input type = "submit" value = "Submit" class = "btn btn-success"/>
+</center>
 </form>
 
 <!--Return button-->
