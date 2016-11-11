@@ -1,4 +1,4 @@
-//<script src="jquery.js"></script>
+<script src="jquery.js"></script>
 
 $(document).ready(function(){
 	console.log("cookies");
