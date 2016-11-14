@@ -126,6 +126,10 @@ function insertPerson()
 	$lastNameError = "Last Name is required";
 	$foodError = "Food is required NOW!";
 	}
+
+	echo "<br>First name entered: " . $firstNameEnter . "<br>";
+	echo "<br>Last name entered: " . $lastNameEnter . "<br>";
+	echo "<br>Favorite food: " . $foodEnter . "<br>";
 }
 
 // haven't test
@@ -154,6 +158,10 @@ function insertVisit()
 	{
 		$visitError = "Data visit is required";
 	}
+
+	echo "Person entered : " . $personEnter . "<br>";
+	echo "State entered : " . $stateEnter . "<br>";
+	echo "Date entered : " . $visitEnter . "<br>";
 }
 $connection->close();
 ?>
