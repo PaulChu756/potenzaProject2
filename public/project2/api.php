@@ -16,13 +16,17 @@ if($requestMethod === "GET")
 	{
 		// select one person
 		var_dump($_GET);
-		$id= intval($_GET["personID"]);
+		$id = intval($_GET["personID"]);
 		getPerson($id);
 	}
-	else
+	elseif()
 	{
 		// select everyone
 		getPerson();
+	}
+	elseif(!empty($_GET["stateID"]))
+	{
+		$id = 
 	}
 }
 
@@ -94,6 +98,11 @@ function getPerson($id=0)
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
+}
+
+function getStates($id=0)
+{
+
 }
 
 // haven't test
