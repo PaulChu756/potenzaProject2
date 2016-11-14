@@ -1,11 +1,2 @@
-console.log("hello");
-console.log("hello");
-console.log("hello");
-console.log("hello");
-console.log("hello");
-console.log("butt");
-console.log("cookies");
-console.log("cookies");
-console.log("cookies");
-console.log("cookies");
-console.log("cookies");
+console.log('hello');
+console.log('test');
