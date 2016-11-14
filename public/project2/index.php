@@ -85,4 +85,4 @@
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
 <script src="jquery.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src="love.js"></script>
+<script src="drive.js"></script>
