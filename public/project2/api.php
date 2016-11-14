@@ -13,37 +13,37 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 if($requestMethod === "GET")
 {
 	// Get People
-	if(!empty($_GET["personID"]))
+	if($_GET["personID"])
 	{
-		// select one person
-		var_dump($_GET);
-		$id = intval($_GET["personID"]);
-		getPerson($id);
-	}
-	elseif(empty($_GET["personID"]))
-	{
-		// select everyone
-		var_dump($_GET);
-		getPerson();
+		if(!empty($_GET["personID"]))
+		{
+			// select one person
+			var_dump($_GET);
+			$id = intval($_GET["personID"]);
+			getPerson($id);
+		}
+		else
+		{
+			echo "Ugh";
+			// select everyone
+			var_dump($_GET);
+			getPerson();
+		}
 	}
 	
 	// Get States
-	elseif(!empty($_GET["stateID"]))
+	if($_GET["stateID"])
 	{
-		var_dump($_GET);
-		$id = intval($_GET["stateID"]);
-		getStates($id);
-
-	}
-	elseif(empty($_GET["stateID"]))
-	{
-		// select everyone
-		var_dump($_GET);
 		getStates();
+		if(empty($_GET["stateID"]))
+		{
+			var_dump($_GET);
+			getStates();
+		}
 	}
 }
 
-elseif($requestMethod === "POST")
+if($requestMethod === "POST")
 {
 	var_dump($_POST);
 	if($_POST["insertPerson"])
@@ -66,21 +66,22 @@ else
 function getPerson($id=0)
 {
 	global $connection;
-	$resultSql = "SELECT * FROM People";
+	$peopleSql = "SELECT * FROM People";
+	
 	if($id != 0)
 	{
-		$resultSql = "SELECT p.firstname, s.statename, p.food
+		$peopleSql = "SELECT p.firstname, s.statename, p.food
 					FROM Visits v
 					INNER JOIN People p ON v.p_id = p.id
 					INNER JOIN States s ON v.s_id = s.id
 					WHERE v.p_id =" . $id;
 
-		$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
-		$row2 = mysqli_fetch_array($query);
+		$peopleQuery = mysqli_query ($connection, $peopleSql) or die(mysqli_error($connection));
+		$row = mysqli_fetch_array($peopleQuery);
 			
-		$firstName = $row2["firstname"];
-		$stateName = $row2["statename"];
-		$foodName = $row2["food"];
+		$firstName = $row["firstname"];
+		$stateName = $row["statename"];
+		$foodName = $row["food"];
 
 			if(!empty($firstName) && !empty($stateName) && !empty($foodName))
 			{
@@ -88,9 +89,9 @@ function getPerson($id=0)
 
 				echo "<br><center> The state they're visited : " . $stateName . "</center>";
 
-				while($row3 = mysqli_fetch_array($query))
+				while($row = mysqli_fetch_array($peopleSql))
 				{
-					$stateName = $row3["statename"];
+					$stateName = $row["statename"];
 					echo "<br><center> The state they're visited : " . $stateName . "</center>";				
 				}
 
@@ -104,8 +105,8 @@ function getPerson($id=0)
 	}
 	
 	$response = array();
-	$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
-	while($row = mysqli_fetch_array($query))
+	$peopleQuery = mysqli_query ($connection, $peopleSql) or die(mysqli_error($connection));
+	while($row = mysqli_fetch_array($peopleQuery))
 	{
 		$response[] = $row;
 	}
@@ -113,9 +114,19 @@ function getPerson($id=0)
 	echo json_encode($response);
 }
 
-function getStates($id=0)
+function getStates()
 {
+	global $connection;
+	$stateSql = "SELECT id, statename FROM States";
+	$stateQuery = mysqli_query($connection,$stateSql) or die(mysqli_error($connection));
 
+	$response = array();
+	while($row = mysqli_fetch_array($stateQuery))
+	{
+		$response[] = $row;
+	}
+	header('Content-Type: application/json');
+	echo json_encode($response);
 }
 
 // haven't test
