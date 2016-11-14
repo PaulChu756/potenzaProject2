@@ -22,12 +22,13 @@ if($requestMethod === "GET")
 			$id = intval($_GET["personID"]);
 			getPerson($id);
 		}
-		else
+
+		if(empty($_GET["personID"]))
 		{
-			echo "Ugh";
 			// select everyone
 			var_dump($_GET);
-			getPerson();
+			$id = intval($_GET["personID"]);
+			getPeople($id);
 		}
 	}
 	
@@ -65,10 +66,7 @@ else
 // works
 function getPerson($id=0)
 {
-	global $connection;
-	$peopleSql = "SELECT * FROM People";
-	
-	if($id != 0)
+	if($id!=0)
 	{
 		$peopleSql = "SELECT p.firstname, s.statename, p.food
 					FROM Visits v
@@ -76,39 +74,51 @@ function getPerson($id=0)
 					INNER JOIN States s ON v.s_id = s.id
 					WHERE v.p_id =" . $id;
 
-		$peopleQuery = mysqli_query ($connection, $peopleSql) or die(mysqli_error($connection));
+		$peopleQuery = mysqli_query($connection, $peopleSql) or die(mysqli_error($connection));
 		$row = mysqli_fetch_array($peopleQuery);
 			
 		$firstName = $row["firstname"];
 		$stateName = $row["statename"];
 		$foodName = $row["food"];
 
-			if(!empty($firstName) && !empty($stateName) && !empty($foodName))
+		if(!empty($firstName) && !empty($stateName) && !empty($foodName))
+		{
+			echo "<br><br><center> The human you select is : " . $firstName . "</center>";
+
+			echo "<br><center> The state they're visited : " . $stateName . "</center>";
+
+			while($row2 = mysqli_fetch_array($peopleSql))
 			{
-				echo "<br><br><center> The human you select is : " . $firstName . "</center>";
-
-				echo "<br><center> The state they're visited : " . $stateName . "</center>";
-
-				while($row = mysqli_fetch_array($peopleSql))
-				{
-					$stateName = $row["statename"];
-					echo "<br><center> The state they're visited : " . $stateName . "</center>";				
-				}
-
-				echo "<br><center> Their favor food is : " . $foodName . "<br><br><br><br></center>";
+				$stateName = $row2["statename"];
+				echo "<br><center> The state they're visited : " . $stateName . "</center>";				
 			}
 
-			else
-			{
-				echo "<br><center> You need to add a visit </center>";
-			}
+			echo "<br><center> Their favor food is : " . $foodName . "<br><br><br><br></center>";
+		}
+
+		else
+		{
+			echo "<br><center> You need to add a visit </center>";
+		}
 	}
-	
 	$response = array();
-	$peopleQuery = mysqli_query ($connection, $peopleSql) or die(mysqli_error($connection));
-	while($row = mysqli_fetch_array($peopleQuery))
+	$peopleQuery = mysqli_query($connection, $peopleSql) or die(mysqli_error($connection));
+	while($row3 = mysqli_fetch_array($peopleQuery))
 	{
-		$response[] = $row;
+		$response[] = $row3;
+	}
+	header('Content-Type: application/json');
+	echo json_encode($response);
+}
+
+function getPeople()
+{
+	$peopleSql = "SELECT * FROM People";
+	$response = array();
+	$peopleQuery = mysqli_query($connection, $peopleSql) or die(mysqli_error($connection));
+	while($row3 = mysqli_fetch_array($peopleQuery))
+	{
+		$response[] = $row3;
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
@@ -116,7 +126,6 @@ function getPerson($id=0)
 
 function getStates()
 {
-	global $connection;
 	$stateSql = "SELECT id, statename FROM States";
 	$stateQuery = mysqli_query($connection,$stateSql) or die(mysqli_error($connection));
 
@@ -132,8 +141,6 @@ function getStates()
 // haven't test
 function insertPerson()
 {
-	global $connection;
-
 	// define variables to be all empty
 	$firstNameError = $lastNameError = $foodError = "";
 	$firstNameEnter = $lastNameEnter = $foodEnter = "";
@@ -168,8 +175,6 @@ function insertPerson()
 // haven't test
 function insertVisit()
 {
-	global $connection;
-
 	$visitError = $visitEnter = "";
 
 	$personEnter = $_POST["humanName"];
