@@ -12,6 +12,7 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 if($requestMethod === "GET")
 {
+	// Get People
 	if(!empty($_GET["personID"]))
 	{
 		// select one person
@@ -19,14 +20,26 @@ if($requestMethod === "GET")
 		$id = intval($_GET["personID"]);
 		getPerson($id);
 	}
-	elseif()
+	elseif(empty($_GET["personID"]))
 	{
 		// select everyone
+		var_dump($_GET);
 		getPerson();
 	}
+	
+	// Get States
 	elseif(!empty($_GET["stateID"]))
 	{
-		$id = 
+		var_dump($_GET);
+		$id = intval($_GET["stateID"]);
+		getStates($id);
+
+	}
+	elseif(empty($_GET["stateID"]))
+	{
+		// select everyone
+		var_dump($_GET);
+		getStates();
 	}
 }
 

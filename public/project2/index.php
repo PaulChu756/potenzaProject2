@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8"/>
 	<link href="css/bootstrap.css" rel="stylesheet">
-	<script src="jquery.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="drive.js"></script>
   </head>
   
 	<body>
@@ -86,3 +83,6 @@
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
+<script src="jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="main.js"></script>
