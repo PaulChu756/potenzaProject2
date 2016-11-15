@@ -9,7 +9,6 @@ die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
-
 if($requestMethod === "GET")
 {
 	// Get People
@@ -30,7 +29,7 @@ if($requestMethod === "GET")
 	// Get States
 	if($_GET["stateID"])
 	{
-		var_dump($_GET);
+		//var_dump($_GET);
 		getStates();
 	}
 	else
@@ -50,12 +49,6 @@ if($requestMethod === "POST")
 	{
 		insertVisit();	
 	}
-}
-
-else
-{
-	echo "Request method is bad, you should feel bad";
-	die(mysqli_error());
 }
 
 // works
@@ -104,6 +97,7 @@ function getPerson($id=0)
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
+	die();
 }
 
 function getStates()
@@ -119,6 +113,7 @@ function getStates()
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
+	die();
 }
 
 // haven't test
