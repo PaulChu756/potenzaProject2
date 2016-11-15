@@ -33,6 +33,10 @@ if($requestMethod === "GET")
 		var_dump($_GET);
 		getStates();
 	}
+	else
+	{
+		getStates();
+	}
 }
 
 if($requestMethod === "POST")

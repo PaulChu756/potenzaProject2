@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	console.log("ready");
 	$('#Name').change(function(){
 	populatePeople();
 	});
@@ -23,7 +24,11 @@ function populatePeople()
 					$name.append($("<option></option>")
 						.attr("value", value).text(key));
 				});
-			}
+			},
+			error: function(jqXHR, textStatus, errorThrown)
+			{
+				console.log("didn't go through");
+			},
 	});
 }
 
