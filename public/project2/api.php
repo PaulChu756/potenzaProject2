@@ -15,44 +15,23 @@ if($requestMethod === "GET")
 	// Get People
 	if($_GET["personID"])
 	{
-		var_dump($_GET);
-
-		if(!empty($_GET["personID"]))
-		{
-			// select one person
-			//var_dump($_GET);
-			$id = intval($_GET["personID"]);
-			getPerson($id);
-		}
-
-		//does not fire
-		if(empty($_GET["personID"]))
-		{
-			// select everyone
-			var_dump($_GET);
-			getPerson();
-		}
+		// select one person
+		//var_dump($_GET);
+		$id = intval($_GET["personID"]);
+		getPerson($id);
 	}
-	
-	/*
-	//fires
-	if(empty($_GET["personID"]))
+	else
 	{
 		// select everyone
-		var_dump($_GET);
+		//var_dump($_GET);
 		getPerson();
 	}
-	*/
 
 	// Get States
 	if($_GET["stateID"])
 	{
+		var_dump($_GET);
 		getStates();
-		if(empty($_GET["stateID"]))
-		{
-			var_dump($_GET);
-			getStates();
-		}
 	}
 }
 
@@ -63,7 +42,7 @@ if($requestMethod === "POST")
 	{
 		insertPerson();	
 	}
-	elseif($_POST["insertVisit"])
+	if($_POST["insertVisit"])
 	{
 		insertVisit();	
 	}
@@ -72,7 +51,7 @@ if($requestMethod === "POST")
 else
 {
 	echo "Request method is bad, you should feel bad";
-	die();
+	die(mysqli_error());
 }
 
 // works
@@ -125,7 +104,8 @@ function getPerson($id=0)
 
 function getStates()
 {
-	$stateSql = "SELECT id, statename FROM States";
+	global $connection;
+	$stateSql = "SELECT * FROM States";
 	$stateQuery = mysqli_query($connection,$stateSql) or die(mysqli_error($connection));
 
 	$response = array();
@@ -140,6 +120,7 @@ function getStates()
 // haven't test
 function insertPerson()
 {
+	global $connection;
 	// define variables to be all empty
 	$firstNameError = $lastNameError = $foodError = "";
 	$firstNameEnter = $lastNameEnter = $foodEnter = "";
@@ -174,6 +155,7 @@ function insertPerson()
 // haven't test
 function insertVisit()
 {
+	global $connection;
 	$visitError = $visitEnter = "";
 
 	$personEnter = $_POST["humanName"];
