@@ -15,23 +15,35 @@ if($requestMethod === "GET")
 	// Get People
 	if($_GET["personID"])
 	{
+		var_dump($_GET);
+
 		if(!empty($_GET["personID"]))
 		{
 			// select one person
-			var_dump($_GET);
+			//var_dump($_GET);
 			$id = intval($_GET["personID"]);
 			getPerson($id);
 		}
 
+		//does not fire
 		if(empty($_GET["personID"]))
 		{
 			// select everyone
 			var_dump($_GET);
-			$id = intval($_GET["personID"]);
-			getPeople($id);
+			getPerson();
 		}
 	}
 	
+	/*
+	//fires
+	if(empty($_GET["personID"]))
+	{
+		// select everyone
+		var_dump($_GET);
+		getPerson();
+	}
+	*/
+
 	// Get States
 	if($_GET["stateID"])
 	{
@@ -66,59 +78,46 @@ else
 // works
 function getPerson($id=0)
 {
-	if($id!=0)
+	global $connection;
+	$resultSql = "SELECT * FROM People";
+
+	if($id != 0)
 	{
-		$peopleSql = "SELECT p.firstname, s.statename, p.food
+		$resultSql = "SELECT p.firstname, s.statename, p.food
 					FROM Visits v
 					INNER JOIN People p ON v.p_id = p.id
 					INNER JOIN States s ON v.s_id = s.id
 					WHERE v.p_id =" . $id;
 
-		$peopleQuery = mysqli_query($connection, $peopleSql) or die(mysqli_error($connection));
-		$row = mysqli_fetch_array($peopleQuery);
+		$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
+		$row2 = mysqli_fetch_array($query);
 			
-		$firstName = $row["firstname"];
-		$stateName = $row["statename"];
-		$foodName = $row["food"];
-
-		if(!empty($firstName) && !empty($stateName) && !empty($foodName))
-		{
-			echo "<br><br><center> The human you select is : " . $firstName . "</center>";
-
-			echo "<br><center> The state they're visited : " . $stateName . "</center>";
-
-			while($row2 = mysqli_fetch_array($peopleSql))
+		$firstName = $row2["firstname"];
+		$stateName = $row2["statename"];
+		$foodName = $row2["food"];
+		
+			if(!empty($firstName) && !empty($stateName) && !empty($foodName))
 			{
-				$stateName = $row2["statename"];
-				echo "<br><center> The state they're visited : " . $stateName . "</center>";				
+				echo "<br><br><center> The human you select is : " . $firstName . "</center>";
+				echo "<br><center> The state they're visited : " . $stateName . "</center>";
+				while($row3 = mysqli_fetch_array($query))
+				{
+					$stateName = $row3["statename"];
+					echo "<br><center> The state they're visited : " . $stateName . "</center>";				
+				}
+				echo "<br><center> Their favor food is : " . $foodName . "<br><br><br><br></center>";
 			}
-
-			echo "<br><center> Their favor food is : " . $foodName . "<br><br><br><br></center>";
-		}
-
-		else
-		{
-			echo "<br><center> You need to add a visit </center>";
-		}
+			else
+			{
+				echo "<br><center> You need to add a visit </center>";
+			}
 	}
+	
 	$response = array();
-	$peopleQuery = mysqli_query($connection, $peopleSql) or die(mysqli_error($connection));
-	while($row3 = mysqli_fetch_array($peopleQuery))
+	$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
+	while($row = mysqli_fetch_array($query))
 	{
-		$response[] = $row3;
-	}
-	header('Content-Type: application/json');
-	echo json_encode($response);
-}
-
-function getPeople()
-{
-	$peopleSql = "SELECT * FROM People";
-	$response = array();
-	$peopleQuery = mysqli_query($connection, $peopleSql) or die(mysqli_error($connection));
-	while($row3 = mysqli_fetch_array($peopleQuery))
-	{
-		$response[] = $row3;
+		$response[] = $row;
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
