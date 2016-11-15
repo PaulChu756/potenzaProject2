@@ -106,9 +106,9 @@ function getStates()
 {
 	global $connection;
 	$stateSql = "SELECT * FROM States";
-	$stateQuery = mysqli_query($connection,$stateSql) or die(mysqli_error($connection));
 
 	$response = array();
+	$stateQuery = mysqli_query($connection,$stateSql) or die(mysqli_error($connection));
 	while($row = mysqli_fetch_array($stateQuery))
 	{
 		$response[] = $row;
