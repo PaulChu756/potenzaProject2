@@ -1,61 +1,35 @@
 $(document).ready(function(){
 	console.log("test");
-	//populatePeople();
-	$.ajax({
+	populatePeople();
+});
+
+function populatePeople()
+{
+		$.ajax({
 		type:"GET",
 		url:"api.php",
 		dataType:"json",
-		beforeSend : function() {
+		beforeSend : function() 
+		{
 			console.log('sending now...');
 		},
 		success: function(data)
 		{
+			alert("success");
 			console.log(data);
 			//options.append($("<option value='" + result[i].id + "'>" + result[i].firstname + "</option>"));
 		},
 		fail: function(data)
 		{
-			console.log('test');
+			alert("fail");
+			console.log('fail');
 		},
 		always: function(data)
 		{
 			console.log('no matter what');
 		}
 	});
-});
-
-function populatePeople()
-{
-	$.getJSON("api.php", function(data)
-	{
-		// stops here
-		// none fire
-		console.log("fire please")
-		console.log(data);
-		/*
-		var options = $("#Name");
-		$.each(data, function()
-		{
-			options.append($("<option value='" + result[i].id + "'>" + result[i].firstname + "</option>"));
-		});
-		*/
-	});
 }
-
-/*
-$.ajax({
-		type:"GET",
-		url:"api.php",
-		dataType:"json",
-		success: function(data)
-		{
-			console.log(data);
-			options.append($("<option value='" + result[i].id + "'>" + result[i].firstname + "</option>"));
-		},
-		fail:,
-		always:
-	});
-*/
 
 function selectPeople()
 {
@@ -106,3 +80,11 @@ function selectStates()
 			}
 	});
 }
+
+//Comment section
+/*
+beforeSend : function() 
+		{
+			console.log('sending now...');
+		},
+*/
