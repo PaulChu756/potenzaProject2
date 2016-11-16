@@ -64,7 +64,7 @@ function getPerson($id=0)
 					INNER JOIN People p ON v.p_id = p.id
 					INNER JOIN States s ON v.s_id = s.id
 					WHERE v.p_id =" . $id;
-
+		
 		$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
 		$row2 = mysqli_fetch_array($query);
 			
