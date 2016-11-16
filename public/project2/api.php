@@ -97,7 +97,6 @@ function getPerson($id=0)
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
-	die();
 }
 
 function getStates()
@@ -113,7 +112,6 @@ function getStates()
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
-	die();
 }
 
 // haven't test
