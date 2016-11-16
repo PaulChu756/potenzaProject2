@@ -1,38 +1,24 @@
 $(document).ready(function(){
-	console.log("beforeFunctionCall");
 	populatePeople();
 });
 
 function populatePeople()
 {
-	console.log("insideFunction")
-
+	console.log("test");
 	$.ajax({
 		type:"GET",
 		url:"api.php",
 		dataType:"json",
-
-		beforeSend : function() 
-		{
-			console.log('beforeSend: sending now...');
-		},
-
 		success : function(data)
 		{
-			console.log("success");
-			console.log(data);
+			var id = data[id];
+			var firstname = data[firstname];
+			$.each()
+			{
+				
+			}
 			//options.append($("<option value='" + result[i].id + "'>" + result[i].firstname + "</option>"));
 		},
-
-		fail : function(data)
-		{
-			console.log('fail');
-		},
-
-		always : function(data)
-		{
-			console.log('no matter what');
-		}
 	});
 }
 
