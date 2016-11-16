@@ -64,7 +64,7 @@ function getPerson($id=0)
 					INNER JOIN People p ON v.p_id = p.id
 					INNER JOIN States s ON v.s_id = s.id
 					WHERE v.p_id =" . $id;
-		
+
 		$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
 		$row2 = mysqli_fetch_array($query);
 			
@@ -91,7 +91,7 @@ function getPerson($id=0)
 	
 	$response = array();
 	$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
-	while($row = mysqli_fetch_array($query))
+	while($row = mysqli_fetch_array($query, true))
 	{
 		$response[] = $row;
 	}
@@ -106,7 +106,7 @@ function getStates()
 
 	$response = array();
 	$stateQuery = mysqli_query($connection,$stateSql) or die(mysqli_error($connection));
-	while($row = mysqli_fetch_array($stateQuery))
+	while($row = mysqli_fetch_array($stateQuery, true))
 	{
 		$response[] = $row;
 	}
