@@ -11,14 +11,14 @@ function populatePeople()
 		dataType:"json",
 		success : function(data)
 		{
-			var id = data[id];
-			var firstname = data[firstname];
-			$.each()
+			var len = data.length;
+			for(var i = 0; i < len; i++)
 			{
-				
+				var id = data[i]["id"];
+				var firstname = data[i]["firstname"];
+				$("#Name").append("<option value='" + id + "'>" + firstname + "</option>");
 			}
-			//options.append($("<option value='" + result[i].id + "'>" + result[i].firstname + "</option>"));
-		},
+		}
 	});
 }
 
