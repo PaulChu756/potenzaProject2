@@ -46,31 +46,35 @@
 </form>
 
 <!--Add Visit -->
-<form>
-<br><br>
-<button type="button" class="btn btn-success" style="float: right;" data-toggle="collapse" data-target="#visit">Add Visit</button>
-	<div id="visit" class="collapse">
-		<center>
-		<!--Select human-->
-		<br><br>Select a human
-		<br><select name="humanName" id="humanName" class="btn btn-primary dropdown-toggle"></select>
-
-		<!--Select States-->
-		<br><br><br><br><br><br>Select a state 
-		<br><select name="stateName" id="stateName" class="btn btn-info dropdown-toggle"></select>
-		
-		<!--Add visit-->
-		<br><br><br><br><br><br><br><br><br><br><br>Add a visit to the table
-		<br><span class="error">* required field. </span><br><br>
-		Date Visited:<br>
-		Format: YYYY/MM/DD<br>
-		Example: 1994/07/14<br>
-		<input type = "text" name = "visit">
-		<span class = "error">* <?php echo $visitError;?></span><br><br>
-		<input type = "submit" class = "btn btn-success" value = "Enter ze data"/>
-		<br><br>
-		</center>
-	</div>
+<form id="visitForm" method="POST"><br><br>
+	<button type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#visit">Add Visit</button>
+		<div class="modal fade" id="visit" tabindex="-1" role="dialog" aria-labelledby="visitLabel">
+			<div class="modal-dialog" role="document">
+				<div class = "modal-content">
+					<div class="modal-header"> 
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class = "modal-title">Add a Visit</h4>
+					</div>
+					<div class = "modal-body">
+						<!--Select human-->
+						<br><br>Select a human
+						<br><select name="humanName" id="humanName" class="btn btn-primary dropdown-toggle"></select>
+						<!--Select States-->
+						<br><br><br><br><br><br>Select a state 
+						<br><select name="stateName" id="stateName" class="btn btn-info dropdown-toggle"></select>
+						<!--Add visit-->
+						<br><br><br><br><br><br><br><br><br><br><br> Add a visit to the table <br><br><br>
+						Date Visited:<br>
+						Format: YYYY/MM/DD<br>
+						Example: 1994/07/14<br>
+						<input type = "text" name = "visit"><br><br>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
 </form>
 
 <!-- Select a human and output info -->
@@ -87,4 +91,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!--BootStrap javascript CDN method>-->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Ajax file -->
 <script src="drive.js"></script>
