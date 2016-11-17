@@ -23,19 +23,25 @@
 </html>
 
 <!--Add Person -->
-<form>
-	<button type="button" class="btn btn-warning" style="float: right;" data-toggle="collapse" data-target="#person">Add Person</button>
-		<div id="person" class="collapse">
-			<br><br><center>Add a person to the table<br>
-			<span class="error">* required field. </span><br><br>
-			First Name: <input type = "text" name = "firstName">
-			<span class = "error">* <?php echo $firstNameError;?></span><br><br>
-			Last Name: <input type = "text" name = "lastName">
-			<span class = "error">* <?php echo $lastNameError;?></span><br><br>
-			Favorite Food: <input type = "text" name = "food">
-			<span class = "error">* <?php echo $foodError;?></span><br><br>
-			<input type = "submit" value = "Submit" class = "btn btn-success"/>
-			</center>
+<form id="personForm" method="POST">
+	<button type="button" class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#person">Add Person</button>
+		<div class="modal fade" id="person" tabindex="-1" role="dialog" aria-labelledby="personLabel">
+			<div class="modal-dialog" role="document">
+				<div class = "modal-content">
+					<div class="modal-header"> 
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class = "modal-title">Add a Person</h4>
+					</div>
+					<div class = "modal-body">
+						First Name: 	<input type = "text" name = "firstName"><br><br>
+						Last Name: 		<input type = "text" name = "lastName"><br><br>
+						Favorite Food: 	<input type = "text" name = "food"><br><br>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">Submit</button>
+					</div>
+				</div>
+			</div>
 		</div>
 </form>
 

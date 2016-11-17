@@ -59,7 +59,24 @@ function populateStates()
 }
 
 //Add person to database
-function insertPerson()
+//$("form").submit(function()
+//{})
+$(document).ready(function(){
+	$("personForm").click(function(){
+		$.ajax({
+			type: "POST",
+			url: "api.php",
+			dataType: "json",
+			data: $("personForm").serialize(),
+			success: function(data)
+			{
+				console.log(data);
+			}
+		});
+	});
+});
+
+/*
 {
 	$.ajax({
 		type: "POST",
@@ -71,6 +88,7 @@ function insertPerson()
 		}
 	})
 }
+*/
 
 /*
 function selectPeople()
