@@ -8,15 +8,34 @@ if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
-$requestMethod = $_SERVER["REQUEST_METHOD"];
+//$requestMethod = $_SERVER["REQUEST_METHOD"];
+
+$requestURI = parse_url($_SERVER['REQUEST_URI']);
+$segments = explode('/', $requestURI['path']);
+$apiVars = [];
+
+$i = 2;
+while($i < count($segments)) 
+{    
+	if($segments[$i+1]) 
+	{  
+		$apiVars[$segments[$i]] = $segments[$i+1];  
+		$i += 2;    
+	}
+	else 
+	{  
+		$apiVars[$segments[$i]] = null;  
+		$i++;    
+	}
+		 
+}
+
+header('application/json');
+echo(json_encode($apiVars));
+die();
+
 
 /*
-switch($requestMethod)
-{
-	
-}
-*/
-
 if($requestMethod === "GET")
 {
 	// Get People
@@ -58,9 +77,10 @@ if($requestMethod === "POST")
 		insertVisit();	
 	}
 }
+*/
 
 
-// works
+// Select all people or select a person
 function getPerson($id=0)
 {
 	global $connection;
@@ -82,6 +102,7 @@ function getPerson($id=0)
 	die();
 }
 
+//select all states
 function getStates()
 {
 	global $connection;
