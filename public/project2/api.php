@@ -8,8 +8,6 @@ if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
-//$requestMethod = $_SERVER["REQUEST_METHOD"];
-
 $requestURI = parse_url($_SERVER['REQUEST_URI']);
 $segments = explode('/', $requestURI['path']);
 $apiVars = [];
@@ -34,6 +32,41 @@ header('application/json');
 echo(json_encode($apiVars));
 die();
 
+$requestMethod = $_SERVER["REQUEST_METHOD"];
+$peopleRequest = "people";
+$stateRequest = "states"; 
+
+switch($peopleRequest)
+{
+	case "people":
+		if($requestMethod === "GET")
+		{
+			getPerson();
+		}
+		elseif($requestMethod === "POST")
+		{
+			insertPerson();
+		}
+		else
+		{
+			die();
+		}
+		break;
+	case "states":
+		if($requestMethod === "GET")
+		{
+			getStates();
+		}
+		elseif($requestMethod === "POST")
+		{
+			insertVisit();
+		}
+		else
+		{
+			die();
+		}
+		break;
+}
 
 /*
 if($requestMethod === "GET")
