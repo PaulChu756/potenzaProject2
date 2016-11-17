@@ -29,7 +29,7 @@ while($i < count($segments))
 }
 
 header('application/json');
-echo json_encode($apiVars);
+echo(json_encode($apiVars));
 die();
 
 
