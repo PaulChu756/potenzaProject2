@@ -48,21 +48,15 @@
 		<center>
 		<!--Select human-->
 		<br><br>Select a human
-		<br><select name="humanName" class="btn btn-primary dropdown-toggle">
-		
-		<?php 
-		//while($row = mysqli_fetch_array($humanResult)) {
-		//echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . "</option>";}?>
-		</select>
+		<br><select name="humanName" id="humanName" class="btn btn-primary dropdown-toggle"></select>
 
 		<!--Select States-->
 		<br><br><br><br><br><br>Select a state 
-		<br><select name="stateName" class="btn btn-info dropdown-toggle">
-		<?php 
+		<br><select name="stateName" id="stateName" class="btn btn-info dropdown-toggle"></select>
+		<!--<?php 
 		//while($row = mysqli_fetch_array($stateResult)) {
-		//echo "<option value='" . $row['id'] . "'>" . $row['statename'] . "</option>";}?> 
-		</select>
-
+		//echo "<option value='" . $row['id'] . "'>" . $row['statename'] . "</option>";}?>--> 
+		
 		<!--Add visit-->
 		<br><br><br><br><br><br><br><br><br><br><br>Add a visit to the table
 		<br><span class="error">* required field. </span><br><br>

@@ -5,12 +5,16 @@ $(document).ready(function(){
 function populatePeople()
 {
 	console.log("test");
+
 	$.ajax({
 		type:"GET",
 		url:"api.php",
 		dataType:"json",
 		success : function(data)
 		{
+			console.log('sucxcess');
+			console.log(data);
+			/*
 			var len = data.length;
 			for(var i = 0; i < len; i++)
 			{
@@ -18,10 +22,17 @@ function populatePeople()
 				var firstname = data[i]["firstname"];
 				$("#Name").append("<option value='" + id + "'>" + firstname + "</option>");
 			}
+			*/
+		},
+		error : function(data)
+		{
+			console.log('fadiled');
+			console.log(data);
 		}
 	});
 }
 
+/*
 function selectPeople()
 {
 	var getInfo = $(this).val();
@@ -71,7 +82,7 @@ function selectStates()
 			}
 	});
 }
-
+*/
 //Comment section
 /*
 beforeSend : function() 

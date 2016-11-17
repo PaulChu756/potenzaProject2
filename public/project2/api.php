@@ -9,6 +9,14 @@ die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
+
+/*
+switch($requestMethod)
+{
+	
+}
+*/
+
 if($requestMethod === "GET")
 {
 	// Get People
@@ -51,6 +59,7 @@ if($requestMethod === "POST")
 	}
 }
 
+
 // works
 function getPerson($id=0)
 {
@@ -59,6 +68,8 @@ function getPerson($id=0)
 
 	if($id != 0)
 	{
+		$resultSql.=" WHERE id=". $id ." LIMIT 1";
+		/*
 		$resultSql = "SELECT p.firstname, s.statename, p.food
 					FROM Visits v
 					INNER JOIN People p ON v.p_id = p.id
@@ -87,6 +98,7 @@ function getPerson($id=0)
 			{
 				echo "<br><center> You need to add a visit </center>";
 			}
+			*/
 	}
 	
 	$response = array();
@@ -97,6 +109,7 @@ function getPerson($id=0)
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
+	die();
 }
 
 function getStates()
@@ -112,6 +125,7 @@ function getStates()
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
+	die();
 }
 
 // haven't test
