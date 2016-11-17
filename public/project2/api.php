@@ -8,6 +8,7 @@ if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
+/*
 $requestURI = parse_url($_SERVER['REQUEST_URI']);
 $segments = explode('/', $requestURI['path']);
 $apiVars = [];
@@ -31,6 +32,7 @@ while($i < count($segments))
 header('application/json');
 echo(json_encode($apiVars));
 die();
+*/
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $peopleRequest = "people";
@@ -132,7 +134,6 @@ function getPerson($id=0)
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
-	die();
 }
 
 //select all states
@@ -149,7 +150,6 @@ function getStates()
 	}
 	header('Content-Type: application/json');
 	echo json_encode($response);
-	die();
 }
 
 // haven't test
@@ -217,5 +217,6 @@ function insertVisit()
 	echo "State entered : " . $stateEnter . "<br>";
 	echo "Date entered : " . $visitEnter . "<br>";
 }
+
 $connection->close();
 ?>

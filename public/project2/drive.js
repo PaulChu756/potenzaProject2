@@ -1,32 +1,56 @@
 $(document).ready(function(){
 	populatePeople();
+	//populateStates();
 });
 
 function populatePeople()
 {
-	console.log("test");
-
 	$.ajax({
 		type:"GET",
 		url:"api.php",
 		dataType:"json",
 		success : function(data)
 		{
-			console.log('sucxcess');
+			console.log('success');
 			console.log(data);
-			/*
 			var len = data.length;
 			for(var i = 0; i < len; i++)
 			{
 				var id = data[i]["id"];
 				var firstname = data[i]["firstname"];
 				$("#Name").append("<option value='" + id + "'>" + firstname + "</option>");
+				$("#humanName").append("<option value='" + id + "'>" + firstname + "</option>");
 			}
-			*/
 		},
 		error : function(data)
 		{
-			console.log('fadiled');
+			console.log('failed');
+			console.log(data);
+		}
+	});
+}
+
+function populateStates()
+{
+	$.ajax({
+		type:"GET",
+		url:"api.php",
+		dataType:"json",
+		success : function(data)
+		{
+			console.log('success');
+			console.log(data);
+			var len = data.length;
+			for(var i = 0; i < len; i++)
+			{
+				var id = data[i]["id"];
+				var firstname = data[i]["statename"];
+				$("#stateName").append("<option value='" + id + "'>" + firstname + "</option>");
+			}
+		},
+		error : function(data)
+		{
+			console.log('failed');
 			console.log(data);
 		}
 	});
