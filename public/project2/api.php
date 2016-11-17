@@ -43,6 +43,8 @@ switch($peopleRequest)
 	case "people":
 		if($requestMethod === "GET")
 		{
+			//$id = intval($_GET["personID"]);
+			//getPerson($id);
 			getPerson();
 		}
 		elseif($requestMethod === "POST")
@@ -69,51 +71,6 @@ switch($peopleRequest)
 		}
 		break;
 }
-
-/*
-if($requestMethod === "GET")
-{
-	// Get People
-	if($_GET["personID"])
-	{
-		// select one person
-		//var_dump($_GET);
-		$id = intval($_GET["personID"]);
-		getPerson($id);
-	}
-	else
-	{
-		// select everyone
-		//var_dump($_GET);
-		getPerson();
-	}
-
-	// Get States
-	if($_GET["stateID"])
-	{
-		//var_dump($_GET);
-		getStates();
-	}
-	else
-	{
-		getStates();
-	}
-}
-
-if($requestMethod === "POST")
-{
-	var_dump($_POST);
-	if($_POST["insertPerson"])
-	{
-		insertPerson();	
-	}
-	if($_POST["insertVisit"])
-	{
-		insertVisit();	
-	}
-}
-*/
-
 
 // Select all people or select a person
 function getPerson($id=0)

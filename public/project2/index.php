@@ -4,11 +4,10 @@
     <title>Project 1 with BootStrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8"/>
-	<!--<link href="css/bootstrap.css" rel="stylesheet">-->
+	<!--Bootstrap CDN method-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
   </head>
-  
+
 	<body>
 		<div class = "container">
 			<br><center><img class = "img-responsive" src = "stormtrooper.jpg" alt = "Stormtrooper" width = "200" height="200"></center>
@@ -53,9 +52,6 @@
 		<!--Select States-->
 		<br><br><br><br><br><br>Select a state 
 		<br><select name="stateName" id="stateName" class="btn btn-info dropdown-toggle"></select>
-		<!--<?php 
-		//while($row = mysqli_fetch_array($stateResult)) {
-		//echo "<option value='" . $row['id'] . "'>" . $row['statename'] . "</option>";}?>--> 
 		
 		<!--Add visit-->
 		<br><br><br><br><br><br><br><br><br><br><br>Add a visit to the table
@@ -71,6 +67,7 @@
 	</div>
 </form>
 
+<!-- Select a human and output info -->
 <center>
 <form>
 	<br><br>Select a human and learn where they're from and favor food
@@ -79,8 +76,9 @@
 </center>
 </form>
 <div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
-<!--<script src="jquery.js"></script>-->
+
+<!--Jquery CDN method-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<!--<script src="js/bootstrap.js"></script>-->
+<!--BootStrap javascript CDN method>-->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="drive.js"></script>

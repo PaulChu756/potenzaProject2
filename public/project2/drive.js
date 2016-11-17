@@ -3,6 +3,7 @@ $(document).ready(function(){
 	//populateStates();
 });
 
+//populate people's dropdowns
 function populatePeople()
 {
 	$.ajax({
@@ -30,6 +31,7 @@ function populatePeople()
 	});
 }
 
+//populate state dropdown
 function populateStates()
 {
 	$.ajax({
@@ -54,6 +56,20 @@ function populateStates()
 			console.log(data);
 		}
 	});
+}
+
+//Add person to database
+function insertPerson()
+{
+	$.ajax({
+		type: "POST",
+		url: "api.php",
+		dataType: "json",
+		success : function(data)
+		{
+
+		}
+	})
 }
 
 /*
@@ -107,6 +123,8 @@ function selectStates()
 	});
 }
 */
+
+
 //Comment section
 /*
 beforeSend : function() 
