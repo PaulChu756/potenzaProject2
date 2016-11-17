@@ -9,7 +9,7 @@ die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
 $requestURI = parse_url($_SERVER['REQUEST_URI']);
-$segments = explode('/', $requestURI['path']);
+$segments = explode('/', trim($requestURI['path'], '/'));
 $apiVars = [];
 
 $i = 2;
@@ -28,16 +28,9 @@ while($i < count($segments))
 		 
 }
 
-header('application/json');
-echo(json_encode($apiVars));
-die();
-
-
 $requestMethod = $_SERVER["REQUEST_METHOD"];
-$peopleRequest = "people";
-$stateRequest = "states"; 
 
-switch($peopleRequest)
+switch($apiVars)
 {
 	case "people":
 		if($requestMethod === "GET")
@@ -70,6 +63,10 @@ switch($peopleRequest)
 		}
 		break;
 }
+
+header('application/json');
+echo json_encode($apiVars);
+die();
 
 // Select all people or select a person
 function getPerson($id=0)
