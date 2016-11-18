@@ -36,6 +36,7 @@ die();
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $peopleRequest = "people";
+$stateRequest = "states";
 
 switch($peopleRequest)
 {
@@ -117,8 +118,7 @@ function insertPerson()
 
 	$firstNameEnter = $_POST["firstName"];
 	$lastNameEnter = $_POST["lastName"];
-	$foodEnter = $_POST["food"];
-
+	$foodEnter = $_POST["favoriteFood"];
 
 	// Insert values into table
 	$sql = "INSERT INTO People (firstname, lastname, food) 
@@ -131,7 +131,7 @@ function insertPerson()
 	
 	else 
 	{
-		echo "You have added a friend";
+		echo "You have added a friend" . $firstNameEnter . $lastNameEnter . $foodEnter;
 	}
 }
 

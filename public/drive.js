@@ -12,7 +12,7 @@ function populatePeople()
 		dataType:"json",
 		success : function(data)
 		{
-			console.log('success');
+			//console.log('success');
 			console.log(data);
 			var len = data.length;
 			for(var i = 0; i < len; i++)
@@ -59,37 +59,20 @@ function populateStates()
 }
 
 //Add person to database
-//$("form").submit(function()
 $(document).ready(function(){
-	$("#addPersonButton").click(function(){
+	$("#addPersonSubmit").click(function(){
 		$.ajax({
 			type: "POST",
 			url: "api.php",
-			dataType: "json",
-			data: $("personForm").serialize(),
-			success: function(data)
+			//dataType: "json",
+			data: $("#personForm").serialize(),
+			success: function()
 			{
-				console.log("success");
-				console.log(data);
-				$("#form").add("<div> You added a person </div>");
+				alert("You have added a person");
 			}
 		});
 	});
 });
-
-/*
-{
-	$.ajax({
-		type: "POST",
-		url: "api.php",
-		dataType: "json",
-		success : function(data)
-		{
-
-		}
-	})
-}
-*/
 
 /*
 function selectPeople()
@@ -118,31 +101,6 @@ function selectPeople()
 			},
 	});
 }
-
-function selectStates()
-{
-    var getInfo = $(this).val();
-		$.ajax({
-			type:"GET",
-			url:"api.php",
-			data:{personID:getInfo},
-			dataType:"json",
-			success: function(json)
-			{
-				var name = $("#Name");
-				$name.empty();
-				$name.append($("<option></option>")
-					.attr("value","").text("Select a Human"));
-				$.each(json, function(value,key)
-				{
-					$name.append($("<option></option>")
-						.attr("value", value).text(key));
-				});
-			}
-	});
-}
-*/
-
 
 //Comment section
 /*

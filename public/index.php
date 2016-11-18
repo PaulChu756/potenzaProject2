@@ -23,27 +23,29 @@
 </html>
 
 <!--Add Person -->
-<form id="personForm" method="POST">
-	<button id="addPersonButton" type="button" class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#person">Add Person</button>
-		<div class="modal fade" id="person" tabindex="-1" role="dialog" aria-labelledby="personLabel">
-			<div class="modal-dialog" role="document">
-				<div class = "modal-content">
-					<div class="modal-header"> 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class = "modal-title">Add a Person</h4>
-					</div>
-					<div class = "modal-body">
-						First Name: 	<input type = "text" name = "firstName"><br><br>
-						Last Name: 		<input type = "text" name = "lastName"><br><br>
-						Favorite Food: 	<input type = "text" name = "food"><br><br>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">Submit</button>
-					</div>
+<button id="addPersonButton" type="button" class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#person">Add Person</button>
+	<div class="modal fade" id="person" tabindex="-1" role="dialog" aria-labelledby="personLabel">
+		<div class="modal-dialog" role="document">
+			<div class = "modal-content">
+			
+				<div class="modal-header"> 
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class = "modal-title">Add a Person</h4>
 				</div>
+
+				<div class = "modal-body">
+					<form id="personForm" method="POST">
+					First Name: 	<input type="text" name="firstName"><br><br>
+					Last Name: 		<input type="text" name="lastName"><br><br>
+					Favorite Food: 	<input type="text" name="favoriteFood"><br><br>
+					<button type="submit" id="addPersonSubmit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+
 			</div>
 		</div>
-</form>
+	</div>
+
 
 <!--Add Visit -->
 <form id="visitForm" method="POST"><br><br>
@@ -51,10 +53,12 @@
 		<div class="modal fade" id="visit" tabindex="-1" role="dialog" aria-labelledby="visitLabel">
 			<div class="modal-dialog" role="document">
 				<div class = "modal-content">
+
 					<div class="modal-header"> 
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h4 class = "modal-title">Add a Visit</h4>
 					</div>
+
 					<div class = "modal-body">
 						<!--Select human-->
 						<br><br>Select a human
@@ -68,10 +72,9 @@
 						Format: YYYY/MM/DD<br>
 						Example: 1994/07/14<br>
 						<input type = "text" name = "visit"><br><br>
-					</div>
-					<div class="modal-footer">
 						<button type="submit" class="btn btn-success">Submit</button>
 					</div>
+					
 				</div>
 			</div>
 		</div>
