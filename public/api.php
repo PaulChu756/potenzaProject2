@@ -41,13 +41,13 @@ $stateRequest = "states";
 switch($peopleRequest)
 {
 	case "people":
-		if($requestMethod === "GET")
+		if($requestMethod == "GET")
 		{
 			//$id = intval($_GET["personID"]);
 			//getPerson($id);
 			getPerson();
 		}
-		elseif($requestMethod === "POST")
+		elseif($requestMethod == "POST")
 		{
 			insertPerson();
 		}
@@ -57,11 +57,11 @@ switch($peopleRequest)
 		}
 		break;
 	case "states":
-		if($requestMethod === "GET")
+		if($requestMethod == "GET")
 		{
 			getStates();
 		}
-		elseif($requestMethod === "POST")
+		elseif($requestMethod == "POST")
 		{
 			insertVisit();
 		}
@@ -71,8 +71,6 @@ switch($peopleRequest)
 		}
 		break;
 }
-
-
 
 // Select all people or select a person
 function getPerson($id=0)

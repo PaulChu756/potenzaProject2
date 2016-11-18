@@ -23,7 +23,7 @@
 </html>
 
 <!--Add Person -->
-<button id="addPersonButton" type="button" class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#person">Add Person</button>
+<button id="addPersonButton" type="button" class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#person">Add Person</button><br><br>
 	<div class="modal fade" id="person" tabindex="-1" role="dialog" aria-labelledby="personLabel">
 		<div class="modal-dialog" role="document">
 			<div class = "modal-content">
@@ -34,11 +34,13 @@
 				</div>
 
 				<div class = "modal-body">
-					<form id="personForm" method="POST">
-					First Name: 	<input type="text" name="firstName"><br><br>
-					Last Name: 		<input type="text" name="lastName"><br><br>
-					Favorite Food: 	<input type="text" name="favoriteFood"><br><br>
-					<button type="submit" id="addPersonSubmit" class="btn btn-success">Submit</button>
+
+					<form method="post" id="personForm">
+					First Name: 	<input type="text" id="firstName" name="firstName"><br><br>
+					Last Name: 		<input type="text" id="lastName" name="lastName"><br><br>
+					Favorite Food: 	<input type="text" id="favoriteFood" name="favoriteFood"><br><br>
+					<button type="submit" id="addPersonSubmit" name="addPersonSubmit" class="btn btn-success">Submit</button>
+
 					</form>
 				</div>
 
@@ -48,37 +50,38 @@
 
 
 <!--Add Visit -->
-<form id="visitForm" method="POST"><br><br>
-	<button id="addVisitButton" type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#visit">Add Visit</button>
-		<div class="modal fade" id="visit" tabindex="-1" role="dialog" aria-labelledby="visitLabel">
-			<div class="modal-dialog" role="document">
-				<div class = "modal-content">
+<button id="addVisitButton" type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#visit">Add Visit</button>
+	<div class="modal fade" id="visit" tabindex="-1" role="dialog" aria-labelledby="visitLabel">
+		<div class="modal-dialog" role="document">
+			<div class = "modal-content">
 
-					<div class="modal-header"> 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class = "modal-title">Add a Visit</h4>
-					</div>
-
-					<div class = "modal-body">
-						<!--Select human-->
-						<br><br>Select a human
-						<br><select name="humanName" id="humanName" class="btn btn-primary dropdown-toggle"></select>
-						<!--Select States-->
-						<br><br><br><br><br><br>Select a state 
-						<br><select name="stateName" id="stateName" class="btn btn-info dropdown-toggle"></select>
-						<!--Add visit-->
-						<br><br><br><br><br><br><br><br><br><br><br> Add a visit to the table <br><br><br>
-						Date Visited:<br>
-						Format: YYYY/MM/DD<br>
-						Example: 1994/07/14<br>
-						<input type = "text" name = "visit"><br><br>
-						<button type="submit" class="btn btn-success">Submit</button>
-					</div>
-					
+				<div class="modal-header"> 
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class = "modal-title">Add a Visit</h4>
 				</div>
+
+				<div class = "modal-body">
+					<form id="visitForm" method="POST"><br><br>
+					<!--Select human-->
+					<br><br>Select a human
+					<br><select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle"></select>
+					<!--Select States-->
+					<br><br><br><br><br><br>Select a state 
+					<br><select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle"></select>
+					<!--Add visit-->
+					<br><br><br><br><br><br><br><br><br><br><br> Add a visit to the table <br><br><br>
+					Date Visited:<br>
+					Format: YYYY/MM/DD<br>
+					Example: 1994/07/14<br>
+					<input type = "text" name = "visit"><br><br>
+					<button type="submit" id="addVisitSubmit" name="addVisitSubmit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+
 			</div>
 		</div>
-</form>
+	</div>
+
 
 <!-- Select a human and output info -->
 <center>

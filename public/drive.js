@@ -1,3 +1,47 @@
+//Add person to database
+$(document).ready(function(){
+	$("#addPersonSubmit").click(function(){
+		$.ajax({
+			type: "POST",
+			url: "api.php",
+			data: $("#personForm").serialize(),
+			success: function()
+			{
+				console.log($("#personForm").serialize());
+				console.log("You have added a person");
+			},
+			error: function()
+			{
+				console.log($("#personForm").serialize());
+				console.log("Error");
+			}
+
+		});
+	});
+});
+
+//Add visit to database
+$(document).ready(function(){
+	$("#addVisitSubmit").click(function(){
+		$.ajax({
+			type: "POST",
+			url: "api.php",
+			data: $("#humanNameDropDown, #stateNameDropDown, #visitForm").serialize(),
+			success: function()
+			{
+				console.log($("#visitForm").serialize());
+				console.log("You have added a visit");
+			},
+			error: function()
+			{
+				console.log($("#visitForm").serialize());
+				console.log("Error");
+			}
+
+		});
+	});
+});
+
 $(document).ready(function(){
 	populatePeople();
 	//populateStates();
@@ -55,50 +99,6 @@ function populateStates()
 			console.log('failed');
 			console.log(data);
 		}
-	});
-}
-
-//Add person to database
-$(document).ready(function(){
-	$("#addPersonSubmit").click(function(){
-		$.ajax({
-			type: "POST",
-			url: "api.php",
-			//dataType: "json",
-			data: $("#personForm").serialize(),
-			success: function()
-			{
-				alert("You have added a person");
-			}
-		});
-	});
-});
-
-/*
-function selectPeople()
-{
-	var getInfo = $(this).val();
-		$.ajax({
-			type:"GET",
-			url:"api.php",
-			data:{personID:getInfo},
-			dataType:"json",
-			success: function(json)
-			{
-				var name = $("#Name");
-				$name.empty();
-				$name.append($("<option></option>")
-					.attr("value","").text("Select a Human"));
-				$.each(json, function(value,key)
-				{
-					$name.append($("<option></option>")
-						.attr("value", value).text(key));
-				});
-			},
-			error: function(jqXHR, textStatus, errorThrown)
-			{
-				console.log("didn't go through");
-			},
 	});
 }
 
