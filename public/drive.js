@@ -42,6 +42,24 @@ $(document).ready(function(){
 	});
 });
 
+//display selected person
+$("#Name").change(function(){
+	$.ajax({
+		type: "GET",
+		url: "api.php",
+		dataType: "json",
+		success: function(response)
+		{
+			var i = $("#Name").val();
+			var firstname = response[i]["firstname"];
+			var lastname = response[i]["lastname"];
+			var food = response[i]["food"];
+			$("#displayInfo").append("First name: " + firstname + "Last name " + lastname + "favorite food" + food);
+		}
+	});
+});
+
+//exe functions
 $(document).ready(function(){
 	populatePeople();
 	//populateStates();
@@ -101,11 +119,3 @@ function populateStates()
 		}
 	});
 }
-
-//Comment section
-/*
-beforeSend : function() 
-		{
-			console.log('sending now...');
-		},
-*/

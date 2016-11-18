@@ -48,7 +48,6 @@
 		</div>
 	</div>
 
-
 <!--Add Visit -->
 <button id="addVisitButton" type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#visit">Add Visit</button>
 	<div class="modal fade" id="visit" tabindex="-1" role="dialog" aria-labelledby="visitLabel">
@@ -82,16 +81,17 @@
 		</div>
 	</div>
 
-
+<div class="displayInfo"><center><br><strong>Selected person info will be here</strong></center></div>
 <!-- Select a human and output info -->
 <center>
 <form>
 	<br><br>Select a human and learn where they're from and favor food
 	<br><br><select name="Name" id="Name">
 	<option value="">Select a human</option>
+	
 </center>
 </form>
-<div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
+
 
 <!--Jquery CDN method-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
