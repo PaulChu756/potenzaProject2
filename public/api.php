@@ -197,7 +197,7 @@ function insertPerson()
 	{
 		// Insert values into table
 		$sql = "INSERT INTO People (firstname, lastname, food) 
-		VALUES('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
+		VALUES ('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
 
 		// Check if insert is good
 		if(mysqli_query($connection, $sql))
