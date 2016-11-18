@@ -62,10 +62,10 @@
 				<div class = "modal-body">
 					<form id="visitForm" method="POST"><br><br>
 					<!--Select human-->
-					<br><br>Select a human
+					<br><br>
 					<br><select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle"></select>
 					<!--Select States-->
-					<br><br><br><br><br><br>Select a state 
+					<br><br><br><br><br><br>
 					<br><select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle"></select>
 					<!--Add visit-->
 					<br><br><br><br><br><br><br><br><br><br><br> Add a visit to the table <br><br><br>
@@ -81,14 +81,13 @@
 		</div>
 	</div>
 
-<div class="displayInfo"><center><br><strong>Selected person info will be here</strong></center></div>
 <!-- Select a human and output info -->
 <center>
 <form>
-	<br><br>Select a human and learn where they're from and favor food
-	<br><br><select name="Name" id="Name">
-	<option value="">Select a human</option>
-	
+	<br><br>Select a human and learn where they're from and favor food <br><br>
+	<div id="displayInfo">Selected person info will be here</div>
+	<br><br><select name="SelectHumanDropDown" id="SelectHumanDropDown">
+	<option>Select a human</option>	
 </center>
 </form>
 

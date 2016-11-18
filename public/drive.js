@@ -1,3 +1,82 @@
+//display selected person
+$("#SelectHumanDropDown").change(function(){
+	$.ajax({
+		type: "GET",
+		url: "api.php",
+		dataType: "json",
+		success: function(data)
+		{
+			$("#displayInfo").empty();
+			var i = $("#SelectHumanDropDown").val();
+			var firstname = data[i-1]["firstname"];
+			var lastname = data[i-1]["lastname"];
+			var food = data[i-1]["food"];
+			$("#displayInfo").append("First name: " + firstname + "<br> Last name: " + lastname + "<br> Favorite food: " + food);
+		}
+	});
+});
+
+//exe functions
+$(document).ready(function(){
+	populatePeople();
+	//populateStates();
+});
+
+//populate people's dropdowns
+function populatePeople()
+{
+	$.ajax({
+		type:"GET",
+		url:"api.php",
+		dataType:"json",
+		success : function(data)
+		{
+			//console.log('success');
+			console.log(data);
+			var len = data.length;
+			for(var i = 0; i < len; i++)
+			{
+				var id = data[i]["id"];
+				var firstname = data[i]["firstname"];
+				$("#SelectHumanDropDown").append("<option value='" + id + "'>" + firstname + "</option>");
+				$("#humanNameDropDown").append("<option value='" + id + "'>" + firstname + "</option>");
+			}
+		},
+		error : function(data)
+		{
+			console.log('failed');
+			console.log(data);
+		}
+	});
+}
+
+//populate state dropdown
+function populateStates()
+{
+	$.ajax({
+		type:"GET",
+		url:"api.php",
+		dataType:"json",
+		success : function(data)
+		{
+			console.log('success');
+			console.log(data);
+			var len = data.length;
+			for(var i = 0; i < len; i++)
+			{
+				var id = data[i]["id"];
+				var firstname = data[i]["statename"];
+				$("#stateName").append("<option value='" + id + "'>" + firstname + "</option>");
+			}
+		},
+		error : function(data)
+		{
+			console.log('failed');
+			console.log(data);
+		}
+	});
+}
+
 //Add person to database
 $(document).ready(function(){
 	$("#addPersonSubmit").click(function(){
@@ -41,81 +120,3 @@ $(document).ready(function(){
 		});
 	});
 });
-
-//display selected person
-$("#Name").change(function(){
-	$.ajax({
-		type: "GET",
-		url: "api.php",
-		dataType: "json",
-		success: function(response)
-		{
-			var i = $("#Name").val();
-			var firstname = response[i]["firstname"];
-			var lastname = response[i]["lastname"];
-			var food = response[i]["food"];
-			$("#displayInfo").append("First name: " + firstname + "Last name " + lastname + "favorite food" + food);
-		}
-	});
-});
-
-//exe functions
-$(document).ready(function(){
-	populatePeople();
-	//populateStates();
-});
-
-//populate people's dropdowns
-function populatePeople()
-{
-	$.ajax({
-		type:"GET",
-		url:"api.php",
-		dataType:"json",
-		success : function(data)
-		{
-			//console.log('success');
-			console.log(data);
-			var len = data.length;
-			for(var i = 0; i < len; i++)
-			{
-				var id = data[i]["id"];
-				var firstname = data[i]["firstname"];
-				$("#Name").append("<option value='" + id + "'>" + firstname + "</option>");
-				$("#humanName").append("<option value='" + id + "'>" + firstname + "</option>");
-			}
-		},
-		error : function(data)
-		{
-			console.log('failed');
-			console.log(data);
-		}
-	});
-}
-
-//populate state dropdown
-function populateStates()
-{
-	$.ajax({
-		type:"GET",
-		url:"api.php",
-		dataType:"json",
-		success : function(data)
-		{
-			console.log('success');
-			console.log(data);
-			var len = data.length;
-			for(var i = 0; i < len; i++)
-			{
-				var id = data[i]["id"];
-				var firstname = data[i]["statename"];
-				$("#stateName").append("<option value='" + id + "'>" + firstname + "</option>");
-			}
-		},
-		error : function(data)
-		{
-			console.log('failed');
-			console.log(data);
-		}
-	});
-}
