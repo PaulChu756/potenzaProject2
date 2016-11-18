@@ -200,15 +200,15 @@ function insertPerson()
 		VALUES('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
 
 		// Check if insert is good
-		if($connection->query($sql) === FALSE)
+		if(mysqli_query($connection, $sql))
 		{
-		echo "Error: " . $sql . "<br>" . $connection->error;
+			echo "You have added a friend" . $firstNameEnter . $lastNameEnter . $foodEnter;
 		}
 	}
 	
 	else 
 	{
-		echo "You have added a friend" . $firstNameEnter . $lastNameEnter . $foodEnter;
+		echo "Error: " . $sql . "<br>" . $connection->error;
 	}
 }
 

@@ -32,7 +32,7 @@ function populatePeople()
 		success : function(data)
 		{
 			//console.log('success');
-			console.log(data);
+			//console.log(data);
 			var len = data.length;
 			for(var i = 0; i < len; i++)
 			{
@@ -89,10 +89,11 @@ $(document).ready(function(){
 				console.log($("#personForm").serialize());
 				console.log("You have added a person");
 			},
-			error: function()
+			error:function(data)
 			{
+				console.log(data);
 				console.log($("#personForm").serialize());
-				console.log("Error");
+				//console.log("Error");
 			}
 
 		});
