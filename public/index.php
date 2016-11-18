@@ -40,8 +40,8 @@
 					Last Name: 		<input type="text" id="lastName" name="lastName"><br><br>
 					Favorite Food: 	<input type="text" id="favoriteFood" name="favoriteFood"><br><br>
 					<button type="submit" id="addPersonSubmit" name="addPersonSubmit" class="btn btn-success">Submit</button>
+
 					</form>
-					
 				</div>
 
 			</div>

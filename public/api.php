@@ -29,10 +29,82 @@ while($i < count($segments))
 		 
 }
 
+$requestMethod = $_SERVER["REQUEST_METHOD"];
+
+if($requestMethod == "GET")
+{
+	if(array_key_exists("people", $apiVars))
+	{
+		if($apiVars["people"] == null)
+		{
+			getPerson();
+		}
+		elseif($apiVars["people"] !== null)
+		{
+			getPerson($apiVars['people']);
+		}
+		else
+		{
+			die();
+		}
+	}
+	elseif(array_key_exists("visits", $apiVars))
+	{
+		if($apiVars["visits"] == null)
+		{
+			// get visits
+		}
+		elseif($apiVars["visits"] !== null)
+		{
+			//get visit by id $apiVars["visits"];
+		}
+		else
+		{
+			die();
+		}
+	}
+	elseif(array_key_exists("states", $apiVars))
+	{
+		if($apiVars["states"] == null)
+		{
+			//gets States();
+		}
+		else
+		{
+			die();
+		}
+	}
+	else
+	{
+		// return people, visits and states
+	}
+}
+elseif($requestMethod == "POST")
+{
+	if($apiVars["people"] == null)
+	{
+		insertPerson();
+	}
+	elseif($apiVars["visits"] == null)
+	{
+		insertVisit();
+	}
+	else
+	{
+		die();
+	}
+}
+else
+{
+	die();
+}
+
+
 header('application/json');
 echo json_encode($apiVars);
 die();
 */
+
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $peopleRequest = "people";
@@ -43,9 +115,9 @@ switch($peopleRequest)
 	case "people":
 		if($requestMethod == "GET")
 		{
-			//$id = intval($_GET["personID"]);
-			//getPerson($id);
-			getPerson();
+			$id = intval($_GET["personID"]);
+			getPerson($id);
+			//getPerson();
 		}
 		elseif($requestMethod == "POST")
 		{
@@ -121,16 +193,17 @@ function insertPerson()
 	$lastNameEnter = $_POST["lastName"];
 	$foodEnter = $_POST["favoriteFood"];
 
-	echo $firstNameEnter;
-	echo $lastNameEnter;
-	echo $foodEnter;
-
-	$sql = "INSERT INTO People (firstname, lastname, food) 
-	VALUES('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
-
-	if($connection->query($sql) == FALSE)
+	if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter))
 	{
+		// Insert values into table
+		$sql = "INSERT INTO People (firstname, lastname, food) 
+		VALUES('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
+
+		// Check if insert is good
+		if($connection->query($sql) === FALSE)
+		{
 		echo "Error: " . $sql . "<br>" . $connection->error;
+		}
 	}
 	
 	else 
