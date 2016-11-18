@@ -1,4 +1,4 @@
-//display selected person
+//display selected person, done
 $("#SelectHumanDropDown").change(function(){
 	$.ajax({
 		type: "GET",
@@ -18,11 +18,11 @@ $("#SelectHumanDropDown").change(function(){
 
 //exe functions
 $(document).ready(function(){
-	populatePeople();
-	//populateStates();
+	populatePeople(); // done but static
+	//populateStates(); // done but static
 });
 
-//populate people's dropdowns
+//populate people's dropdowns // done
 function populatePeople()
 {
 	$.ajax({
@@ -50,7 +50,7 @@ function populatePeople()
 	});
 }
 
-//populate state dropdown
+//populate state dropdown //done
 function populateStates()
 {
 	$.ajax({
@@ -77,7 +77,7 @@ function populateStates()
 	});
 }
 
-//Add person to database
+//Add person to database // error
 $(document).ready(function(){
 	$("#addPersonSubmit").click(function(){
 		$.ajax({
@@ -99,7 +99,7 @@ $(document).ready(function(){
 	});
 });
 
-//Add visit to database
+//Add visit to database /error
 $(document).ready(function(){
 	$("#addVisitSubmit").click(function(){
 		$.ajax({

@@ -53,9 +53,11 @@ switch($peopleRequest)
 		}
 		else
 		{
+			echo "People failed";
 			die();
 		}
 		break;
+
 	case "states":
 		if($requestMethod == "GET")
 		{
@@ -67,6 +69,7 @@ switch($peopleRequest)
 		}
 		else
 		{
+			echo "States failed";
 			die();
 		}
 		break;
@@ -118,11 +121,14 @@ function insertPerson()
 	$lastNameEnter = $_POST["lastName"];
 	$foodEnter = $_POST["favoriteFood"];
 
-	// Insert values into table
+	echo $firstNameEnter;
+	echo $lastNameEnter;
+	echo $foodEnter;
+
 	$sql = "INSERT INTO People (firstname, lastname, food) 
 	VALUES('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
 
-	if($connection->query($sql) === FALSE)
+	if($connection->query($sql) == FALSE)
 	{
 		echo "Error: " . $sql . "<br>" . $connection->error;
 	}
@@ -145,7 +151,7 @@ function insertVisit()
 	$visitSql = "INSERT INTO Visits(p_id, s_id, date_visited)
 	VALUES('$personEnter', '$stateEnter', '$visitEnter')";
 
-	if($connection->query($visitSql) === FALSE)
+	if($connection->query($visitSql) == FALSE)
 	{
 		echo "Error: " . $visitSql . "<br>" . $connection->error;
 	}
