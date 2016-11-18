@@ -114,70 +114,48 @@ function getStates()
 function insertPerson()
 {
 	global $connection;
-	// define variables to be all empty
-	$firstNameError = $lastNameError = $foodError = "";
-	$firstNameEnter = $lastNameEnter = $foodEnter = "";
 
 	$firstNameEnter = $_POST["firstName"];
 	$lastNameEnter = $_POST["lastName"];
 	$foodEnter = $_POST["food"];
 
-	if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter))
-	{
+
 	// Insert values into table
 	$sql = "INSERT INTO People (firstname, lastname, food) 
 	VALUES('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
-		// Check if insert is good
-		if($connection->query($sql) === FALSE)
-		{
+
+	if($connection->query($sql) === FALSE)
+	{
 		echo "Error: " . $sql . "<br>" . $connection->error;
-		}
 	}
+	
 	else 
 	{
-	$firstNameError = "First Name is required";
-	$lastNameError = "Last Name is required";
-	$foodError = "Food is required NOW!";
+		echo "You have added a friend";
 	}
-
-	/*
-	echo "<br>First name entered: " . $firstNameEnter . "<br>";
-	echo "<br>Last name entered: " . $lastNameEnter . "<br>";
-	echo "<br>Favorite food: " . $foodEnter . "<br>";
-	*/
 }
 
 // haven't test
 function insertVisit()
 {
 	global $connection;
-	$visitError = $visitEnter = "";
 
 	$personEnter = $_POST["humanName"];
 	$stateEnter = $_POST["stateName"];
 	$visitEnter = $_POST["visit"];
 		
-	if(!empty($visitEnter))
-	{
 	$visitSql = "INSERT INTO Visits(p_id, s_id, date_visited)
 	VALUES('$personEnter', '$stateEnter', '$visitEnter')";
 
-		// Check if insert is good
-		if($connection->query($visitSql) === FALSE)
-		{
-			echo "Error: " . $visitSql . "<br>" . $connection->error;
-		}
-	}
-	else
+	if($connection->query($visitSql) === FALSE)
 	{
-		$visitError = "Data visit is required";
+		echo "Error: " . $visitSql . "<br>" . $connection->error;
 	}
 
-	/*
-	echo "Person entered : " . $personEnter . "<br>";
-	echo "State entered : " . $stateEnter . "<br>";
-	echo "Date entered : " . $visitEnter . "<br>";
-	*/
+	else
+	{
+		echo "You have added a visit";
+	}
 }
 
 $connection->close();
