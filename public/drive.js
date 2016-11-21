@@ -88,7 +88,7 @@ $(document).ready(function(){
 			{
 				console.log(data);
 				console.log($("#personForm").serialize());
-				console.log("You have added a person");
+				alert("You have added a person");
 			}
 		});
 	});

@@ -23,17 +23,17 @@
 </html>
 
 <!--Add Person -->
-<button id="addPersonButton" type="button" class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#person">Add Person</button><br><br>
+<button id="addPersonButton" type="button" class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#person">Add a Person</button><br><br>
 	<div class="modal fade" id="person" tabindex="-1" role="dialog" aria-labelledby="personLabel">
 		<div class="modal-dialog" role="document">
-			<div class = "modal-content">
+			<div class="modal-content">
 			
 				<div class="modal-header"> 
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class = "modal-title">Add a Person!</h4>
+					<h4 class="modal-title">Add a Person!</h4>
 				</div>
 
-				<div class = "modal-body">
+				<div class="modal-body">
 					<form method="post" id="personForm">
 					First Name: 	<input type="text" id="firstName" name="firstName">	<br><br>
 					Last Name: 		<input type="text" id="lastName" name="lastName">	<br><br>
@@ -47,27 +47,26 @@
 	</div>
 
 <!--Add Visit -->
-<button id="addVisitButton" type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#visit">Add Visit</button>
+<button id="addVisitButton" type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#visit">Add a Visit</button>
 	<div class="modal fade" id="visit" tabindex="-1" role="dialog" aria-labelledby="visitLabel">
 		<div class="modal-dialog" role="document">
-			<div class = "modal-content">
+			<div class="modal-content">
 
 				<div class="modal-header"> 
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class = "modal-title">Add a Visit!</h4>
+					<h4 class="modal-title">Add a Visit!</h4>
 				</div>
 
-				<div class = "modal-body">
-					<form method="post" id="visitForm"><br><br><br><br><br>
+				<div class="modal-body">
+					<form method="post" id="visitForm">
 					<select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle">
-					<option>Select a human</option></select><br><br><br><br><br><br><br>
+					<option>Select a human</option></select>	<br><br><br><br><br><br><br>
 
 					<select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle">
 					<option>Select a State</option>
 					<option value="1">Louisiana</option>
-					</select><br><br><br><br><br><br><br><br><br><br><br>
-					 
-					Add a visit to the table <br><br><br>
+					</select>	<br><br><br><br><br><br><br><br><br><br><br>
+
 					Date Visited:<br>
 					Format: YYYY/MM/DD<br>
 					Example: 1994/07/14<br>
