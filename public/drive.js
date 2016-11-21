@@ -1,4 +1,4 @@
-//display selected person, done
+//display selected person
 $("#SelectHumanDropDown").change(function(){
 	$.ajax({
 		type: "GET",
@@ -22,7 +22,7 @@ $(document).ready(function(){
 	//populateStates(); // done but static
 });
 
-//populate people's dropdowns // done
+//populate people's dropdowns
 function populatePeople()
 {
 	$.ajax({
@@ -50,7 +50,7 @@ function populatePeople()
 	});
 }
 
-//populate state dropdown //done
+//populate state dropdown
 function populateStates()
 {
 	$.ajax({
@@ -77,35 +77,22 @@ function populateStates()
 	});
 }
 
-// test
-$(document).ready(function(){
-	
-});
-
-/*
-//Add person to database // error
+//Add person to database
 $(document).ready(function(){
 	$("#addPersonSubmit").click(function(){
 		$.ajax({
 			type: "POST",
 			url: "api.php",
 			data: $("#personForm").serialize(),
-			success: function()
-			{
-				console.log($("#personForm").serialize());
-				console.log("You have added a person");
-			},
-			error:function(data)
+			success: function(data)
 			{
 				console.log(data);
 				console.log($("#personForm").serialize());
-				//console.log("Error");
+				console.log("You have added a person");
 			}
-
 		});
 	});
 });
-*/
 
 //Add visit to database /error
 $(document).ready(function(){
