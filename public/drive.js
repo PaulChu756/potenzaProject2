@@ -77,6 +77,12 @@ function populateStates()
 	});
 }
 
+// test
+$(document).ready(function(){
+	
+});
+
+/*
 //Add person to database // error
 $(document).ready(function(){
 	$("#addPersonSubmit").click(function(){
@@ -99,6 +105,7 @@ $(document).ready(function(){
 		});
 	});
 });
+*/
 
 //Add visit to database /error
 $(document).ready(function(){

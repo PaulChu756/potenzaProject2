@@ -98,13 +98,7 @@ else
 {
 	die();
 }
-
-
-header('application/json');
-echo json_encode($apiVars);
-die();
 */
-
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $peopleRequest = "people";
@@ -165,7 +159,7 @@ function getPerson($id=0)
 		$response[] = $row;
 	}
 	header('Content-Type: application/json');
-	echo json_encode($response);
+	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
 //select all states
@@ -181,7 +175,7 @@ function getStates()
 		$response[] = $row;
 	}
 	header('Content-Type: application/json');
-	echo json_encode($response);
+	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
 // haven't test

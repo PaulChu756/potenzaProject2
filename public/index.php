@@ -30,18 +30,15 @@
 			
 				<div class="modal-header"> 
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class = "modal-title">Add a Person</h4>
+					<h4 class = "modal-title">Add a Person!</h4>
 				</div>
 
 				<div class = "modal-body">
-
 					<form method="post" id="personForm">
 					First Name: 	<input type="text" id="firstName" name="firstName"><br><br>
 					Last Name: 		<input type="text" id="lastName" name="lastName"><br><br>
 					Favorite Food: 	<input type="text" id="favoriteFood" name="favoriteFood"><br><br>
 					<button type="submit" id="addPersonSubmit" name="addPersonSubmit" class="btn btn-success">Submit</button>
-
-					</form>
 				</div>
 
 			</div>
@@ -56,7 +53,7 @@
 
 				<div class="modal-header"> 
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class = "modal-title">Add a Visit</h4>
+					<h4 class = "modal-title">Add a Visit!</h4>
 				</div>
 
 				<div class = "modal-body">
@@ -90,7 +87,6 @@
 	<option>Select a human</option>	
 </center>
 </form>
-
 
 <!--Jquery CDN method-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
