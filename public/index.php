@@ -61,11 +61,9 @@
 					<form method="post" id="visitForm">
 					<select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle">
 					<option>Select a human</option></select>	<br><br><br><br><br><br><br>
-					
+
 					<select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle">
-					<option>Select a State</option>
-					<option value="1">Louisiana</option>
-					</select>	<br><br><br><br><br><br><br><br><br><br><br>
+					<option>Select a State</option> </select>	<br><br><br><br><br><br><br><br><br><br><br>
 
 					Date Visited:<br>
 					Format: YYYY/MM/DD<br>

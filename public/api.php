@@ -27,6 +27,10 @@ while($i < count($segments))
 	}
 }
 
+header('Content-Type: application/json');
+echo(json_encode($apiVars, JSON_PRETTY_PRINT));
+die();
+
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 if($requestMethod === $_GET)
 {
