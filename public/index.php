@@ -58,19 +58,20 @@
 				</div>
 
 				<div class = "modal-body">
-					<form id="visitForm" method="POST"><br><br>
-					<!--Select human-->
-					<br><br>
-					<br><select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle"></select>
-					<!--Select States-->
-					<br><br><br><br><br><br>
-					<br><select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle"></select>
-					<!--Add visit-->
-					<br><br><br><br><br><br><br><br><br><br><br> Add a visit to the table <br><br><br>
+					<form method="post" id="visitForm"><br><br><br><br><br>
+					<select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle">
+					<option>Select a human</option></select><br><br><br><br><br><br><br>
+
+					<select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle">
+					<option>Select a State</option>
+					<option value="1">Louisiana</option>
+					</select><br><br><br><br><br><br><br><br><br><br><br>
+					 
+					Add a visit to the table <br><br><br>
 					Date Visited:<br>
 					Format: YYYY/MM/DD<br>
 					Example: 1994/07/14<br>
-					<input type = "text" name = "visit"><br><br>
+					<input type="text" id="visit" name="visit"><br><br>
 					<button type="submit" id="addVisitSubmit" name="addVisitSubmit" class="btn btn-success">Submit</button>
 					</form>
 				</div>
@@ -81,13 +82,13 @@
 
 <!-- Select a human and output info -->
 <center>
-<form>
-	<br><br>Select a human and learn where they're from and favor food <br><br>
-	<div id="displayInfo">Selected person info will be here</div>
-	<br><br><select name="SelectHumanDropDown" id="SelectHumanDropDown">
-	<option>Select a human</option>	
+	<form>
+		<br><br>Select a human and learn where they're from and favor food <br><br>
+		<div id="displayInfo">Selected person info will be here</div>
+		<br><br><select id="SelectHumanDropDown" name="SelectHumanDropDown" >
+		<option>Select a human</option></select>	
+	</form>
 </center>
-</form>
 
 <!--Jquery CDN method-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

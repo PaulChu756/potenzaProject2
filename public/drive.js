@@ -94,24 +94,25 @@ $(document).ready(function(){
 	});
 });
 
-//Add visit to database /error
+//Add visit to database
 $(document).ready(function(){
 	$("#addVisitSubmit").click(function(){
 		$.ajax({
 			type: "POST",
 			url: "api.php",
 			data: $("#humanNameDropDown, #stateNameDropDown, #visitForm").serialize(),
-			success: function()
+			success: function(data)
 			{
+				console.log(data);
 				console.log($("#visitForm").serialize());
 				console.log("You have added a visit");
 			},
-			error: function()
+			error: function(data)
 			{
+				console.log(data);
 				console.log($("#visitForm").serialize());
 				console.log("Error");
 			}
-
 		});
 	});
 });
