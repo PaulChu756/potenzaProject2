@@ -104,14 +104,13 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 $peopleRequest = "people";
 $stateRequest = "states";
 
-switch($peopleRequest)
+switch($stateRequest)
 {
 	case "people":
 		if($requestMethod == "GET")
 		{
 			$id = intval($_GET["personID"]);
 			getPerson($id);
-			//getPerson();
 		}
 		elseif($requestMethod == "POST")
 		{
@@ -178,7 +177,7 @@ function getStates()
 	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
-// haven't test
+//insert a Person
 function insertPerson()
 {
 	global $connection;
@@ -206,13 +205,13 @@ function insertPerson()
 	}
 }
 
-// haven't test
+// Insert a Visit
 function insertVisit()
 {
 	global $connection;
 
-	$personEnter = $_POST["humanName"];
-	$stateEnter = $_POST["stateName"];
+	$personEnter = $_POST["humanNameDropDown"];
+	$stateEnter = $_POST["stateNameDropDown"];
 	$visitEnter = $_POST["visit"];
 		
 	$visitSql = "INSERT INTO Visits(p_id, s_id, date_visited)

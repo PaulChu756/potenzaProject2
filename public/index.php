@@ -61,7 +61,7 @@
 					<form method="post" id="visitForm">
 					<select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle">
 					<option>Select a human</option></select>	<br><br><br><br><br><br><br>
-
+					
 					<select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle">
 					<option>Select a State</option>
 					<option value="1">Louisiana</option>
@@ -84,7 +84,7 @@
 	<form>
 		<br><br>Select a human and learn where they're from and favor food <br><br>
 		<div id="displayInfo">Selected person info will be here</div>
-		<br><br><select id="SelectHumanDropDown" name="SelectHumanDropDown" >
+		<br><br><select id="SelectHumanDropDown" name="SelectHumanDropDown" class="btn btn-success dropdown-toggle">
 		<option>Select a human</option></select>	
 	</form>
 </center>
