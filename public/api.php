@@ -8,7 +8,6 @@ if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
-/*
 $requestURI = parse_url($_SERVER['REQUEST_URI']);
 $segments = explode('/', trim($requestURI['path'], '/'));
 $apiVars = [];
@@ -26,121 +25,15 @@ while($i < count($segments))
 		$apiVars[$segments[$i]] = null;  
 		$i++;    
 	}
-		 
 }
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
-
-if($requestMethod == "GET")
+if($requestMethod === $_GET)
 {
-	if(array_key_exists("people", $apiVars))
-	{
-		if($apiVars["people"] == null)
-		{
-			getPerson();
-		}
-		elseif($apiVars["people"] !== null)
-		{
-			getPerson($apiVars['people']);
-		}
-		else
-		{
-			die();
-		}
-	}
-	elseif(array_key_exists("visits", $apiVars))
-	{
-		if($apiVars["visits"] == null)
-		{
-			// get visits
-		}
-		elseif($apiVars["visits"] !== null)
-		{
-			//get visit by id $apiVars["visits"];
-		}
-		else
-		{
-			die();
-		}
-	}
-	elseif(array_key_exists("states", $apiVars))
-	{
-		if($apiVars["states"] == null)
-		{
-			//gets States();
-		}
-		else
-		{
-			die();
-		}
-	}
-	else
-	{
-		// return people, visits and states
-	}
-}
-elseif($requestMethod == "POST")
-{
-	if($apiVars["people"] == null)
-	{
-		insertPerson();
-	}
-	elseif($apiVars["visits"] == null)
-	{
-		insertVisit();
-	}
-	else
-	{
-		die();
-	}
-}
-else
-{
-	die();
-}
-*/
-
-$requestMethod = $_SERVER["REQUEST_METHOD"];
-$peopleRequest = "people";
-$stateRequest = "states";
-
-switch($stateRequest)
-{
-	case "people":
-		if($requestMethod == "GET")
-		{
-			$id = intval($_GET["personID"]);
-			getPerson($id);
-		}
-		elseif($requestMethod == "POST")
-		{
-			insertPerson();
-		}
-		else
-		{
-			echo "People failed";
-			die();
-		}
-		break;
-
-	case "states":
-		if($requestMethod == "GET")
-		{
-			getStates();
-		}
-		elseif($requestMethod == "POST")
-		{
-			insertVisit();
-		}
-		else
-		{
-			echo "States failed";
-			die();
-		}
-		break;
+	
 }
 
-// Select all people or select a person
+// Select all people/select a person
 function getPerson($id=0)
 {
 	global $connection;
@@ -161,8 +54,8 @@ function getPerson($id=0)
 	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
-//select all states
-function getStates()
+//select all states/select a state
+function getStates($id=0)
 {
 	global $connection;
 	$stateSql = "SELECT * FROM States";
@@ -170,6 +63,22 @@ function getStates()
 	$response = array();
 	$stateQuery = mysqli_query($connection,$stateSql) or die(mysqli_error($connection));
 	while($row = mysqli_fetch_array($stateQuery, true))
+	{
+		$response[] = $row;
+	}
+	header('Content-Type: application/json');
+	echo json_encode($response, JSON_PRETTY_PRINT);
+}
+
+//select all visits/select a visit
+function getVisits($id=0)
+{
+	global $connection;
+	$visitSql = "SELECT * FROM Visits";
+
+	$response = array();
+	$visitQuery = mysqli_query($connection,$visitSql) or die(mysqli_error($connection));
+	while($row = mysqli_fetch_array($visitQuery, true))
 	{
 		$response[] = $row;
 	}
@@ -229,4 +138,49 @@ function insertVisit()
 }
 
 $connection->close();
+
+// ------Comment Section-----
+
+/*
+$requestMethod = $_SERVER["REQUEST_METHOD"];
+$peopleRequest = "people";
+$stateRequest = "states";
+
+switch($stateRequest)
+{
+	case "people":
+		if($requestMethod == "GET")
+		{
+			$id = intval($_GET["personID"]);
+			getPerson($id);
+		}
+		elseif($requestMethod == "POST")
+		{
+			insertPerson();
+		}
+		else
+		{
+			echo "People failed";
+			die();
+		}
+		break;
+
+	case "states":
+		if($requestMethod == "GET")
+		{
+			getStates();
+		}
+		elseif($requestMethod == "POST")
+		{
+			insertVisit();
+		}
+		else
+		{
+			echo "States failed";
+			die();
+		}
+		break;
+}
+*/ 
 ?>
+

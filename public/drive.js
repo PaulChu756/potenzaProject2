@@ -16,10 +16,10 @@ $("#SelectHumanDropDown").change(function(){
 	});
 });
 
-//exe functions
+// populate people/states
 $(document).ready(function(){
-	populatePeople(); // done but static
-	//populateStates(); // done but static
+	populatePeople();
+	populateStates();
 });
 
 //populate people's dropdowns
