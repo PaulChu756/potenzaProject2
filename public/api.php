@@ -27,14 +27,27 @@ while($i < count($segments))
 	}
 }
 
-header('Content-Type: application/json');
-echo(json_encode($apiVars, JSON_PRETTY_PRINT));
-die();
-
 $requestMethod = $_SERVER["REQUEST_METHOD"];
+header('application/json');
+
 if($requestMethod === $_GET)
 {
-	
+	// get all people, states, visits
+	// get individaul people, states, visits
+	if($apiVars)
+	{
+		
+	}
+}
+elseif($requestMethod === $_POST)
+{
+	// post to add a person
+	// post to add a visit
+}
+else
+{
+	echo(json_encode($apiVars));
+	//die();
 }
 
 // Select all people/select a person
