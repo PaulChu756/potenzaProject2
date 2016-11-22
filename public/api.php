@@ -30,10 +30,10 @@ while($i < count($segments))
 header('Content-Type: application/json');
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-//get request
+//GET request
 if($requestMethod === "GET")
 {
-	//check people exisit
+	//check people exist
 	if(array_key_exists("people", $apiVars))
 	{	
 		//get all people

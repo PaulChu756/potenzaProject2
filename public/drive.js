@@ -3,12 +3,12 @@ $(document).ready(function(){
 	populatePeople();
 	populateStates();
 
-	$('#personForm').submit(function(e) {
+	$('#personForm').submit(function(e){
 		e.preventDefault();
 		addPerson();
 	});
 
-	$('#visitForm').submit(function(e) {
+	$('#visitForm').submit(function(e){
 		e.preventDefault();
 		addVisit();
 	});
@@ -18,7 +18,7 @@ $(document).ready(function(){
 $("#SelectHumanDropDown").change(function(){
 	$.ajax({
 		type: "GET",
-		url: "api.php",
+		url: "api/people",
 		dataType: "json",
 		success: function(data)
 		{
@@ -69,14 +69,14 @@ function populateStates()
 		dataType:"json",
 		success : function(data)
 		{
-			console.log('success');
-			console.log(data);
+			//console.log('success');
+			//console.log(data);
 			var len = data.length;
 			for(var i = 0; i < len; i++)
 			{
 				var id = data[i]["id"];
 				var firstname = data[i]["statename"];
-				$("#stateName").append("<option value='" + id + "'>" + firstname + "</option>");
+				$("#stateNameDropDown").append("<option value='" + id + "'>" + firstname + "</option>");
 			}
 		},
 		error : function(data)
@@ -92,17 +92,18 @@ function addPerson()
 {
 	$.ajax({
 		type: "POST",
-		url: "api.php", // api/people
+		url: "api/people", // api/people
 		data: $("#personForm").serialize(),
 		success: function (data) 
 		{
 			console.log(data);
 			console.log($("#personForm").serialize());
-			alert("You have added a person");
+			console.log("You have added a person");
 		},
 		error: function (data) 
 		{
 			console.log("ERROR: " + data);
+			console.log($("#personForm").serialize());
 		}
 	});	
 }
@@ -112,13 +113,13 @@ function addVisit()
 {
 	$.ajax({
 			type: "POST",
-			url: "api.php", // api/visit
+			url: "api/visits", // api/visit
 			data: $("#humanNameDropDown, #stateNameDropDown, #visitForm").serialize(),
 			success: function(data)
 			{
 				console.log(data);
 				console.log($("#visitForm").serialize());
-				console.log("You have added a visit");
+				alert("You have added a visit");
 			},
 			error: function(data)
 			{
