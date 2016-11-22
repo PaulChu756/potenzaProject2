@@ -30,18 +30,16 @@ while($i < count($segments))
 header('application/json');
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-if($requestMethod == $_GET)
+if($requestMethod === $_GET)
 {
 	// get all people, states, visits
 	// get individaul people, states, visits
 	if(array_key_exists("people", $apiVars))
 	{
-		var_dump("get people");
 		if($apiVars["people"] == null)
 		{
-			var_dump("get people");
-			getPerson($id);
-			var_dump(getPerson($id));
+			getPeople($id);
+			var_dump(getPeople($id));
 		}
 	}
 	else
@@ -86,8 +84,8 @@ else
 }
 */
 
-// Select all people/select a person
-function getPerson($id=0)
+// Select all people/select a person /api/people
+function getPeople($id=0)
 {
 	global $connection;
 	$resultSql = "SELECT * FROM People";
@@ -103,10 +101,11 @@ function getPerson($id=0)
 	{
 		$response[] = $row;
 	}
+	header('Content-Type: application/json');
 	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
-//select all states/select a state
+//select all states/select a state /api/states
 function getStates($id=0)
 {
 	global $connection;
@@ -123,10 +122,11 @@ function getStates($id=0)
 	{
 		$response[] = $row;
 	}
+	header('Content-Type: application/json');
 	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
-//select all visits/select a visit
+//select all visits/select a visit /api/visits
 function getVisits($id=0)
 {
 	global $connection;
@@ -143,10 +143,11 @@ function getVisits($id=0)
 	{
 		$response[] = $row;
 	}
+	header('Content-Type: application/json');
 	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
-//insert a Person
+//insert a Person //api/person
 function insertPerson()
 {
 	global $connection;
@@ -174,7 +175,7 @@ function insertPerson()
 	}
 }
 
-// Insert a Visit
+// Insert a Visit //api/visit
 function insertVisit()
 {
 	global $connection;
