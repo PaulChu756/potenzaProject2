@@ -1,3 +1,19 @@
+// populate people/states
+$(document).ready(function(){
+	populatePeople();
+	populateStates();
+
+	$('#personForm').submit(function(e) {
+		e.preventDefault();
+		addPerson();
+	});
+
+	$('#visitForm').submit(function(e) {
+		e.preventDefault();
+		addVisit();
+	});
+});
+
 //display selected person
 $("#SelectHumanDropDown").change(function(){
 	$.ajax({
@@ -16,18 +32,12 @@ $("#SelectHumanDropDown").change(function(){
 	});
 });
 
-// populate people/states
-$(document).ready(function(){
-	populatePeople();
-	populateStates();
-});
-
 //populate people's dropdowns
 function populatePeople()
 {
 	$.ajax({
 		type:"GET",
-		url:"api.php",
+		url:"api/people",
 		dataType:"json",
 		success : function(data)
 		{
@@ -55,7 +65,7 @@ function populateStates()
 {
 	$.ajax({
 		type:"GET",
-		url:"api.php",
+		url:"api/states",
 		dataType:"json",
 		success : function(data)
 		{
@@ -77,29 +87,33 @@ function populateStates()
 	});
 }
 
+
 //Add person to database
-$(document).ready(function(){
-	$("#addPersonSubmit").click(function(){
-		$.ajax({
-			type: "POST",
-			url: "api.php",
-			data: $("#personForm").serialize(),
-			success: function(data)
-			{
-				console.log(data);
-				console.log($("#personForm").serialize());
-				alert("You have added a person");
-			}
-		});
-	});
-});
+function addPerson()
+{
+	$.ajax({
+		type: "POST",
+		url: "api.php", // api/people
+		data: $("#personForm").serialize(),
+		success: function (data) 
+		{
+			console.log(data);
+			console.log($("#personForm").serialize());
+			alert("You have added a person");
+		},
+		error: function (data) 
+		{
+			console.log("ERROR: " + data);
+		}
+	});	
+}
 
 //Add visit to database
-$(document).ready(function(){
-	$("#addVisitSubmit").click(function(){
-		$.ajax({
+function addVisit()
+{
+	$.ajax({
 			type: "POST",
-			url: "api.php",
+			url: "api.php", // api/visit
 			data: $("#humanNameDropDown, #stateNameDropDown, #visitForm").serialize(),
 			success: function(data)
 			{
@@ -109,10 +123,8 @@ $(document).ready(function(){
 			},
 			error: function(data)
 			{
-				console.log(data);
+				console.log("ERROR:" + data);
 				console.log($("#visitForm").serialize());
-				console.log("Error");
 			}
 		});
-	});
-});
+}

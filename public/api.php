@@ -1,4 +1,6 @@
 <?php
+var_dump('test');die();
+
 $host = "localhost";
 $user = "root";
 $password = "root";
@@ -29,7 +31,7 @@ while($i < count($segments))
 }
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
-
+header('Content-Type: application/json');
 
 if($requestMethod === $_GET)
 {
@@ -43,30 +45,37 @@ if($requestMethod === $_GET)
 		}
 	}
 	//get states
-	if(array_key_exists("states", $apiVars))
+	elseif(array_key_exists("states", $apiVars))
 	{
-
+		if($apiVars["states"] == null)
+		{
+			getStates($id);
+		}
 	}
 	//get visits
-	if(array_key_exists("visits", $apiVars))
+	elseif(array_key_exists("visits", $apiVars))
 	{
-
+		if($apiVars["visits"] == null)
+		{
+			getVisits($id);
+		}
 	}
 }
 elseif($requestMethod === $_POST)
 {
 	// post to add a person
 	// post to add a visit
+	echo "Post";
+	die();
 }
 // Get everything
 else
 {
+	echo "get people,states, visits";
 	getPerson($id);
 	getStates($id);
 	getVisits($id);
 }
-
-
 
 // Select all people/select a person
 function getPerson($id=0)
@@ -85,7 +94,6 @@ function getPerson($id=0)
 	{
 		$response[] = $row;
 	}
-	header('Content-Type: application/json');
 	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
@@ -106,7 +114,6 @@ function getStates($id=0)
 	{
 		$response[] = $row;
 	}
-	header('Content-Type: application/json');
 	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
@@ -127,7 +134,6 @@ function getVisits($id=0)
 	{
 		$response[] = $row;
 	}
-	header('Content-Type: application/json');
 	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
@@ -226,6 +232,6 @@ switch($stateRequest)
 		}
 		break;
 }
-*/ 
+
 ?>
 
