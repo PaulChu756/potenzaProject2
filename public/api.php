@@ -30,16 +30,18 @@ while($i < count($segments))
 header('Content-Type: application/json');
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-// get all people, states, visits
-// get individaul people, states, visits
+//get request
 if($requestMethod === "GET")
 {
+	//check people exisit
 	if(array_key_exists("people", $apiVars))
-	{
+	{	
+		//get all people
 		if($apiVars["people"] == null)
 		{
 			getPeople($id);
 		}
+		// get a person
 		elseif($apiVars["people"] != null)
 		{
 			getPeople($apiVars["people"]);
@@ -49,12 +51,15 @@ if($requestMethod === "GET")
 			var_dump("ERROR");
 		}
 	}
+	//check states exist
 	elseif(array_key_exists("states", $apiVars))
 	{
+		//get states
 		if($apiVars["states"] == null)
 		{
 			getStates($id);
 		}
+		//get a state
 		elseif($apiVars["states"] != null)
 		{
 			getStates($apiVars["states"]);
@@ -64,44 +69,51 @@ if($requestMethod === "GET")
 			var_dump("ERROR");
 		}
 	}
-}
-
-	/*
-	//get states
-	elseif(array_key_exists("states", $apiVars))
-	{
-		if($apiVars["states"] == null)
-		{
-			getStates($id);
-		}
-	}
-	//get visits
+	//check visits exist
 	elseif(array_key_exists("visits", $apiVars))
 	{
+		//get visits
 		if($apiVars["visits"] == null)
 		{
 			getVisits($id);
 		}
+		// get a visit
+		elseif($apiVars["visits"] != null)
+		{
+			getVisits($apiVars["visits"]);
+		}
+		else
+		{
+			var_dump("ERROR");
+		}
 	}
-	*/
-
-/*
-elseif($requestMethod === $_POST)
-{
-	// post to add a person
-	// post to add a visit
-	echo "Post";
-	die();
+	else
+	{
+		var_dump("You have entered an invalid GET request");
+	}
 }
-// Get everything
+// POST request
+elseif($requestMethod === "POST")
+{
+	//check if people exist
+	if(array_key_exists("people", $apiVars))
+	{
+		insertPerson();
+	}
+	//check if visits exist
+	elseif(array_key_exists("visits", $apiVars))
+	{
+		insertVisit();
+	}
+	else
+	{
+		var_dump("ERROR: post request");
+	}
+}
 else
 {
-	echo "get people,states, visits";
-	getPerson($id);
-	getStates($id);
-	getVisits($id);
+	var_dump("ERROR: fourth wall");
 }
-*/
 
 // Select all people/select a person /api/people
 function getPeople($id=0)
@@ -218,48 +230,5 @@ function insertVisit()
 }
 
 $connection->close();
-
-// ------Comment Section-----
-/*
-$requestMethod = $_SERVER["REQUEST_METHOD"];
-$peopleRequest = "people";
-$stateRequest = "states";
-
-switch($stateRequest)
-{
-	case "people":
-		if($requestMethod == "GET")
-		{
-			$id = intval($_GET["personID"]);
-			getPerson($id);
-		}
-		elseif($requestMethod == "POST")
-		{
-			insertPerson();
-		}
-		else
-		{
-			echo "People failed";
-			die();
-		}
-		break;
-
-	case "states":
-		if($requestMethod == "GET")
-		{
-			getStates();
-		}
-		elseif($requestMethod == "POST")
-		{
-			insertVisit();
-		}
-		else
-		{
-			echo "States failed";
-			die();
-		}
-		break;
-}
-*/
 ?>
 
