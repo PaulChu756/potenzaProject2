@@ -33,7 +33,7 @@ while($i < count($segments))
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 header('Content-Type: application/json');
 
-if($requestMethod === $_GET)
+if($requestMethod == $_GET)
 {
 	// get all people, states, visits
 	// get individaul people, states, visits
@@ -44,6 +44,15 @@ if($requestMethod === $_GET)
 			getPerson($id);
 		}
 	}
+}
+else
+{
+	echo "get people,states, visits";
+	getPerson($id);
+	getStates($id);
+	getVisits($id);
+}
+	/*
 	//get states
 	elseif(array_key_exists("states", $apiVars))
 	{
@@ -60,7 +69,9 @@ if($requestMethod === $_GET)
 			getVisits($id);
 		}
 	}
-}
+	*/
+
+/*
 elseif($requestMethod === $_POST)
 {
 	// post to add a person
@@ -76,6 +87,7 @@ else
 	getStates($id);
 	getVisits($id);
 }
+*/
 
 // Select all people/select a person
 function getPerson($id=0)
@@ -191,7 +203,6 @@ function insertVisit()
 $connection->close();
 
 // ------Comment Section-----
-
 /*
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $peopleRequest = "people";
@@ -232,6 +243,6 @@ switch($stateRequest)
 		}
 		break;
 }
-
+*/
 ?>
 

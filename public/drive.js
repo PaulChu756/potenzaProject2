@@ -87,7 +87,6 @@ function populateStates()
 	});
 }
 
-
 //Add person to database
 function addPerson()
 {
