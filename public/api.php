@@ -27,31 +27,45 @@ while($i < count($segments))
 	}
 }
 
-header('application/json');
+header('Content-Type: application/json');
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-if($requestMethod === $_GET)
+// get all people, states, visits
+// get individaul people, states, visits
+if($requestMethod === "GET")
 {
-	// get all people, states, visits
-	// get individaul people, states, visits
 	if(array_key_exists("people", $apiVars))
 	{
 		if($apiVars["people"] == null)
 		{
 			getPeople($id);
-			var_dump(getPeople($id));
-			var_dump("got people");
+		}
+		elseif($apiVars["people"] != null)
+		{
+			getPeople($apiVars["people"]);
 		}
 		else
 		{
-			var_dump("no people");
+			var_dump("ERROR");
 		}
 	}
-	else 
+	elseif(array_key_exists("states", $apiVars))
 	{
-		var_dump("never fired");
+		if($apiVars["states"] == null)
+		{
+			getStates($id);
+		}
+		elseif($apiVars["states"] != null)
+		{
+			getStates($apiVars["states"]);
+		}
+		else
+		{
+			var_dump("ERROR");
+		}
 	}
 }
+
 	/*
 	//get states
 	elseif(array_key_exists("states", $apiVars))
@@ -118,7 +132,7 @@ function getStates($id=0)
 
 	if($id != 0)
 	{
-		$resultSql.=" WHERE id=". $id ." LIMIT 1";
+		$stateSql.=" WHERE id=". $id ." LIMIT 1";
 	}
 
 	$response = array();
@@ -139,7 +153,7 @@ function getVisits($id=0)
 
 	if($id != 0)
 	{
-		$resultSql.=" WHERE id=". $id ." LIMIT 1";
+		$visitSql.=" WHERE id=". $id ." LIMIT 1";
 	}
 
 	$response = array();
