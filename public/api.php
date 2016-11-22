@@ -8,6 +8,7 @@ if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
+//Zeke's code
 $requestURI = parse_url($_SERVER['REQUEST_URI']);
 $segments = explode('/', trim($requestURI['path'], '/'));
 $apiVars = [];
@@ -28,15 +29,28 @@ while($i < count($segments))
 }
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
-header('application/json');
+
 
 if($requestMethod === $_GET)
 {
 	// get all people, states, visits
 	// get individaul people, states, visits
-	if($apiVars)
+	if(array_key_exists("people", $apiVars)
 	{
-		
+		if($apiVars["people"] == null)
+		{
+			getPerson($id);
+		}
+	}
+	//get states
+	if(array_key_exists("states", $apiVars))
+	{
+
+	}
+	//get visits
+	if(array_key_exists("visits", $apiVars))
+	{
+
 	}
 }
 elseif($requestMethod === $_POST)
@@ -44,11 +58,15 @@ elseif($requestMethod === $_POST)
 	// post to add a person
 	// post to add a visit
 }
+// Get everything
 else
 {
-	echo(json_encode($apiVars));
-	//die();
+	getPerson($id);
+	getStates($id);
+	getVisits($id);
 }
+
+
 
 // Select all people/select a person
 function getPerson($id=0)
@@ -77,6 +95,11 @@ function getStates($id=0)
 	global $connection;
 	$stateSql = "SELECT * FROM States";
 
+	if($id != 0)
+	{
+		$resultSql.=" WHERE id=". $id ." LIMIT 1";
+	}
+
 	$response = array();
 	$stateQuery = mysqli_query($connection,$stateSql) or die(mysqli_error($connection));
 	while($row = mysqli_fetch_array($stateQuery, true))
@@ -92,6 +115,11 @@ function getVisits($id=0)
 {
 	global $connection;
 	$visitSql = "SELECT * FROM Visits";
+
+	if($id != 0)
+	{
+		$resultSql.=" WHERE id=". $id ." LIMIT 1";
+	}
 
 	$response = array();
 	$visitQuery = mysqli_query($connection,$visitSql) or die(mysqli_error($connection));
