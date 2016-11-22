@@ -9,7 +9,7 @@ die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
 $requestURI = parse_url($_SERVER['REQUEST_URI']);
-$segments = explode('/', trim($requestURI['path'], '/'));
+$segments = explode('/', $requestURI['path']);
 $apiVars = [];
 
 $i = 2;
@@ -40,11 +40,16 @@ if($requestMethod === $_GET)
 		{
 			getPeople($id);
 			var_dump(getPeople($id));
+			var_dump("got people");
+		}
+		else
+		{
+			var_dump("no people");
 		}
 	}
-	else
+	else 
 	{
-		var_dump("no people");
+		var_dump("never fired");
 	}
 }
 	/*
