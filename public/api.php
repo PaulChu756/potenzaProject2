@@ -1,6 +1,4 @@
 <?php
-var_dump('test');die();
-
 $host = "localhost";
 $user = "root";
 $password = "root";
@@ -10,7 +8,6 @@ if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
-//Zeke's code
 $requestURI = parse_url($_SERVER['REQUEST_URI']);
 $segments = explode('/', trim($requestURI['path'], '/'));
 $apiVars = [];
@@ -30,27 +27,27 @@ while($i < count($segments))
 	}
 }
 
+header('application/json');
 $requestMethod = $_SERVER["REQUEST_METHOD"];
-header('Content-Type: application/json');
 
 if($requestMethod == $_GET)
 {
 	// get all people, states, visits
 	// get individaul people, states, visits
-	if(array_key_exists("people", $apiVars)
+	if(array_key_exists("people", $apiVars))
 	{
+		var_dump("get people");
 		if($apiVars["people"] == null)
 		{
+			var_dump("get people");
 			getPerson($id);
+			var_dump(getPerson($id));
 		}
 	}
-}
-else
-{
-	echo "get people,states, visits";
-	getPerson($id);
-	getStates($id);
-	getVisits($id);
+	else
+	{
+		var_dump("no people");
+	}
 }
 	/*
 	//get states

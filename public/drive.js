@@ -1,4 +1,4 @@
-// populate people/states
+// populate people/states, also person/visit form submit
 $(document).ready(function(){
 	populatePeople();
 	populateStates();
