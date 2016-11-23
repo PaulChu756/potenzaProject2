@@ -165,7 +165,11 @@ function getVisits($id=0)
 
 	if($id != 0)
 	{
-		$visitSql.=" WHERE id=". $id;
+		//$visitSql.=" WHERE id=". $id;
+		$visitSql = "SELECT * FROM Visits v
+		INNER JOIN People p ON v.p_id = p.id
+		INNER JOIN States s ON v.s_id = s.id
+		WHERE v.p_id =" . $id;
 	}
 
 	$response = array();
