@@ -102,19 +102,25 @@ function addPerson()
 		type: "POST",
 		url: "api/people", // api/people
 		data: $("#personForm").serialize(),
-		success: function (data) 
+		 success: function(data,status,xhr) 
 		{
 			console.log(data);
+			console.log(status);
+			console.log(xhr);
 			console.log($("#personForm").serialize());
 			console.log("You have added a person");
 			populatePeople();
 			displayData();
 		},
-		error: function (data) 
+		 error: function(data,status,xhr) 
 		{
 			console.log(data);
+			console.log(status);
+			console.log(xhr);
 			console.log($("#personForm").serialize());
-			//console.log("error");
+			console.log("error");
+			populatePeople();
+			displayData();
 		}
 	});	
 }
