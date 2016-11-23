@@ -2,6 +2,7 @@
 $(document).ready(function(){
 	populatePeople();
 	populateStates();
+	displayData();
 
 	$('#personForm').submit(function(e){
 		e.preventDefault();
@@ -15,22 +16,29 @@ $(document).ready(function(){
 });
 
 //display selected person
-$("#SelectHumanDropDown").change(function(){
-	$.ajax({
-		type: "GET",
-		url: "api/people",
-		dataType: "json",
-		success: function(data)
-		{
-			$("#displayInfo").empty();
-			var i = $("#SelectHumanDropDown").val();
-			var firstname = data[i-1]["firstname"];
-			var lastname = data[i-1]["lastname"];
-			var food = data[i-1]["food"];
-			$("#displayInfo").append("First name: " + firstname + "<br> Last name: " + lastname + "<br> Favorite food: " + food);
-		}
+function displayData()
+{
+	$("#SelectHumanDropDown").change(function(){
+		$.ajax({
+			type: "GET",
+			url: "api/people",
+			dataType: "json",
+			success: function(data)
+			{
+				$("#displayInfo").empty();
+				var i = $("#SelectHumanDropDown").val();
+				var firstname = data[i-1]["firstname"];
+				var lastname = data[i-1]["lastname"];
+				var food = data[i-1]["food"];
+				$("#displayInfo").append(
+				"First name: " + firstname + 
+				"<br> Last name: " + lastname + 
+				"<br> Favorite food: " + food);
+			}
+		});
 	});
-});
+}
+
 
 //populate people's dropdowns
 function populatePeople()
@@ -100,11 +108,13 @@ function addPerson()
 			console.log($("#personForm").serialize());
 			console.log("You have added a person");
 			populatePeople();
+			displayData();
 		},
 		error: function (data) 
 		{
 			console.log(data);
 			console.log($("#personForm").serialize());
+			console.log("error");
 		}
 	});	
 }

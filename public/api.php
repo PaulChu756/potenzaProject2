@@ -161,7 +161,7 @@ function getStates($id=0)
 function getVisits($id=0)
 {
 	global $connection;
-	$visitSql = "SELECT * FROM Visits v
+		$visitSql = "SELECT * FROM Visits v
 		INNER JOIN People p ON v.p_id = p.id
 		INNER JOIN States s ON v.s_id = s.id";
 
