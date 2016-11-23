@@ -15,7 +15,7 @@ $apiVars = [];
 $i = 2;
 while($i < count($segments)) 
 {    
-	if($segments[$i+1]) 
+	if($segments[$i+1])
 	{  
 		$apiVars[$segments[$i]] = $segments[$i+1];  
 		$i += 2;    
@@ -39,7 +39,7 @@ if($requestMethod === "GET")
 		//get all people
 		if($apiVars["people"] == null)
 		{
-			getPeople($id);
+			getPeople();
 		}
 		// get a person
 		elseif($apiVars["people"] != null)
@@ -57,7 +57,7 @@ if($requestMethod === "GET")
 		//get states
 		if($apiVars["states"] == null)
 		{
-			getStates($id);
+			getStates();
 		}
 		//get a state
 		elseif($apiVars["states"] != null)
@@ -75,7 +75,7 @@ if($requestMethod === "GET")
 		//get visits
 		if($apiVars["visits"] == null)
 		{
-			getVisits($id);
+			getVisits();
 		}
 		// get a visit
 		elseif($apiVars["visits"] != null)

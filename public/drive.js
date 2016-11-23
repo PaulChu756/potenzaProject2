@@ -114,7 +114,7 @@ function addPerson()
 		{
 			console.log(data);
 			console.log($("#personForm").serialize());
-			console.log("error");
+			//console.log("error");
 		}
 	});	
 }
@@ -123,19 +123,19 @@ function addPerson()
 function addVisit()
 {
 	$.ajax({
-			type: "POST",
-			url: "api/visits", // api/visits
-			data: $("#humanNameDropDown, #stateNameDropDown, #visitForm").serialize(),
-			success: function(data)
-			{
-				console.log(data);
-				console.log($("#visitForm").serialize());
-				console.log("You have added a visit");
-			},
-			error: function(data)
-			{
-				console.log(data);
-				console.log($("#visitForm").serialize());
-			}
-		});
+		type: "POST",
+		url: "api/visits", // api/visits
+		data: $("#humanNameDropDown, #stateNameDropDown, #visitForm").serialize(),
+		success: function(data)
+		{
+			console.log(data);
+			console.log($("#visitForm").serialize());
+			console.log("You have added a visit");
+		},
+		error: function(data)
+		{
+			console.log(data);
+			console.log($("#visitForm").serialize());
+		}
+	});
 }
