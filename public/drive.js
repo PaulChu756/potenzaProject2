@@ -99,10 +99,11 @@ function addPerson()
 			console.log(data);
 			console.log($("#personForm").serialize());
 			console.log("You have added a person");
+			populatePeople();
 		},
 		error: function (data) 
 		{
-			console.log("ERROR: " + data);
+			console.log(data);
 			console.log($("#personForm").serialize());
 		}
 	});	
@@ -119,11 +120,11 @@ function addVisit()
 			{
 				console.log(data);
 				console.log($("#visitForm").serialize());
-				alert("You have added a visit");
+				console.log("You have added a visit");
 			},
 			error: function(data)
 			{
-				console.log("ERROR:" + data);
+				console.log(data);
 				console.log($("#visitForm").serialize());
 			}
 		});

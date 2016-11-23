@@ -161,7 +161,9 @@ function getStates($id=0)
 function getVisits($id=0)
 {
 	global $connection;
-	$visitSql = "SELECT * FROM Visits";
+	$visitSql = "SELECT * FROM Visits v
+		INNER JOIN People p ON v.p_id = p.id
+		INNER JOIN States s ON v.s_id = s.id";
 
 	if($id != 0)
 	{
@@ -200,7 +202,7 @@ function insertPerson()
 		// Check if insert is good
 		if(mysqli_query($connection, $sql))
 		{
-			echo "You have added a friend" . $firstNameEnter . $lastNameEnter . $foodEnter;
+			echo "You have added a friend: " . " First Name: ". $firstNameEnter . " Last Name: ". $lastNameEnter . " Food: " . $foodEnter;
 		}
 	}
 	
