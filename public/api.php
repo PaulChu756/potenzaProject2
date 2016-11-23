@@ -123,7 +123,7 @@ function getPeople($id=0)
 
 	if($id != 0)
 	{
-		$resultSql.=" WHERE id=". $id ." LIMIT 1";
+		$resultSql.=" WHERE id=". $id;
 	}
 	
 	$response = array();
@@ -144,7 +144,7 @@ function getStates($id=0)
 
 	if($id != 0)
 	{
-		$stateSql.=" WHERE id=". $id ." LIMIT 1";
+		$stateSql.=" WHERE id=". $id;
 	}
 
 	$response = array();
@@ -165,7 +165,7 @@ function getVisits($id=0)
 
 	if($id != 0)
 	{
-		$visitSql.=" WHERE id=". $id ." LIMIT 1";
+		$visitSql.=" WHERE id=". $id;
 	}
 
 	$response = array();
@@ -178,7 +178,7 @@ function getVisits($id=0)
 	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
-//insert a Person //api/person
+//insert a Person //api/people
 function insertPerson()
 {
 	global $connection;
@@ -206,7 +206,7 @@ function insertPerson()
 	}
 }
 
-// Insert a Visit //api/visit
+// Insert a Visit //api/visits
 function insertVisit()
 {
 	global $connection;

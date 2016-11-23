@@ -113,7 +113,7 @@ function addVisit()
 {
 	$.ajax({
 			type: "POST",
-			url: "api/visits", // api/visit
+			url: "api/visits", // api/visits
 			data: $("#humanNameDropDown, #stateNameDropDown, #visitForm").serialize(),
 			success: function(data)
 			{
