@@ -39,7 +39,6 @@ function displayData()
 	});
 }
 
-
 //populate people's dropdowns
 function populatePeople()
 {

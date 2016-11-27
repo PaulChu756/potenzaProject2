@@ -187,29 +187,37 @@ function getVisits($id=0)
 //insert a Person //api/people
 function insertPerson()
 {
-	global $connection;
-
-	$firstNameEnter = $_POST["firstName"];
-	$lastNameEnter = $_POST["lastName"];
-	$foodEnter = $_POST["favoriteFood"];
-
-	if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter))
+	try
 	{
-		// Insert values into table
-		$sql = "INSERT INTO People (firstname, lastname, food) 
-		VALUES ('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
+		global $connection;
 
-		// Check if insert is good
-		if(mysqli_query($connection, $sql))
+		$firstNameEnter = $_POST["firstName"];
+		$lastNameEnter = $_POST["lastName"];
+		$foodEnter = $_POST["favoriteFood"];
+
+		if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter))
 		{
-			echo "You have added a friend: " . " First Name: ". $firstNameEnter . " Last Name: ". $lastNameEnter . " Food: " . $foodEnter;
+			// Insert values into table
+			$sql = "INSERT INTO People (firstname, lastname, food) 
+			VALUES ('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
+
+			// Check if insert is good
+			if(mysqli_query($connection, $sql))
+			{
+				echo "You have added a friend: " . " First Name: ". $firstNameEnter . " Last Name: ". $lastNameEnter . " Food: " . $foodEnter;
+			}
+		}
+		
+		else 
+		{
+			echo "Error: " . $sql . "<br>" . $connection->error;
 		}
 	}
-	
-	else 
+	catch(Exception $e)
 	{
-		echo "Error: " . $sql . "<br>" . $connection->error;
+		echo json_encode($e->getMessage());
 	}
+	
 }
 
 // Insert a Visit //api/visits
