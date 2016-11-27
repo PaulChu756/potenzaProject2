@@ -21,19 +21,26 @@ function displayData()
 	$("#SelectHumanDropDown").change(function(){
 		$.ajax({
 			type: "GET",
-			url: "api/people",
+			url: "api/visits",
 			dataType: "json",
 			success: function(data)
 			{
 				$("#displayInfo").empty();
 				var i = $("#SelectHumanDropDown").val();
-				var firstname = data[i-1]["firstname"];
-				var lastname = data[i-1]["lastname"];
-				var food = data[i-1]["food"];
+
+				var firstName = data[i]["firstname"];
+				var lastName = data[i]["lastname"];
+				var food = data[i]["food"];
+				var stateAbb = data[i]["stateabb"];
+				var stateName = data[i]["statename"];
+				var dateVisit = data[i]["date_visited"]; 
+
 				$("#displayInfo").append(
-				"First name: " + firstname + 
-				"<br> Last name: " + lastname + 
-				"<br> Favorite food: " + food);
+				"First name: " + firstName + 
+				"<br> Last name: " + lastName + 
+				"<br> Favorite food: " + food +
+				"<br> Visited : " + stateAbb + " " + stateName + 
+				"<br> on " + dateVisit);
 			}
 		});
 	});
