@@ -1,9 +1,0 @@
-<?
-$arr = array();
-if(is_object($this->record)){
-    foreach($this->detailColumns as $key=>$title){
-        $arr[str_replace('.','_',$key)] = $this->getDoctrineEntityValue($this->record,$key,$this->relations);
-    }
-}
-echo json_encode($arr);
-exit;
