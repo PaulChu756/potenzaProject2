@@ -223,24 +223,32 @@ function insertPerson()
 // Insert a Visit //api/visits
 function insertVisit()
 {
-	global $connection;
-
-	$personEnter = $_POST["humanNameDropDown"];
-	$stateEnter = $_POST["stateNameDropDown"];
-	$visitEnter = $_POST["visit"];
-		
-	$visitSql = "INSERT INTO Visits(p_id, s_id, date_visited)
-	VALUES('$personEnter', '$stateEnter', '$visitEnter')";
-
-	if($connection->query($visitSql) == FALSE)
+	try
 	{
-		echo "Error: " . $visitSql . "<br>" . $connection->error;
-	}
+		global $connection;
 
-	else
-	{
-		echo "You have added a visit";
+		$personEnter = $_POST["humanNameDropDown"];
+		$stateEnter = $_POST["stateNameDropDown"];
+		$visitEnter = $_POST["visit"];
+			
+		$visitSql = "INSERT INTO Visits(p_id, s_id, date_visited)
+		VALUES('$personEnter', '$stateEnter', '$visitEnter')";
+
+		if($connection->query($visitSql) == FALSE)
+		{
+			echo "Error: " . $visitSql . "<br>" . $connection->error;
+		}
+
+		else
+		{
+			echo "You have added a visit";
+		}
 	}
+	catch(Exception $e)
+	{
+		echo json_encode($e->getMessage());
+	}
+	
 }
 
 $connection->close();

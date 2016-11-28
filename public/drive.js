@@ -25,9 +25,9 @@ function displayData()
 			dataType: "json",
 			success: function(data)
 			{
-				$("#displayInfo").empty();
 				var i = $("#SelectHumanDropDown").val();
-
+				$("#displayInfo").empty();
+				
 				var firstName = data[i]["firstname"];
 				var lastName = data[i]["lastname"];
 				var food = data[i]["food"];
@@ -57,6 +57,8 @@ function populatePeople()
 		{
 			//console.log('success');
 			//console.log(data);
+			$("#SelectHumanDropDown").empty();
+			$("#humanNameDropDown").empty();
 			var len = data.length;
 			for(var i = 0; i < len; i++)
 			{
@@ -85,12 +87,13 @@ function populateStates()
 		{
 			//console.log('success');
 			//console.log(data);
+			$("#stateNameDropDown").empty();
 			var len = data.length;
 			for(var i = 0; i < len; i++)
 			{
 				var id = data[i]["id"];
-				var firstname = data[i]["statename"];
-				$("#stateNameDropDown").append("<option value='" + id + "'>" + firstname + "</option>");
+				var stateName = data[i]["statename"];
+				$("#stateNameDropDown").append("<option value='" + id + "'>" + stateName + "</option>");
 			}
 		},
 		error : function(data)

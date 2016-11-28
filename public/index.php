@@ -38,7 +38,8 @@
 					First Name: 	<input type="text" id="firstName" name="firstName">	<br><br>
 					Last Name: 		<input type="text" id="lastName" name="lastName">	<br><br>
 					Favorite Food: 	<input type="text" id="favoriteFood" name="favoriteFood">	<br><br>
-					<button type="submit" id="addPersonSubmit" name="addPersonSubmit" class="btn btn-success" data-dismiss="modal">Submit</button>
+					<!--data-dismiss="modal"-->
+					<button type="submit" id="addPersonSubmit" name="addPersonSubmit" class="btn btn-success">Submit</button>
 					</form>
 				</div>
 
@@ -69,7 +70,8 @@
 					Format: YYYY/MM/DD<br>
 					Example: 1994/07/14<br>
 					<input type="text" id="visit" name="visit"><br><br>
-					<button type="submit" id="addVisitSubmit" name="addVisitSubmit" class="btn btn-success" data-dismiss="modal">Submit</button>
+					<!-- data-dismiss="modal" -->
+					<button type="submit" id="addVisitSubmit" name="addVisitSubmit" class="btn btn-success">Submit</button>
 					</form>
 				</div>
 
