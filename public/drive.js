@@ -4,12 +4,12 @@ $(document).ready(function(){
 	populateStates();
 	displayData();
 
-	$('#personForm').submit(function(e){
+	$('#addPersonSubmit').click(function(e){
 		e.preventDefault();
 		addPerson();
 	});
 
-	$('#visitForm').submit(function(e){
+	$('#addVisitSubmit').click(function(e){
 		e.preventDefault();
 		addVisit();
 	});
