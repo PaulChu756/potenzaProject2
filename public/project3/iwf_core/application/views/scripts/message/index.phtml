@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-md-6">
+        <h1><?=ucwords($this->plural)?></h1>
+    </div>
+    <div class="col-md-6">
+        <?php /*<a href="<?=$this->url(array('action'=>'create'))?>" class="pull-right btn btn-primary"><i class="glyphicon glyphicon-plus-sign glyphicon-white"></i> Create <?=ucwords($this->singular)?></a> */ ?>
+    </div>
+</div>
+
+<?php
+$allFolders = \Ia\Entity\Message::getFolders();
+$defaultFolder = ($this->paginators['new']->getTotalItemCount() > 0) ? 'new' : 'inbox';
+$selectedFolder = (isset($this->params['folder'])) ? $this->params['folder'] : $defaultFolder;
+?>
+<?php if($this->bulkActions): ?>
+    <div class="bulkActions well" style="float:left;width:100%">
+        <p class="numSelectedNotice"><span class="numSelected">0</span> <?=ucwords($this->plural); ?> Selected</p>
+        <?php foreach($this->bulkActions as $key=>$bulkAction): ?>
+            <div class="bulkAction" id="bulkAction-<?=$key?>">
+                <?php echo $this->renderIndexAction($bulkAction,null,'btn'); ?>
+            </div>
+        <?php endforeach; ?>
+    </div>        
+<?php endif; ?> 
+
+<div role="tabpanel">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li style="width: 4%;text-align:left;padding:5px 10px;"><input data-table-selector=".messages" type="checkbox" class="selectAll" /></li>
+    <?php foreach($allFolders as $folder): ?>
+        <li role="presentation"<?=($selectedFolder==$folder) ? 'class="active"' : '';?>><a href="<?=$this->url(array('page'=>1,'folder'=>$folder));?>"><?=ucwords($folder);?> (<?=$this->paginators[$folder]->getTotalItemCount();?>)</a></li>
+    <?php endforeach; ?>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+    <?php foreach($allFolders as $folder): ?>
+        <div role="tabpanel" class="tab-pane<?=($selectedFolder==$folder) ? ' active' : '';?>" id="<?=$folder;?>">
+            <?php if ($selectedFolder==$folder && count($this->paginators[$folder])): ?>
+                <div class="table-responsive">
+                    <table class="table table-responsive table-condensed messages">
+                        <tbody>
+                            <?php foreach($this->paginators[$folder] as $item): ?>
+                                <tr>
+                                    <td class="selector" style="width: 4%;text-align:left"><input type="checkbox" name="ids[]" value="<?=$item->id?>" /></td>
+                                    <td style="width: 4%">
+                                        <?=$item->created_at->format('m/d/Y');?>
+                                    </td>
+                                    <td style="width:7%">
+                                        <?php 
+                                        if($folder=='sent') {
+                                            if($item->recipient_user) {
+                                              if(\Ia\Config::get('anonymous_messages')) {
+                                                echo($item->recipient_user->first_name.' '.$item->recipient_user->last_name[0]);
+                                            } else {
+                                                echo($item->recipient_user->first_name.' '.$item->recipient_user->last_name);
+                                            }
+                                        } else {
+                                          echo('<em>System</em>');
+                                      }
+                                  } else { 
+                                    if($item->origin_user) {
+                                        if(\Ia\Config::get('anonymous_messages')) {
+                                            echo($item->origin_user->first_name.' '.$item->origin_user->last_name[0]);
+                                        } else {
+                                            echo($item->origin_user->first_name.' '.$item->origin_user->last_name);
+                                        }
+                                    } else {
+                                        echo('<em>System</em>');
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td style="width:30%">
+                                <a href="<?=$this->url(array('action'=>'view','id'=>$item->id,'folder'=>$folder));?>"><?=$item->subject;?></a>
+                            </td>
+                            <td style="width:40">
+                                <?=$this->truncate(strip_tags($item->message),100); ?>
+                            </td>
+                            <td style="width:15%">
+                                <?php if($item->link && $this->acl($item->link) && $this->acl(null,'message_follow-link')):?>
+                                    <a href="<?=$this->url(array('folder'=>$folder,'action'=>'follow-link','id'=>$item->id));?>" data-toggle="tooltip" data-placement="top" title="<?=($item->follow_link_text) ? $item->follow_link_text : 'Follow Link';?>"><i class="<?=($item->follow_link_icon) ? $item->follow_link_icon : 'glyphicon glyphicon-link'?>"></i></a>
+                                    &nbsp;&nbsp;
+                                <?php endif; ?>
+                                <?php if($this->acl(null,'message_archive')): ?>
+                                    <?php if($folder=='archived'): ?>
+                                        <a href="<?=$this->url(array('folder'=>$folder,'action'=>'archive','active'=>1,'id'=>$item->id));?>" data-toggle="tooltip" data-placement="top" title="Return To Inbox"><i class="glyphicon glyphicon-folder-open"></i></a>
+                                        &nbsp;&nbsp;
+                                    <?php else: ?>
+                                        <a href="<?=$this->url(array('folder'=>$folder,'action'=>'archive','active'=>0,'id'=>$item->id));?>" data-toggle="tooltip" data-placement="top" title="Archive"><i class="glyphicon glyphicon-folder-open"></i></a>
+                                        &nbsp;&nbsp;
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php echo $this->paginationControl($this->paginators[$folder],
+            'Sliding',
+            '_pagination.phtml'); ?>
+        <?php else: ?>
+            <div class="well">
+                <h4 class="text-center">No messages in this folder.</h4>
+            </div>
+        <?php endif; ?>
+    </div>
+<?php endforeach; ?>
+</div>
+</div>
+
+<?=$this->perPage($this->perPage)?>

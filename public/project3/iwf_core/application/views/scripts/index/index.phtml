@@ -1,0 +1,8 @@
+<?php
+if($this->module && $this->controller && $this->action):
+    echo $this->action($this->action,$this->controller,$this->module,$this->params);
+else:
+    ?>
+    <p>No home page content has been configured.</p>
+    <?php
+endif;

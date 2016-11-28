@@ -1,0 +1,13 @@
+application/configs/application.ini
+application/cache/*
+application/locks/*
+application/modules
+application/views/layouts/layout.phtml
+library/Ia/Entity/Proxy
+public/_env.php
+public/assets
+public/tmp_files
+public/favicon.ico
+public/uploads
+public/dynamic_css
+robots.txt

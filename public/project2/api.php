@@ -8,15 +8,14 @@ if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
 $connection->select_db($database);
 
-/*
 $requestURI = parse_url($_SERVER['REQUEST_URI']);
-$segments = explode('/', trim($requestURI['path'], '/'));
+$segments = explode('/', $requestURI['path']);
 $apiVars = [];
 
 $i = 2;
 while($i < count($segments)) 
 {    
-	if($segments[$i+1]) 
+	if($segments[$i+1])
 	{  
 		$apiVars[$segments[$i]] = $segments[$i+1];  
 		$i += 2;    
@@ -26,62 +25,105 @@ while($i < count($segments))
 		$apiVars[$segments[$i]] = null;  
 		$i++;    
 	}
-		 
 }
 
-header('application/json');
-echo json_encode($apiVars);
-die();
-*/
-
+header('Content-Type: application/json');
 $requestMethod = $_SERVER["REQUEST_METHOD"];
-$peopleRequest = "people";
 
-switch($peopleRequest)
+//GET request
+if($requestMethod === "GET")
 {
-	case "people":
-		if($requestMethod === "GET")
+	//check people exist
+	if(array_key_exists("people", $apiVars))
+	{	
+		//get all people
+		if($apiVars["people"] == null)
 		{
-			//$id = intval($_GET["personID"]);
-			//getPerson($id);
-			getPerson();
+			getPeople();
 		}
-		elseif($requestMethod === "POST")
+		// get a person
+		elseif($apiVars["people"] != null)
 		{
-			insertPerson();
+			getPeople($apiVars["people"]);
 		}
 		else
 		{
-			die();
+			var_dump("ERROR");
 		}
-		break;
-	case "states":
-		if($requestMethod === "GET")
+	}
+	//check states exist
+	elseif(array_key_exists("states", $apiVars))
+	{
+		//get states
+		if($apiVars["states"] == null)
 		{
 			getStates();
 		}
-		elseif($requestMethod === "POST")
+		//get a state
+		elseif($apiVars["states"] != null)
 		{
-			insertVisit();
+			getStates($apiVars["states"]);
 		}
 		else
 		{
-			die();
+			var_dump("ERROR");
 		}
-		break;
+	}
+	//check visits exist
+	elseif(array_key_exists("visits", $apiVars))
+	{
+		//get visits
+		if($apiVars["visits"] == null)
+		{
+			getVisits();
+		}
+		// get a visit
+		elseif($apiVars["visits"] != null)
+		{
+			getVisits($apiVars["visits"]);
+		}
+		else
+		{
+			var_dump("ERROR");
+		}
+	}
+	else
+	{
+		var_dump("You have entered an invalid GET request");
+	}
+}
+// POST request
+elseif($requestMethod === "POST")
+{
+	//check if people exist
+	if(array_key_exists("people", $apiVars))
+	{
+		insertPerson();
+	}
+	//check if visits exist
+	elseif(array_key_exists("visits", $apiVars))
+	{
+		insertVisit();
+	}
+	else
+	{
+		var_dump("ERROR: post request");
+	}
+}
+else
+{
+	var_dump("ERROR: fourth wall");
 }
 
-
-
-// Select all people or select a person
-function getPerson($id=0)
+// Select all people/select a person /api/people
+function getPeople($id=0)
 {
 	global $connection;
 	$resultSql = "SELECT * FROM People";
 
 	if($id != 0)
 	{
-		$resultSql.=" WHERE id=". $id ." LIMIT 1";
+		$resultSql.=" WHERE id=". $id;
 	}
 	
 	$response = array();
@@ -91,14 +133,19 @@ function getPerson($id=0)
 		$response[] = $row;
 	}
 	header('Content-Type: application/json');
-	echo json_encode($response);
+	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
-//select all states
-function getStates()
+//select all states/select a state /api/states
+function getStates($id=0)
 {
 	global $connection;
 	$stateSql = "SELECT * FROM States";
+
+	if($id != 0)
+	{
+		$stateSql.=" WHERE id=". $id;
+	}
 
 	$response = array();
 	$stateQuery = mysqli_query($connection,$stateSql) or die(mysqli_error($connection));
@@ -107,78 +154,103 @@ function getStates()
 		$response[] = $row;
 	}
 	header('Content-Type: application/json');
-	echo json_encode($response);
+	echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
-// haven't test
+//select all visits/select a visit /api/visits
+function getVisits($id=0)
+{
+	global $connection;
+		$visitSql = "SELECT * FROM Visits v
+		INNER JOIN People p ON v.p_id = p.id
+		INNER JOIN States s ON v.s_id = s.id";
+
+	if($id != 0)
+	{
+		//$visitSql.=" WHERE id=". $id;
+		$visitSql = "SELECT * FROM Visits v
+		INNER JOIN People p ON v.p_id = p.id
+		INNER JOIN States s ON v.s_id = s.id
+		WHERE v.p_id =" . $id;
+	}
+
+	$response = array();
+	$visitQuery = mysqli_query($connection,$visitSql) or die(mysqli_error($connection));
+	while($row = mysqli_fetch_array($visitQuery, true))
+	{
+		$response[] = $row;
+	}
+	header('Content-Type: application/json');
+	echo json_encode($response, JSON_PRETTY_PRINT);
+}
+
+//insert a Person //api/people
 function insertPerson()
 {
-	global $connection;
-	// define variables to be all empty
-	$firstNameError = $lastNameError = $foodError = "";
-	$firstNameEnter = $lastNameEnter = $foodEnter = "";
-
-	$firstNameEnter = $_POST["firstName"];
-	$lastNameEnter = $_POST["lastName"];
-	$foodEnter = $_POST["food"];
-
-	if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter))
+	try
 	{
-	// Insert values into table
-	$sql = "INSERT INTO People (firstname, lastname, food) 
-	VALUES('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
-		// Check if insert is good
-		if($connection->query($sql) === FALSE)
+		global $connection;
+
+		$firstNameEnter = $_POST["firstName"];
+		$lastNameEnter = $_POST["lastName"];
+		$foodEnter = $_POST["favoriteFood"];
+
+		if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter))
 		{
-		echo "Error: " . $sql . "<br>" . $connection->error;
+			// Insert values into table
+			$sql = "INSERT INTO People (firstname, lastname, food) 
+			VALUES ('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
+
+			// Check if insert is good
+			if(mysqli_query($connection, $sql))
+			{
+				echo "You have added a friend: " . " First Name: ". $firstNameEnter . " Last Name: ". $lastNameEnter . " Food: " . $foodEnter;
+			}
+		}
+		
+		else 
+		{
+			echo "Error: " . $sql . "<br>" . $connection->error;
 		}
 	}
-	else 
+	catch(Exception $e)
 	{
-	$firstNameError = "First Name is required";
-	$lastNameError = "Last Name is required";
-	$foodError = "Food is required NOW!";
+		echo json_encode($e->getMessage());
 	}
-
-	/*
-	echo "<br>First name entered: " . $firstNameEnter . "<br>";
-	echo "<br>Last name entered: " . $lastNameEnter . "<br>";
-	echo "<br>Favorite food: " . $foodEnter . "<br>";
-	*/
+	
 }
 
-// haven't test
+// Insert a Visit //api/visits
 function insertVisit()
 {
-	global $connection;
-	$visitError = $visitEnter = "";
-
-	$personEnter = $_POST["humanName"];
-	$stateEnter = $_POST["stateName"];
-	$visitEnter = $_POST["visit"];
-		
-	if(!empty($visitEnter))
+	try
 	{
-	$visitSql = "INSERT INTO Visits(p_id, s_id, date_visited)
-	VALUES('$personEnter', '$stateEnter', '$visitEnter')";
+		global $connection;
 
-		// Check if insert is good
-		if($connection->query($visitSql) === FALSE)
+		$personEnter = $_POST["humanNameDropDown"];
+		$stateEnter = $_POST["stateNameDropDown"];
+		$visitEnter = $_POST["visit"];
+			
+		$visitSql = "INSERT INTO Visits(p_id, s_id, date_visited)
+		VALUES('$personEnter', '$stateEnter', '$visitEnter')";
+
+		if($connection->query($visitSql) == FALSE)
 		{
 			echo "Error: " . $visitSql . "<br>" . $connection->error;
 		}
-	}
-	else
-	{
-		$visitError = "Data visit is required";
-	}
 
-	/*
-	echo "Person entered : " . $personEnter . "<br>";
-	echo "State entered : " . $stateEnter . "<br>";
-	echo "Date entered : " . $visitEnter . "<br>";
-	*/
+		else
+		{
+			echo "You have added a visit";
+		}
+	}
+	catch(Exception $e)
+	{
+		echo json_encode($e->getMessage());
+	}
+	
 }
 
 $connection->close();
 ?>
+

@@ -1,0 +1,60 @@
+<?php
+require_once 'PHPExcel.php';
+$objPHPExcel = new PHPExcel();
+/* $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+							 ->setLastModifiedBy("Maarten Balliauw")
+							 ->setTitle("Office 2007 XLSX Test Document")
+							 ->setSubject("Office 2007 XLSX Test Document")
+							 ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+							 ->setKeywords("office 2007 openxml php")
+							 ->setCategory("Test result file"); */
+
+$objPHPExcel->setActiveSheetIndex(0);
+
+// column names
+$j = 0;
+foreach($this->detailColumns as $key=>$title) {
+    $objPHPExcel->getActiveSheet()->setCellValue(num2alpha($j).(1), $title);            
+    $j++;
+}
+        
+$i = 2; //start on row 2 b/c row 1 is used for column names
+$results = array();
+if (count($this->paginator)){
+    foreach ($this->paginator as $item){
+        $j = 0;
+        foreach($this->detailColumns as $key=>$title) {
+            if(strpos($key,'.')!==false) {
+                $parts = explode('.',$key); // [0] c [1] company_name
+                $key = str_replace('.','_',$key); //json gets confused by the periods
+                $relation = $this->relations[$parts[0]];
+                $value = $item->{$relation}->{$parts[1]};
+            } else {
+                $value = $item->{$key};
+            }
+            if($value instanceOf DateTime)
+                $value = $value->format('Y-m-d');
+            $objPHPExcel->getActiveSheet()->setCellValue(num2alpha($j).$i, $value);            
+            $j++;
+        }
+        $i++;
+    }
+}
+
+function num2alpha($n)
+{
+    for($r = ""; $n >= 0; $n = intval($n / 26) - 1)
+        $r = chr($n%26 + 0x41) . $r;
+    return $r;
+}
+
+$filename = $this->params['module'].'-'.$this->params['controller'].'-'.date('Y-m-d-h-i-s');
+
+// Redirect output to a client’s web browser (Excel2007)
+header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+header('Content-Disposition: attachment;filename="'.$filename.'.xlsx"');
+header('Cache-Control: max-age=0');
+
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+$objWriter->save('php://output');
+exit;

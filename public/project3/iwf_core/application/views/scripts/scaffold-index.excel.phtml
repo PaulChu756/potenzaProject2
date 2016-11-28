@@ -1,0 +1,52 @@
+<?php
+require_once 'PHPExcel.php';
+$objPHPExcel = new PHPExcel();
+$objPHPExcel->getProperties()->setCreator("Etiquette");
+
+$objPHPExcel->setActiveSheetIndex(0);
+$objPHPExcel->getActiveSheet()->setTitle('Current Year');
+
+// column names
+$j = 0;
+foreach($this->detailColumns as $key=>$title) {
+    $objPHPExcel->getActiveSheet()->setCellValue(num2alpha($j).(1), $title);            
+    $j++;
+}
+        
+$i = 2; //start on row 2 b/c row 1 is used for column names
+$maxLetter = 0;
+$maxNumber = $i;
+$results = array();
+if (count($this->paginator)){
+    foreach ($this->paginator as $item){
+        $j = 0;
+        foreach($this->detailColumns as $key=>$title) {
+            $value = (is_array($item) && isset($item[$key])) ? $item[$key] : $this->getDoctrineEntityValue($item,$key,$this->relations,'_');
+            $objPHPExcel->getActiveSheet()->setCellValue(num2alpha($j).$i, $value);   
+            $maxNumber = $i;
+            if($j > $maxLetter)
+                $maxLetter = $j;
+            $j++;
+        }
+        $i++;
+    }
+}
+
+$objPHPExcel->addNamedRange( new PHPExcel_NamedRange('DATA', $objPHPExcel->getActiveSheet(), 'A1:'.num2alpha($maxLetter).$maxNumber) );
+
+function num2alpha($n)
+{
+    for($r = ""; $n >= 0; $n = intval($n / 26) - 1)
+        $r = chr($n%26 + 0x41) . $r;
+    return $r;
+}
+
+$filename = $this->params['module'].'-'.$this->params['controller'].'-'.date('Y-m-d-h-i-s');
+
+header('Content-Type: application/application/vnd.ms-excel');
+header('Content-Disposition: attachment;filename="'.$filename.'.xls"');
+header('Cache-Control: max-age=0');
+
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+$objWriter->save('php://output');
+exit;

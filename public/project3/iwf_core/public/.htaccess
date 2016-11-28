@@ -1,0 +1,23 @@
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
+Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
+
+### Header append P3P 'CP="CURa ADMa DEVa CONo HISa OUR IND DSP ALL COR", policyref="/w3c/p3p.xml"'
+AddType audio/mpeg mp3 
+AddType audio/mp4 mp4 
+AddType audio/mp4 mpa
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^tot.iaserve.net [NC]
+RewriteRule ^(.*)$ https://franchise.teamsoftomorrow.com/$1 [L,R=301,NC]
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^parents.tot.iaserve.net [NC]
+RewriteRule ^(.*)$ https://parents.teamsoftomorrow.com/$1 [L,R=301,NC]
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]

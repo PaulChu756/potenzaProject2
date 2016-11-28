@@ -23,69 +23,69 @@
 </html>
 
 <!--Add Person -->
-<form id="personForm" method="POST">
-	<button id="addPersonButton" type="button" class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#person">Add Person</button>
-		<div class="modal fade" id="person" tabindex="-1" role="dialog" aria-labelledby="personLabel">
-			<div class="modal-dialog" role="document">
-				<div class = "modal-content">
-					<div class="modal-header"> 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class = "modal-title">Add a Person</h4>
-					</div>
-					<div class = "modal-body">
-						First Name: 	<input type = "text" name = "firstName"><br><br>
-						Last Name: 		<input type = "text" name = "lastName"><br><br>
-						Favorite Food: 	<input type = "text" name = "food"><br><br>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">Submit</button>
-					</div>
+<button id="addPersonButton" type="button" class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#person">Add a Person</button><br><br>
+	<div class="modal fade" id="person" tabindex="-1" role="dialog" aria-labelledby="personLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			
+				<div class="modal-header"> 
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Add a Person!</h4>
 				</div>
+
+				<div class="modal-body">
+					<form method="post" id="personForm">
+					First Name: 	<input type="text" id="firstName" name="firstName">	<br><br>
+					Last Name: 		<input type="text" id="lastName" name="lastName">	<br><br>
+					Favorite Food: 	<input type="text" id="favoriteFood" name="favoriteFood">	<br><br>
+					<button type="submit" id="addPersonSubmit" name="addPersonSubmit" class="btn btn-success" data-dismiss="modal">Submit</button>
+					</form>
+				</div>
+
 			</div>
 		</div>
-</form>
+	</div>
 
 <!--Add Visit -->
-<form id="visitForm" method="POST"><br><br>
-	<button id="addVisitButton" type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#visit">Add Visit</button>
-		<div class="modal fade" id="visit" tabindex="-1" role="dialog" aria-labelledby="visitLabel">
-			<div class="modal-dialog" role="document">
-				<div class = "modal-content">
-					<div class="modal-header"> 
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class = "modal-title">Add a Visit</h4>
-					</div>
-					<div class = "modal-body">
-						<!--Select human-->
-						<br><br>Select a human
-						<br><select name="humanName" id="humanName" class="btn btn-primary dropdown-toggle"></select>
-						<!--Select States-->
-						<br><br><br><br><br><br>Select a state 
-						<br><select name="stateName" id="stateName" class="btn btn-info dropdown-toggle"></select>
-						<!--Add visit-->
-						<br><br><br><br><br><br><br><br><br><br><br> Add a visit to the table <br><br><br>
-						Date Visited:<br>
-						Format: YYYY/MM/DD<br>
-						Example: 1994/07/14<br>
-						<input type = "text" name = "visit"><br><br>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">Submit</button>
-					</div>
+<button id="addVisitButton" type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#visit">Add a Visit</button>
+	<div class="modal fade" id="visit" tabindex="-1" role="dialog" aria-labelledby="visitLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header"> 
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Add a Visit!</h4>
 				</div>
+
+				<div class="modal-body">
+					<form method="post" id="visitForm">
+					<select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle">
+					<option>Select a human</option></select>	<br><br><br><br><br><br><br>
+
+					<select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle">
+					<option>Select a State</option> </select>	<br><br><br><br><br><br><br><br><br><br><br>
+
+					Date Visited:<br>
+					Format: YYYY/MM/DD<br>
+					Example: 1994/07/14<br>
+					<input type="text" id="visit" name="visit"><br><br>
+					<button type="submit" id="addVisitSubmit" name="addVisitSubmit" class="btn btn-success" data-dismiss="modal">Submit</button>
+					</form>
+				</div>
+
 			</div>
 		</div>
-</form>
+	</div>
 
 <!-- Select a human and output info -->
 <center>
-<form>
-	<br><br>Select a human and learn where they're from and favor food
-	<br><br><select name="Name" id="Name">
-	<option value="">Select a human</option>
+	<form>
+		<br><br>Select a human and learn where they're from and favor food <br><br>
+		<div id="displayInfo">Selected person info will be here</div>
+		<br><br><select id="SelectHumanDropDown" name="SelectHumanDropDown" class="btn btn-success dropdown-toggle">
+		<option>Select a human</option></select>	
+	</form>
 </center>
-</form>
-<div id = "form"><center><br><strong>Selected person info will be here</strong></center></div>
 
 <!--Jquery CDN method-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

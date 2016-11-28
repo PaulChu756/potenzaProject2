@@ -1,0 +1,23 @@
+<?php
+$i = 0;
+$results = array();
+if (count($this->paginator)){
+    foreach ($this->paginator as $item){
+        foreach($this->detailColumns as $key=>$title) {
+            //json gets confused by the periods
+            $results[$i][str_replace('.','_',$key)] = $this->getDoctrineEntityValue($item,$key,$this->relations,'_');
+        }
+        $i++;
+    }
+}
+switch(isset($this->params['noPaginate'])){
+    case true:
+        echo json_encode($results);     
+        break;
+    default:
+        echo json_encode(array(
+        'records'=>$results,
+        'paginator'=>$this->paginator->getPages()
+        ));    
+        break;
+}

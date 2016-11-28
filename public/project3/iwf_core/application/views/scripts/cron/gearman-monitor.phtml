@@ -1,0 +1,66 @@
+<?php $this->headStyle()->captureStart(); ?>
+#gearman_monitor thead th,
+#gearman_monitor tbody td {
+    font-size: 10px;
+}
+#gearman_monitor thead th {
+    background-color: #7a7a7a;
+    color: #eee;
+    padding: 0px 5px;
+}
+#gearman_monitor thead th,
+#gearman_monitor tbody td {
+    max-width: 80px;
+    overflow:hidden;
+}
+#gearman_monitor thead th.resource,
+#gearman_monitor tbody td.resource {
+    max-width: 125px;
+    overflow:hidden;
+}
+<?php $this->headStyle()->captureEnd(); ?>
+
+<h1>Gearman Monitor</h1>
+
+<p>You may use the "RUN NOW" button to immediately run the job.</p>
+<p>If it is a <strong>scheduled</strong> job, a one-time clone of the job will be created, assigned to your user, and set to the highest priority.</p>
+<p>If it is a <strong>onetime</strong> job, it will be assigned to your user, so you may monitor it, and set to the highest priority.</p>
+
+<div id="gearman_monitor">
+    <table class="table table-striped table-condensed">
+        <thead class="taskHeadings">
+        </thead>
+        <tbody class="taskData">
+        </tbody>
+    </table>
+</div>
+
+<?php $this->headScript()->captureStart(); ?>
+$(document).ready(function(){
+    function update_table(){
+        $.getJSON("<?=$this->url(array('format'=>'json'));?>", function( data ) {
+            $('#gearman_monitor tbody.taskData').empty();
+            $('#gearman_monitor thead.taskHeadings').empty();
+            var first = true;
+            $.each( data, function( rowNumber, rowData ) {
+                var $row = $('<tr />');
+                $.each( rowData, function( key, value ) {
+                    if(first){
+                        $('#gearman_monitor thead.taskHeadings').append('<th class="' + key + '">' + key + '</th>');
+                    }
+                    if(key=='resource')
+                        value = value.replace(/\\/g,' ');
+                    $row.append('<td class="' + key + '">' + value + '</td>');
+                });
+$row.append('<td class="action"><a onclick="return confirm(\'This will spawn a one-time task of this job to run immediately. Are you sure?\');" href="<?=$this->url(array('module'=>'default','controller'=>'cron','action'=>'gearman-run-onetime'));?>/id/' + rowData['id'] + '"><i class="glyphicon glyphicon-play"></i></a></td>');
+                $('#gearman_monitor tbody.taskData').append($row);
+                if(first)
+                    $('#gearman_monitor thead.taskHeadings').append('<th>RUN NOW</th>');
+                first = false;
+            });
+        });
+    }
+    setInterval(update_table, 3000);
+    update_table();
+});
+<?php $this->headScript()->captureEnd(); ?>

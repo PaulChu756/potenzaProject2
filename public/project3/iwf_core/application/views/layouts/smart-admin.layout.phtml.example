@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+
+        <title> <?=\Ia\Config::get('title');?> </title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+            
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!-- Basic Styles -->
+        <link rel="stylesheet" type="text/css" media="screen" href="/vendor/smartadmin/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/vendor/smartadmin/css/font-awesome.min.css">
+
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="/vendor/smartadmin/css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/vendor/smartadmin/css/smartadmin-skins.min.css">
+
+        <!-- SmartAdmin RTL Support is under construction
+             This RTL CSS will be released in version 1.5
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
+
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css">
+
+        <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+        <link rel="stylesheet" type="text/css" media="screen" href="/vendor/smartadmin/css/demo.min.css">
+
+
+        <!-- GOOGLE FONT -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+        <?php if(\Ia\Config::get('googleMapsApiKey')): ?>
+            <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?libraries=drawing&key=<?=\Ia\Config::get('googleMapsApiKey');?>&sensor=false">
+            </script>
+        <?php endif ;?>
+                
+        <?php echo $this->headStyle(); ?>
+        <?php echo $this->headLink(); ?>
+
+    </head>
+    <body class="">
+        <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
+
+        <!-- HEADER -->
+        <header id="header">
+            <div id="logo-group">
+
+                <!-- PLACE YOUR LOGO HERE -->
+                <span id="logo"><h4><a href="/"><?=\Ia\Config::get('title');?></a></h4></span>
+                <!-- END LOGO PLACEHOLDER -->
+                <?=$this->inboxWidget();?>
+
+            </div>
+
+
+            <!-- pulled right: nav area -->
+            <div class="pull-right">
+                <?php
+                if(!Zend_Registry::isRegistered('auth')):
+                ?>
+                <ul class="nav navbar-nav navbar-right">
+                <li><a href="/user/login">Login</a></li>
+                </ul>
+                <?php else: ?>
+                <!-- collapse menu button -->
+                <div id="hide-menu" class="btn-header pull-right">
+                    <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+                </div>
+                <!-- end collapse menu -->
+                                            
+                <!-- #MOBILE -->
+                <!-- Top menu profile link : this shows only when top menu is active -->
+                <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+                    <li class="">
+                        <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown"> 
+                            <img src="/img/avatars/sunny.png" alt="John Doe" class="online" />  
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> Setting</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="profile.html" class="padding-10 padding-top-0 padding-bottom-0"> <i class="fa fa-user"></i> <u>P</u>rofile</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0" data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0" data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- logout button -->
+                <div class="btn-header transparent pull-right">
+                    <span> <a href="javascript:void(0)" title="Sign Out" id="logout">
+                                                <i class="fa fa-sign-out"></i></a> 
+                                        </span>
+                </div>
+                <!-- end logout button -->
+                                
+                                
+                                <!-- settings drop down -->
+                <ul class="header-dropdown-list hidden-xs">
+                                    <li>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gear"></i><span> Settings </span> <i class="fa fa-angle-down"></i> </a>
+                                        <ul class="dropdown-menu pull-right">
+                                             <li>
+                                                    <a href="/settings/clear-cache">Clear Cache</a>
+                                            </li>
+                                            <li>
+                                                    <a href="/log/index">View Log</a>
+                                            </li>
+                                            <li>
+                                                    <a href="/user/password-reset">Reset Password</a>
+                                            </li>
+                                            <li>
+                                                    <a href="/support">Contact Support</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                </ul>
+                <!-- settings drop down -->
+                                <?php endif; ?>
+
+            </div>
+            <!-- end pulled right: nav area -->
+
+        </header>
+        <!-- END HEADER -->
+                
+        <?php
+            if(Zend_Registry::isRegistered('auth')):
+                $user = Zend_Registry::get('auth'); 
+        ?>
+        <!-- Left panel : Navigation area -->
+        <!-- Note: This width of the aside area can be adjusted through LESS variables -->
+        <aside id="left-panel">
+            <!-- User info -->
+            <div class="login-info">
+                <span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+                    <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+                        <img src="/img/male.png" alt="me" class="online" /> 
+                        <span>
+                            <?php echo $user->first_name; ?> <?php echo $user->last_name; ?> (<?php echo (strlen($user->role)>7) ? substr($user->role, 0, 5) : $user->role; ?>) 
+                        </span>
+                    </a> 
+                </span>
+            </div>
+            <!-- end user info -->
+            <!-- NAVIGATION : This navigation is also responsive
+            To make this navigation dynamic please make sure to link the node
+            (the reference to the nav > ul) after page load. Or the navigation
+            will not initialize.
+            -->
+            <nav class="nav_menus">
+                <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+                Please note that these links work a bit different than
+                traditional href="" links. See documentation for details.
+                -->
+                <?php echo $this->placeholder('nav'); ?>
+            </nav>
+            <span class="minifyme" data-action="minifyMenu"> 
+                <i class="fa fa-arrow-circle-left hit"></i> 
+            </span>
+        </aside>
+        <!-- END NAVIGATION -->
+        <?php endif; ?>
+                
+        <?php if(!Zend_Registry::isRegistered('auth')): ?>
+            <!-- MAIN PANEL -->
+            <div style="margin: 20px 0px 0px 0px" id="main" role="main">
+                <div class="well" id="login-box">
+                    <div id="content">
+                        <?=$this->layout()->content ?>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN PANEL -->
+        <?php else: ?>
+            <!-- MAIN PANEL -->
+            <div id="main" role="main">
+                <div id="ribbon">
+                        <!-- breadcrumb -->
+                        <ol class="breadcrumb">
+                                <li>Home</li>
+                                <li class="text-capitalize">
+                                <?php echo ucwords($this->params['module']); ?>
+                                </li>
+                                <li class="text-capitalize">
+                                <?php echo ucwords($this->params['controller']); ?>
+                                </li>                                    
+                                <li class="text-capitalize">
+                                <?php echo ucwords($this->params['action']); ?>
+                                </li>
+                        </ol>  
+                </div>
+                <!-- END RIBBON -->  
+                <div id="content">
+                    <?=$this->layout()->content ?>
+                </div>                  
+            </div>
+            <!-- END MAIN PANEL -->
+        <?php endif; ?>
+
+        <!-- Backbone Templates -->
+
+        <script type="text/template" id="ia-alerts">
+            <% if(type=='error') { type = 'danger'; } %>
+            <div class="alert alert-block alert-<%= type %> alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <% if(typeof heading !== 'undefined' && heading!==null) { %>
+            <h4 class="alert-heading"><%= heading %></h4>
+            <% } %>
+            <%= message %>
+            </div>
+        </script>
+
+        <script type="text/template" id="single-select-widget">
+            <div class="control-group">
+                <label class="control-label"><%= this.model.label %></label>
+                <div class="controls">
+                  <select name="<%= this.model.name %>">
+                    <option><%= this.model.nullLabel %></option>
+                    <% _.each(this.model.models, function(item) { %> <option value="<%= item.attributes[item.primaryKey] %>"><%= item.attributes[item.stringIdentifier] %></option> <% }); %>
+                  </select>
+                </div>
+            </div>     
+        </script> 
+
+        <script type="text/template" id="ia-grid-perpage">
+        <form method="post" action=""><label for="perPage">Per Page</label>
+        <select name="perPage" id="perPage">
+        <option value="10"<% if(itemCountPerPage==10){%> selected="selected"<% } %>>10</option>
+        <option value="25"<% if(itemCountPerPage==25){%> selected="selected"<% } %>>25</option>
+        <option value="50"<% if(itemCountPerPage==50){%> selected="selected"<% } %>>50</option>
+        <option value="100"<% if(itemCountPerPage==100){%> selected="selected"<% } %>>100</option>
+        </select></form>
+        </script>    
+
+        <script type="text/template" id="ia-grid-page">
+        <div class="pagination paginationControl pagination-left">
+        <ul>
+        <% for(i=1;i<=pageCount;i++) { %>
+            <% var thisClass=''; %>
+            <% if(i==current) thisClass += 'active '; %>
+            <% if(i==last) thisClass += 'last '; %>
+            <% if(thisClass!=='') { %>
+                <li class="<%=thisClass%>"><a href="#"><%= i %></a></li>
+            <% } else { %>
+                <li><a href="#"><%= i %></a></li>
+            <% } %>
+        <% } %>
+        </ul>
+        </div>
+        </script>                  
+
+        <!-- Backbone Templates -->
+
+        <!--================================================== -->
+
+
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="/js/jquery.2.0.2.min.js"></script>
+
+
+        <script src="/js/jquery-ui.min.js"></script>
+
+
+        <!-- IMPORTANT: APP CONFIG -->
+        <script src="/vendor/smartadmin/js/app.config.js"></script>
+
+        <!-- BOOTSTRAP JS -->
+        <script src="/vendor/smartadmin/js/bootstrap.min.js"></script>
+
+        <!-- JARVIS WIDGETS -->
+        <script src="/js/smartwidgets/jarvis.widget.min.js"></script>
+
+        <!-- EASY PIE CHARTS -->
+        <script src="/js/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+        <!-- SPARKLINES -->
+        <script src="/js/sparkline/jquery.sparkline.min.js"></script>
+
+        <!-- JQUERY UI + Bootstrap Slider -->
+        <script src="/vendor/bootstrap-slider/js/bootstrap-slider.js"></script>
+
+        <!-- Demo purpose only -->
+        <script src="/vendor/smartadmin/js/app.min.js"></script>
+
+        <!-- CUSTOM NOTIFICATION -->
+        <script src="/js/SmartNotification.min.js"></script>
+                
+        <script>
+            $("#logout").click(function(e){
+                $.SmartMessageBox({
+                        title : "Log out <span class='alert-warning'><?php echo $user->first_name; ?> <?php echo $user->last_name; ?></span> ?",
+                        content : "Are you sure you want to log out?",
+                        buttons : '[No][Yes]'
+                }, function(ButtonPressed) {
+                    if (ButtonPressed === "Yes") {
+                        window.location.href = "<?php echo $this->url(array('controller'=>'user','action'=>'logout'),NULL,TRUE); ?>";
+                    }
+                });
+                e.preventDefault();
+            });
+            
+             $("#page_print_button").click(function(e){
+                window.print();
+                return false;
+            });
+        </script>
+        <!-- PAGE RELATED PLUGIN(S) -->
+        <!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip -->
+        <script src="/js/flot/jquery.flot.cust.min.js"></script>
+        <script src="/js/flot/jquery.flot.resize.min.js"></script>
+        <script src="/js/flot/jquery.flot.tooltip.min.js"></script>     
+        <!-- Vector Maps Plugin: Vectormap engine, Vectormap language -->
+        <script src="/js/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="/js/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+        <!-- Full Calendar -->
+        <script src="/vendor//fullcalendar/js/jquery.fullcalendar.min.js"></script>
+        <script src="/js/json2.js"></script>
+        <script src="/js/underscore-1.3.1.js"></script>
+        <script src="/js/backbone-min.js"></script>    
+        <script src="/js/accordionize.js"></script>
+        <script src="/js/ia.js"></script>
+        <script src="/js/jquery.cookie.js"></script>
+        <!--HEADSCRIPT START-->
+        <?php echo $this->headScript(); ?>
+        <!--HEADSCRIPT END-->
+        <script>
+                $(document).ready(function() {
+                    
+                    <?php
+                        $session = new Zend_Session_Namespace('Ia_View_Helper_Alert');
+                        if(!isset($session->alerts))
+                            $session->alerts = array();
+                        if(sizeof($session->alerts)>0):        
+                            foreach($session->alerts as $key=>$alert):
+                                if($alert['type'] == "success"):
+                                    $color = "#739E73";
+                                elseif ($alert['type'] == "error" || $alert['type'] == "danger"):
+                                    $color = "#c26565";
+                                elseif ($alert['type'] == "warning"):
+                                    $color = "#efe1b3";
+                                elseif ($alert['type'] == "info" || $alert['type'] == "INFORMATION"):
+                                    $color = "#d6dde7";
+                                endif;
+                                ?>
+                                $.smallBox({
+                                        title : "<?php echo ($alert['heading']) ? $alert['heading'] : "Notification"; ?>",
+                                        content : "<?=$alert['message']?>",
+                                        color : "<?php echo $color; ?>",
+                                        iconSmall : "fa fa-times",
+                                        timeout : 5000
+                                });
+                                <?php unset($session->alerts[$key]); 
+                            endforeach; 
+                        endif; ?>
+                });
+        </script>
+    <?=$this->envBar();?>
+    </body>
+</html>

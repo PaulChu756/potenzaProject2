@@ -1,0 +1,46 @@
+<?php if($this->messages){ ?>
+    <ul class="notification-body">
+        <?php 
+        foreach($this->messages as $message){ 
+            if( $this->view_type == "sent"){
+                $user = $message->recipient_user;
+            } else {
+                $user = $message->origin_user;
+            };
+            ?>
+            <li>
+                <span <?php if($message->dismissed == false) { ?>class="unread"<?php } ?>>
+                <a href="/message/view/id/<?php echo $message->id; ?>" class="msg">
+                    <img src="/img/male.png" alt="" class="air air-top-left margin-top-5" width="40" height="40" />
+                    <span class="from"><?php echo $user->first_name; ?>  <?php echo $user->last_name; ?> <i class="icon-paperclip"></i></span>
+                    <time>
+                    <?php
+                        if($message->created_at) {
+                            echo date('d D M Y', strtotime($message->created_at->format('m/d/Y'))); 
+                        }
+                    ?>
+                    </time>
+                    <span class="subject"><?=$message->subject;?></span>
+                </a>
+                <hr />
+                <?php if($this->acl(null,'message_dismiss-message') && $message->dismissed==false && \Zend_Registry::get('auth')->id == $message->recipient_user->id){ ?>
+                    <a class="pull-left" style="margin-left:10px" href="<?php echo $this->url(array('controller'=>'message','action'=>'dismiss-message','id'=>$message->id),NULL,TRUE); ?>" onclick="return confirm('Are you sure you want to dismiss this message without reading it?');">
+                        <i class="fa fa-eye-slash"></i> Dismiss</a>
+                <?php } ?>
+                <?php if($this->acl(null,'message_archive') && \Zend_Registry::get('auth')->id == $message->recipient_user->id){ ?>
+                <a class="pull-left" style="margin-left:10px" href="<?php echo $this->url(array('controller'=>'message','action'=>'archive','id'=>$message->id),NULL,TRUE); ?>">
+                    <i class="glyphicon glyphicon-folder-open"></i> Archive</a>
+                <?php } ?>
+                <?php if($message->link && $this->acl($message->link) && $this->acl(null,'message_follow-link')){?>
+                    <a class="pull-left" style="margin-left:10px" href="<?=$this->url(array('action'=>'follow-link','id'=>$message->id));?>"><i class="<?=($message->follow_link_icon) ? $message->follow_link_icon : 'glyphicon glyphicon-link'?>"></i> <?=($message->follow_link_text) ? $message->follow_link_text : 'Follow Link';?></a>
+                <?php } ?>
+                </span>
+            </li>
+        <?php } ?>
+    </ul>
+<?php } else { ?>
+<div class="alert alert-transparent">
+    <h4>No messages in this folder.</h4>
+    </div>
+    <i class="fa fa-lock fa-4x fa-border"></i>
+<?php } ?>

@@ -1,0 +1,24 @@
+<?php
+if(isset($this->records)){
+    $i = 0;
+    $results = array();
+    if (count($this->records)){
+        foreach ($this->records as $item){
+            foreach($this->restColumns as $key=>$title) {
+                //json gets confused by the periods
+                $results[$i][str_replace('.','_',$key)] = $this->getDoctrineEntityValue($item,$key,$this->relations,'_');
+            }
+            $i++;
+        }
+    }
+    echo json_encode($results);     
+    exit;
+} elseif(isset($this->record)) {
+    $result = array();
+    foreach($this->restColumns as $key=>$title) {
+        //json gets confused by the periods
+        $result[str_replace('.','_',$key)] = $this->getDoctrineEntityValue($this->record,$key,$this->relations,'_');
+    }
+    echo json_encode($result);
+    exit;
+}

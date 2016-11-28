@@ -1,0 +1,55 @@
+# MYSQL SCRIPT TO SYNC ADWORDS LOCATION DATA WITH OUR ENTITY TABLE
+# Google AdWords Location Data Downloaded Nightly To: /tmp/adwords_locations.csv
+
+# CREATE TEMPORARY TABLE TO HOUSE ADWORDS LOCATIONS
+CREATE TEMPORARY TABLE `adwords_locations` (
+  `criteria_id` int(11) NOT NULL,
+  `name` varchar(60) DEFAULT NULL,
+  `canonical_name` varchar(255) DEFAULT NULL,
+  `parent_criteria_id` int(11) DEFAULT NULL,
+  `country_code` varchar(60) DEFAULT NULL,
+  `target_type` varchar(60) DEFAULT NULL,
+  `status` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`criteria_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+# SHOULD NOT BE NECESSARY BUT COULDN'T HURT
+TRUNCATE TABLE adwords_locations;
+
+# LOAD ADWORDS DATA INTO TEMPORARY TABLE
+LOAD DATA INFILE '/tmp/adwords_locations.csv' INTO TABLE adwords_locations
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+IGNORE 1 LINES;
+
+# SET FOREIGN KEY CHECKS TO 0 TO PREVENT ERRORS
+SET FOREIGN_KEY_CHECKS = 0;
+
+# SET ALL TO INACTIVE IN PREPARATION FOR UPDATE; UPDATE WILL RESET ACTIVE RECORDS TO 1
+UPDATE `locations` SET active = 0;
+
+# UPDATE OUR ENTITY TABLE WITH THESE RECORDS; SCHEDULED FOR REMOVAL BECOME INACTIVE IMMEDIATELY
+REPLACE INTO `locations` (
+`criteria_id`,
+`parent_criteria_id`,
+`name`,
+`canonical_name`,
+`country_code`,
+`target_type`,
+`active`,
+`updated_at`
+) SELECT 
+`criteria_id`,
+`parent_criteria_id`,
+`name`,
+`canonical_name`,
+`country_code`,
+`target_type`,
+case when status = 'Active' then 1 else 0 end as status,
+NOW() FROM `adwords_locations`;
+
+# ANY NEW RECORDS WILL HAVE TIMESTAMP POPULATED
+UPDATE `locations` SET created_at = NOW() WHERE created_at IS NULL;
+
+# REINSTATE FOREIGN KEY CHECKS
+SET FOREIGN_KEY_CHECKS = 1;

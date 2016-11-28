@@ -1,0 +1,41 @@
+<?php if(!\Ia\Config::get('set_headings_in_layout') || !\Ia\Config::get('set_index_actions_in_layout')): ?>
+<div class="row">
+    <div class="col-md-6">
+    <?php if(!\Ia\Config::get('set_headings_in_layout')): ?>
+        <h1>Create <?=$this->singular?></h1>
+    <?php endif; ?>
+    </div>
+    <div class="col-md-6">
+    <?php 
+    if(!\Ia\Config::get('set_index_actions_in_layout')):
+    foreach($this->indexActions as $indexAction):
+        if($this->acl(null,null,$indexAction['request'])): 
+        ?>
+            <a style="margin-left: 5px;" href="<?=$this->url($indexAction['request'],null,true)?>" class="pull-right <?=$indexAction['btnClass'];?>">
+                <i class="<?=$indexAction['iconClass'];?>"></i> <?=$indexAction['label'];?></a>
+        <?php
+        endif;
+    endforeach;
+    $module = ($this->params['module']=='default') ? '' : $this->params['module'].'_';
+    $resource_prefix = $module.$this->params['controller'].'_';
+    if($this->acl(null,$resource_prefix.'view')):
+    ?>    
+    <a style="margin-left: 5px;" class="btn btn-warning pull-right" href="<?=$this->url(array('action'=>'view'))?>"><i class="glyphicon glyphicon-eye-open"></i> View this <?=ucwords($this->singular)?></a>
+    <?php endif; 
+    ?>
+    <div style="margin-left: 5px;" class="pull-right" style="margin-right:5px">
+        <?=$this->backButton();?>
+    </div>
+    <?php 
+    endif;
+    ?>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php 
+try {
+    echo $this->form;
+} catch (\Exception $e) {
+    echo $e->getMessage();
+}

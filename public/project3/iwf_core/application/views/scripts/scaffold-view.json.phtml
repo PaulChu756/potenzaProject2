@@ -1,0 +1,23 @@
+<?
+header_remove();
+$arr = array();
+if(is_object($this->record)){
+    foreach($this->detailColumns as $key=>$title){
+        $value = $this->getDoctrineEntityValue($this->record,$key,$this->relations,$this->formatters);
+        if(isset($this->formats) && isset($this->formats[$key])){                
+            if(is_object($this->formats[$key][0])){
+                $this->formats[$key][0]->setView($this);
+                $parts = explode('_',get_class($this->formats[$key][0]));
+                $function_name = lcfirst(array_pop($parts));
+                $value = $this->formats[$key][0]->{$function_name}($value);
+            } else {
+                $value = $this->{$this->formats[$key][0]}($value);
+            }
+        }
+        $arr[str_replace('.','_',$key)] = $value;
+    }
+}
+
+header('Content-type: application/json');
+echo json_encode($arr);
+exit;

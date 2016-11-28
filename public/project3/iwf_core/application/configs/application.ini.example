@@ -1,0 +1,207 @@
+[production]
+; application config
+title = Push Boat
+resources.doctrine.cache.instances.default.namespace    = "CHANGE_TO_SOMETHING_UNIQUE_"
+
+; route to use as index action:
+;index = MODULE_CONTROLLER_ACTION
+; set to true if you wish to do a full redirect; otherwise it will embed action using action helper
+;redirect_index = 1 
+
+; cron.ObserverClass = m h dom mon dow
+; add this line to your crontab to activate:
+; * * * * * wget -O - -q -t 1 http://YOURDOMAIN.com/cron > /dev/null 2>&1
+cron.\Ia\Observer\FlushCache = 0 0 * * *
+cron.\Ia\Observer\EmailMessages = * * * * *
+
+; dynamic discriminator map
+; can also be used in module.ini files
+; discr_map.users.your_user = \Path\To\Your\User\Class
+
+; acl config
+acl.roles.guest =
+acl.roles.level1[] = guest
+acl.roles.administrator[] = level1
+acl.roles.administrator[] = guest
+
+acl.default_role = guest
+acl.resources.log_index.allow[] = administrator
+acl.resources.log_view.allow[] = administrator
+
+acl.resources.message_index.allow[] = level1
+acl.resources.message_view.allow[] = level1
+acl.resources.message_create.allow[] = level1
+acl.resources.message_delete.allow[] = level1
+acl.resources.message_view-messages.allow[] = level1
+acl.resources.message_dismiss-message.allow[] = level1
+acl.resources.message_archive.allow[] = level1
+acl.resources.message_follow-link.allow[] = level1
+
+acl.resources.index_index.allow[] = level1
+acl.resources.support_index.allow[] = level1
+acl.resources.settings_clear-cache.allow[] = administrator
+acl.resources.user_create.allow[] = administrator
+acl.resources.user_index.allow[] = administrator
+acl.resources.user_update.allow[] = administrator
+acl.resources.user_delete.allow[] = administrator
+acl.resources.user_password-reset.allow[] = guest
+acl.resources.asset_load.allow[] = guest
+acl.resources.asset_upload.allow[] = level1
+acl.resources.user_password-assistance.allow[] = guest
+
+;navigation config
+
+nav.index_index.label = Home
+nav.index_index.order = 1
+
+nav.user_index.label = Users
+nav.user_index.order = 2
+
+resources.view[] =
+
+; Module setup (@see http://blog.vandenbos.org/2009/07/07/zend-framework-module-config/)
+resources.modulesetup[] =
+; THIS MUST BE DONE FOR EACH MODULE UNTIL I FIND A BETTER WAY
+
+pluginPaths.Ia_Application_Resource = "Ia/Application/Resource"
+
+; IA Front Controller Plugins
+resources.frontController.plugins.Auth = "Ia_Controller_Plugin_Auth"
+resources.frontController.plugins.Acl = "Ia_Controller_Plugin_Acl"
+resources.frontController.plugins.Nav = "Ia_Controller_Plugin_Nav"
+;if using smartadmin
+;resources.frontController.plugins.Nav = "Ia_Controller_Plugin_SmartAdminNav"
+resources.frontController.plugins.Assets = "Ia_Controller_Plugin_Assets"
+
+;--------------------------------------------------------------------------------------
+; email settings - plz don't h@ck m3
+;--------------------------------------------------------------------------------------
+resources.mail.transport.host = "smtp.gmail.com"
+resources.mail.transport.notification = "developer@informationarchitech.com"
+resources.mail.transport.auth = "login"
+resources.mail.transport.username = "developer@informationarchitech.com"
+resources.mail.transport.password = "S8vF3hSx81k"
+resources.mail.transport.ssl = "tls"
+resources.mail.transport.port = 587
+resources.mail.defaultFrom.email = "developer@informationarchitech.com"
+resources.mail.defaultFrom.name = "information archiTECH Development Team"
+resources.mail.defaultReplyTo.email = "developer@informationarchitech.com"
+resources.mail.defaultReplyTo.name = "information archiTECH Development Team"
+resources.mail.defaultRecipient.email = "developer@informationarchitech.com"
+resources.mail.defaultRecipient.name = "information archiTECH Development Team"
+; this can be helpful in dev environments to ensure live users are not emailed
+resources.mail.alwaysRouteToAdmin = 0
+resources.mail.alwaysUseDefaultAsSender = 0
+resources.mail.includeHostnameInSubject = 1
+
+phpSettings.display_startup_errors = 0
+phpSettings.display_errors = 0
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Application"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
+
+resources.layout.layoutPath = APPLICATION_PATH "/views/layouts/"
+
+; information archiTECH library
+autoloaderNamespaces[] = "Ia"
+resources.view.helperPath.Ia_View_Helper = "Ia/View/Helper"
+
+autoloaderNamespaces[] = "Bisna"
+autoloaderNamespaces[] = "Symfony"
+autoloaderNamespaces[] = "Doctrine"
+autoloaderNamespaces[] = "EasyBib"
+
+;; added for Doctrine2 Integration
+;pluginPaths.Bisna_Application_Resource = "Bisna/Application/Resource"
+pluginPaths.Bisna\Application\Resource\ = "Bisna/Application/Resource"
+
+; ------------------------------------------------------------------------------
+; Doctrine Cache Configuration
+; ------------------------------------------------------------------------------
+
+; Points to default cache instance to be used. Optional is only one cache is defined
+resources.doctrine.cache.defaultCacheInstance = default
+
+; Cache Instance configuration for "default" cache
+resources.doctrine.cache.instances.default.adapterClass = "Doctrine\Common\Cache\ApcCache"
+
+; ------------------------------------------------------------------------------
+; Doctrine DBAL Configuration
+; ------------------------------------------------------------------------------
+
+; Points to default connection to be used. Optional if only one connection is defined
+resources.doctrine.dbal.defaultConnection = default
+
+; PRODUCTION Database configuration
+;resources.doctrine.dbal.connections.default.parameters.wrapperClass = ""
+
+; ------------------------------------------------------------------------------
+; Doctrine ORM Configuration
+; ------------------------------------------------------------------------------
+
+; Points to default EntityManager to be used. Optional if only one EntityManager is defined
+resources.doctrine.orm.defaultEntityManager = default
+
+; EntityManager configuration for "default" manager
+resources.doctrine.orm.entityManagers.default.connection     = default
+resources.doctrine.orm.entityManagers.default.proxy.autoGenerateClasses = true
+resources.doctrine.orm.entityManagers.default.proxy.namespace           = "Ia\Entity\Proxy"
+resources.doctrine.orm.entityManagers.default.proxy.dir                 = APPLICATION_PATH "/../library/Ia/Entity/Proxy"
+
+resources.doctrine.orm.entityManagers.default.metadataDrivers.annotationRegistry.annotationFiles[]     = APPLICATION_PATH "/../library/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php"
+resources.doctrine.orm.entityManagers.default.metadataDrivers.annotationRegistry.annotationNamespaces.0.namespace   = "Gedmo"
+resources.doctrine.orm.entityManagers.default.metadataDrivers.annotationRegistry.annotationNamespaces.0.includePath = APPLICATION_PATH "/../library"
+
+resources.doctrine.orm.entityManagers.default.metadataDrivers.drivers.0.adapterClass          = "Doctrine\ORM\Mapping\Driver\AnnotationDriver"
+resources.doctrine.orm.entityManagers.default.metadataDrivers.drivers.0.mappingNamespace      = "Ia\Entity"
+resources.doctrine.orm.entityManagers.default.metadataDrivers.drivers.0.mappingDirs[]         = APPLICATION_PATH "/../library/Ia/Entity"
+resources.doctrine.orm.entityManagers.default.metadataDrivers.drivers.0.annotationReaderClass = "Doctrine\Common\Annotations\AnnotationReader"
+resources.doctrine.orm.entityManagers.default.metadataDrivers.drivers.0.annotationReaderCache = default
+
+;GEDMO extensions
+autoloaderNamespaces[] = "Gedmo"
+resources.doctrine.dbal.connections.default.eventSubscribers[] = "\Gedmo\SoftDeleteable\SoftDeleteableListener"
+resources.doctrine.dbal.connections.default.eventSubscribers[] = "\Gedmo\Timestampable\TimestampableListener"
+resources.doctrine.orm.entityManagers.default.filters.soft-deleteable = "\Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter"
+
+;IA Custom Functions
+resources.doctrine.orm.entityManagers.default.DQLFunctions.string.GROUP_CONCAT = "Ia\Doctrine\Query\Mysql\GroupConcat"
+resources.doctrine.orm.entityManagers.default.DQLFunctions.string.YEAR = "Ia\Doctrine\Query\Mysql\Year"
+resources.doctrine.orm.entityManagers.default.DQLFunctions.string.MONTH = "Ia\Doctrine\Query\Mysql\Month"
+resources.doctrine.dbal.connections.default.eventListeners.loadClassMetadata = "Ia\MappingListener"
+
+resources.modules[] =
+resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
+
+[staging : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1
+
+
+resources.doctrine.dbal.connections.default.parameters.dbname   = "db_etiquette_acadiancontractors_com"
+resources.doctrine.dbal.connections.default.parameters.user = "infoarch"
+resources.doctrine.dbal.connections.default.parameters.password = "f84kgfdE$dg"
+
+[testing : production]
+
+resources.doctrine.dbal.connections.default.parameters.driver   = "pdo_sqlite"
+resources.doctrine.dbal.connections.default.parameters.path   = APPLICATION_PATH "/../tests/data/test.db"
+
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+[development : production]
+
+acl.resources.test_begin.allow[] = guest
+
+resources.doctrine.dbal.connections.default.parameters.dbname   = "db_pushboat_com"
+resources.doctrine.dbal.connections.default.parameters.user = "root"
+resources.doctrine.dbal.connections.default.parameters.password = ""
+
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1
