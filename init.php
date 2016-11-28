@@ -12,7 +12,7 @@ $connection = mysqli_connect($host, $user, $password);
 if(!$connection){
 die("Could not connect: " . mysqli_connect_error());}
 else{
-	echo "Connection successfully";
+	echo "Connection successfully \n";
 }
 
 // Drop database
@@ -20,9 +20,9 @@ $dropDB = "DROP DATABASE myDB";
 
 // Check drop database
 if($connection->query($dropDB) === TRUE){
-	 echo "<br>Database myDB was successfully dropped";
+	 echo "Database myDB was successfully dropped \n";
 } else {
-    echo "<br>Error dropping database: " . $connection->error;
+    echo "Error dropping database: \n" . $connection->error;
 }
 
 //Create Database called "myDB"
@@ -30,9 +30,9 @@ $db = "CREATE DATABASE IF NOT EXISTS myDB";
 
 //Check Datebase
 if($connection->query($db) === TRUE){
-	echo "<br>Database created successfully";
+	echo "Database created successfully \n";
 } else {
-	echo "<br>Error creating database: " . $connection->error;
+	echo "Error creating database: \n" . $connection->error;
 }
 
 // Select Database
@@ -69,31 +69,31 @@ date_visited varchar(40) NOT NULL
 //Check States Table
 if($connection->query($statesTable) === TRUE) 
 {
-	echo "<br>States Table created successfully";
+	echo "States Table created successfully \n";
 }
 else
 {
-	echo "<br> States Table wasn't created" . $connection->error;
+	echo "States Table wasn't created \n" . $connection->error;
 }
 
 //Check People Table
 if($connection->query($peopleTable) === TRUE) 
 {
-	echo "<br> People Table created successfully";
+	echo "People Table created successfully \n";
 }
 else
 {
-	echo "<br> People Table wasn't created" . $connection->error;
+	echo "People Table wasn't created \n" . $connection->error;
 }
 
 //Check Visit Table
 if($connection->query($visitTable) === TRUE) 
 {
-	echo "<br> Visit Table created successfully";
+	echo "Visit Table created successfully \n";
 }
 else
 {
-	echo "<br> Visit Table wasn't created" . $connection->error;
+	echo "Visit Table wasn't created \n" . $connection->error;
 }
 
 // Insert data into states table
@@ -144,12 +144,12 @@ $insertData .= "INSERT INTO Visits (p_id, s_id, date_visited)
 if($connection->multi_query($insertData) === TRUE)
 {
 	$lastID = $connection->insert_id;
-	echo "<br> insertData create successfully. Last inserted ID is: " . $lastID;
+	echo "insertData create successfully. Last inserted ID is: \n" . $lastID;
 }
 
 else
 {
-	echo "<br>Error: " . $connection->error;
+	echo "Error: \n" . $connection->error;
 }
 
 //Close Connection
