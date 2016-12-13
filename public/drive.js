@@ -109,7 +109,7 @@ function addPerson()
 {
 	$.ajax({
 		type: "POST",
-		url: "api/people", // api/people
+		url: "api/people",
 		data: $("#personForm").serialize(),
 		dataType: "json",
 		 success: function(data)
@@ -119,12 +119,6 @@ function addPerson()
 			alert("You have added a person");
 			populatePeople();
 			displayData();
-		},
-		 error: function(data)
-		{
-			console.log(data);
-			console.log($("#personForm").serialize());
-			console.log("error");
 		}
 	});
 }
@@ -134,8 +128,7 @@ function addVisit()
 {
 	$.ajax({
 		type: "POST",
-		url: "api/visits", // api/visits
-		//data: $("#humanNameDropDown, #stateNameDropDown, #visitForm").serialize(),
+		url: "api/visits",
 		data: $("#visitForm").serialize(),
 		dataType: "json",
 		success: function(data)
@@ -143,14 +136,8 @@ function addVisit()
 			console.log(data);
 			console.log($("#visitForm").serialize());
 			alert("You have added a visit");
-			//populatePeople();
-			//displayData();
-		},
-		error: function(data)
-		{
-			console.log(data);
-			console.log($("#visitForm").serialize());
-			console.log("error");
+			populatePeople();
+			displayData();
 		}
 	});
 }
