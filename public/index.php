@@ -17,7 +17,7 @@
 			<br>Step 2: Add a person to the Database
 			<br>Step 3: Add a visit to a person
 			<br>Step 4: Select a human!
-			</p>	
+			</p>
 		</div>
 	</body>
 </html>
@@ -27,8 +27,8 @@
 	<div class="modal fade" id="person" tabindex="-1" role="dialog" aria-labelledby="personLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-			
-				<div class="modal-header"> 
+
+				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">Add a Person!</h4>
 				</div>
@@ -52,7 +52,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 
-				<div class="modal-header"> 
+				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">Add a Visit!</h4>
 				</div>
@@ -83,7 +83,7 @@
 		<br><br>Select a human and learn where they're from and favor food <br><br>
 		<div id="displayInfo">Selected person info will be here</div>
 		<br><br><select id="SelectHumanDropDown" name="SelectHumanDropDown" class="btn btn-success dropdown-toggle">
-		<option>Select a human</option></select>	
+		<option>Select a human</option></select>
 	</form>
 </center>
 

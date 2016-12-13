@@ -27,19 +27,19 @@ function displayData()
 			{
 				var i = $("#SelectHumanDropDown").val();
 				$("#displayInfo").empty();
-				
+
 				var firstName = data[i]["firstname"];
 				var lastName = data[i]["lastname"];
 				var food = data[i]["food"];
 				var stateAbb = data[i]["stateabb"];
 				var stateName = data[i]["statename"];
-				var dateVisit = data[i]["date_visited"]; 
+				var dateVisit = data[i]["date_visited"];
 
 				$("#displayInfo").append(
-				"First name: " + firstName + 
-				"<br> Last name: " + lastName + 
+				"First name: " + firstName +
+				"<br> Last name: " + lastName +
 				"<br> Favorite food: " + food +
-				"<br> Visited : " + stateAbb + " " + stateName + 
+				"<br> Visited : " + stateAbb + " " + stateName +
 				"<br> on " + dateVisit);
 			}
 		});
@@ -111,7 +111,7 @@ function addPerson()
 		type: "POST",
 		url: "api/people", // api/people
 		data: $("#personForm").serialize(),
-		 success: function(data,status,xhr) 
+		 success: function(data,status,xhr)
 		{
 			console.log(data);
 			console.log(status);
@@ -121,17 +121,17 @@ function addPerson()
 			populatePeople();
 			displayData();
 		},
-		 error: function(data,status,xhr) 
+		 error: function(data,status,xhr)
 		{
 			console.log(data);
 			console.log(status);
 			console.log(xhr);
 			console.log($("#personForm").serialize());
 			console.log("error");
-			populatePeople();
-			displayData();
+			//populatePeople();
+			//displayData();
 		}
-	});	
+	});
 }
 
 //Add visit to database
