@@ -68,7 +68,7 @@
 					Date Visited:<br>
 					Format: YYYY/MM/DD<br>
 					Example: 1994/07/14<br>
-					<input type="text" id="visit" name="visit"><br><br>
+					<input type="text" id="dateVisit" name="dateVisit"><br><br>
 					<button type="submit" id="addVisitSubmit" name="addVisitSubmit" class="btn btn-success" data-dismiss="modal">Submit</button>
 					</form>
 				</div>

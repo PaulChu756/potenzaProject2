@@ -208,7 +208,7 @@ function insertPerson()
 
 		else
 		{
-			echo "Error: " . $sql . "<br>" . $connection->error;
+			echo json_encode("Error: " . $sql . "<br>" . $connection->error);
 		}
 }
 
@@ -219,19 +219,19 @@ function insertVisit()
 
 		$personEnter = $_POST["humanNameDropDown"];
 		$stateEnter = $_POST["stateNameDropDown"];
-		$visitEnter = $_POST["visit"];
+		$visitEnter = $_POST["dateVisit"];
 
-		$visitSql = "INSERT INTO Visits(p_id, s_id, date_visited)
+		$sql = "INSERT INTO Visits(p_id, s_id, date_visited)
 		VALUES('$personEnter', '$stateEnter', '$visitEnter')";
 
 		if(mysqli_query($connection, $sql))
 		{
-				echo json_encode("You have added a visit: " . "Person Entered: ". $personEnter . " State Entered: ". $stateEnter . " Visit Entered: " . $visitEnter);
+				echo json_encode("You have added a visit: Person Entered: ". $personEnter . " State Entered: ". $stateEnter . " Visit Entered: " . $visitEnter);
 		}
 
 		else
 		{
-			echo "Error: " . $sql . "<br>" . $connection->error;
+			echo json_code("Error: " . $sql . "<br>" . $connection->error);
 		}
 }
 
