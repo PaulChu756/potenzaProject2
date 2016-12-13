@@ -13,17 +13,17 @@ $segments = explode('/', $requestURI['path']);
 $apiVars = [];
 
 $i = 2;
-while($i < count($segments)) 
-{    
+while($i < count($segments))
+{
 	if($segments[$i+1])
-	{  
-		$apiVars[$segments[$i]] = $segments[$i+1];  
-		$i += 2;    
+	{
+		$apiVars[$segments[$i]] = $segments[$i+1];
+		$i += 2;
 	}
-	else 
-	{  
-		$apiVars[$segments[$i]] = null;  
-		$i++;    
+	else
+	{
+		$apiVars[$segments[$i]] = null;
+		$i++;
 	}
 }
 
@@ -35,7 +35,7 @@ if($requestMethod === "GET")
 {
 	//check people exist
 	if(array_key_exists("people", $apiVars))
-	{	
+	{
 		//get all people
 		if($apiVars["people"] == null)
 		{
@@ -125,7 +125,7 @@ function getPeople($id=0)
 	{
 		$resultSql.=" WHERE id=". $id;
 	}
-	
+
 	$response = array();
 	$query = mysqli_query ($connection, $resultSql) or die(mysqli_error($connection));
 	while($row = mysqli_fetch_array($query, true))
@@ -187,8 +187,6 @@ function getVisits($id=0)
 //insert a Person //api/people
 function insertPerson()
 {
-	try
-	{
 		global $connection;
 
 		$firstNameEnter = $_POST["firstName"];
@@ -198,59 +196,44 @@ function insertPerson()
 		if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter))
 		{
 			// Insert values into table
-			$sql = "INSERT INTO People (firstname, lastname, food) 
+			$sql = "INSERT INTO People (firstname, lastname, food)
 			VALUES ('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
 
 			// Check if insert is good
 			if(mysqli_query($connection, $sql))
 			{
-				echo "You have added a friend: " . " First Name: ". $firstNameEnter . " Last Name: ". $lastNameEnter . " Food: " . $foodEnter;
+				echo json_encode("You have added a friend: " . " First Name: ". $firstNameEnter . " Last Name: ". $lastNameEnter . " Food: " . $foodEnter);
 			}
 		}
-		
-		else 
+
+		else
 		{
 			echo "Error: " . $sql . "<br>" . $connection->error;
 		}
-	}
-	catch(Exception $e)
-	{
-		echo json_encode($e->getMessage());
-	}
-	
 }
 
 // Insert a Visit //api/visits
 function insertVisit()
 {
-	try
-	{
 		global $connection;
 
 		$personEnter = $_POST["humanNameDropDown"];
 		$stateEnter = $_POST["stateNameDropDown"];
 		$visitEnter = $_POST["visit"];
-			
+
 		$visitSql = "INSERT INTO Visits(p_id, s_id, date_visited)
 		VALUES('$personEnter', '$stateEnter', '$visitEnter')";
 
-		if($connection->query($visitSql) == FALSE)
+		if(mysqli_query($connection, $sql))
 		{
-			echo "Error: " . $visitSql . "<br>" . $connection->error;
+				echo json_encode("You have added a visit: " . "Person Entered: ". $personEnter . " State Entered: ". $stateEnter . " Visit Entered: " . $visitEnter);
 		}
 
 		else
 		{
-			echo "You have added a visit";
+			echo "Error: " . $sql . "<br>" . $connection->error;
 		}
-	}
-	catch(Exception $e)
-	{
-		echo json_encode($e->getMessage());
-	}
-	
 }
 
 $connection->close();
 ?>
-

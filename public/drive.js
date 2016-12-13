@@ -7,6 +7,7 @@ $(document).ready(function(){
 	$('#addPersonSubmit').click(function(e){
 		e.preventDefault();
 		addPerson();
+		//addPeople();
 	});
 
 	$('#addVisitSubmit').click(function(e){
@@ -104,6 +105,30 @@ function populateStates()
 	});
 }
 
+function addPeople()
+{
+	$.ajax({
+		type:"POST",
+		url: "/api/people",
+		data:$("#personForm").serialize(),
+		dataType:"json",
+		success: function(data)
+		{
+			console.log(data);
+			console.log($("#personForm").serialize());
+			alert("You have added a person");
+			populatePeople();
+			displayData();
+		},
+		error: function(data)
+		{
+			console.log($("#personForm").serialize());
+			console.log(data);
+			console.log("Error: OH dear lord");
+		}
+	});
+}
+
 //Add person to database
 function addPerson()
 {
@@ -111,25 +136,20 @@ function addPerson()
 		type: "POST",
 		url: "api/people", // api/people
 		data: $("#personForm").serialize(),
-		 success: function(data,status,xhr)
+		dataType: "json",
+		 success: function(data)
 		{
 			console.log(data);
-			console.log(status);
-			console.log(xhr);
 			console.log($("#personForm").serialize());
-			console.log("You have added a person");
+			alert("You have added a person");
 			populatePeople();
 			displayData();
 		},
-		 error: function(data,status,xhr)
+		 error: function(data)
 		{
 			console.log(data);
-			console.log(status);
-			console.log(xhr);
 			console.log($("#personForm").serialize());
 			console.log("error");
-			//populatePeople();
-			//displayData();
 		}
 	});
 }

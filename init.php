@@ -1,5 +1,5 @@
 <?php
-// Define variables. 
+// Define variables.
 $host = "localhost";
 $user = "root";
 $password = "root";
@@ -67,7 +67,7 @@ date_visited varchar(40) NOT NULL
 )";
 
 //Check States Table
-if($connection->query($statesTable) === TRUE) 
+if($connection->query($statesTable) === TRUE)
 {
 	echo "States Table created successfully \n";
 }
@@ -77,7 +77,7 @@ else
 }
 
 //Check People Table
-if($connection->query($peopleTable) === TRUE) 
+if($connection->query($peopleTable) === TRUE)
 {
 	echo "People Table created successfully \n";
 }
@@ -87,7 +87,7 @@ else
 }
 
 //Check Visit Table
-if($connection->query($visitTable) === TRUE) 
+if($connection->query($visitTable) === TRUE)
 {
 	echo "Visit Table created successfully \n";
 }
@@ -97,47 +97,47 @@ else
 }
 
 // Insert data into states table
-$insertData = "	INSERT INTO States (stateabb, statename) 
+$insertData = "	INSERT INTO States (stateabb, statename)
 				VALUES ('LA', 'Louisiana');";
-$insertData .= "INSERT INTO States (stateabb, statename) 
+$insertData .= "INSERT INTO States (stateabb, statename)
 				VALUES ('FL', 'Florida');";
-$insertData .= "INSERT INTO States (stateabb, statename) 
+$insertData .= "INSERT INTO States (stateabb, statename)
 				VALUES ('TX', 'Texas');";
-$insertData .= "INSERT INTO States (stateabb, statename) 
+$insertData .= "INSERT INTO States (stateabb, statename)
 				VALUES ('NM', 'New Mexico');";
-$insertData .= "INSERT INTO States (stateabb, statename) 
+$insertData .= "INSERT INTO States (stateabb, statename)
 				VALUES ('ID', 'Idaho');";
-$insertData .= "INSERT INTO States (stateabb, statename) 
+$insertData .= "INSERT INTO States (stateabb, statename)
 				VALUES ('IA', 'Iowa');";
-$insertData .= "INSERT INTO States (stateabb, statename) 
+$insertData .= "INSERT INTO States (stateabb, statename)
 				VALUES ('ME', 'Maine');";
-$insertData .= "INSERT INTO States (stateabb, statename) 
+$insertData .= "INSERT INTO States (stateabb, statename)
 				VALUES ('NV', 'Nevada');";
-$insertData .= "INSERT INTO States (stateabb, statename) 
+$insertData .= "INSERT INTO States (stateabb, statename)
 				VALUES ('NY', 'New York');";
-$insertData .= "INSERT INTO States (stateabb, statename) 
+$insertData .= "INSERT INTO States (stateabb, statename)
 				VALUES ('UT', 'Utah');";
 
 // Insert data into people table
-$insertData .= "INSERT INTO People (firstname, lastname, food) 
+$insertData .= "INSERT INTO People (firstname, lastname, food)
 				VALUES ('Paul', 'Chu', 'Rice');";
-$insertData .= "INSERT INTO People (firstname, lastname, food) 
+$insertData .= "INSERT INTO People (firstname, lastname, food)
 				VALUES ('Chui', 'Chu', 'Steak');";
-$insertData .= "INSERT INTO People (firstname, lastname, food) 
+$insertData .= "INSERT INTO People (firstname, lastname, food)
 				VALUES ('Pandalord', 'Chu', 'Cookies');";
-$insertData .= "INSERT INTO People (firstname, lastname, food) 
+$insertData .= "INSERT INTO People (firstname, lastname, food)
 				VALUES ('LordBabyPanda', 'Chu', 'Milk');";
 
 // Insert data into Visits table
-$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited)
 				VALUES ('1', '1', '1994/07/14');";
-$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited)
 				VALUES ('1', '2', '1994/07/14');";
-$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited)
 				VALUES ('2', '10', '1994/07/14');";
-$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited)
 				VALUES ('3', '9', '1994/07/14');";
-$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited) 
+$insertData .= "INSERT INTO Visits (p_id, s_id, date_visited)
 				VALUES ('4', '7', '1994/07/14');";
 
 // Check stateData in table
