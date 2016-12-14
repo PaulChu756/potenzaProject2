@@ -6,11 +6,9 @@ $(document).ready(function(){
 
 	$('#addPersonSubmit').click(function(e){
 		e.preventDefault();
-
 		var checkFirstName = $.trim($('#firstName').val());
 		var checkLastName = $.trim($('#lastName').val());
 		var checkFavoriteFood = $.trim($('#favoriteFood').val());
-
 		if(checkFirstName === '' || checkLastName === '' || checkFavoriteFood === '')
 		{
 			alert("Please fill out all input fields");
@@ -23,9 +21,7 @@ $(document).ready(function(){
 
 	$('#addVisitSubmit').click(function(e){
 		e.preventDefault();
-
 		var checkVisit = $.trim($('#dateVisit').val());
-
 		if(checkVisit === '')
 		{
 			alert("Please fill out all input fields");
@@ -53,7 +49,7 @@ function displayData()
 				var firstName = data[i]["firstname"];
 				var lastName = data[i]["lastname"];
 				var food = data[i]["food"];
-				var stateAbb = data[i]["stateabb"];
+
 				var stateName = data[i]["statename"];
 				var dateVisit = data[i]["date_visited"];
 
@@ -61,8 +57,7 @@ function displayData()
 				"First name: " + firstName +
 				"<br> Last name: " + lastName +
 				"<br> Favorite food: " + food +
-				"<br> Visited : " + stateAbb + " " + stateName +
-				"<br> on " + dateVisit);
+				"<br> Visited the State : " + stateName + " on " + dateVisit);
 			}
 		});
 	});
@@ -77,10 +72,8 @@ function populatePeople()
 		dataType:"json",
 		success : function(data)
 		{
-			//console.log('success');
-			//console.log(data);
-			$("#SelectHumanDropDown").empty();
-			$("#humanNameDropDown").empty();
+			$("#SelectHumanDropDownoption").not("#personOptions").remove();
+			$("#humanNameDropDownoption").not("#personOptions").remove();
 			var len = data.length;
 			for(var i = 0; i < len; i++)
 			{
@@ -107,9 +100,6 @@ function populateStates()
 		dataType:"json",
 		success : function(data)
 		{
-			//console.log('success');
-			//console.log(data);
-			$("#stateNameDropDown").empty();
 			var len = data.length;
 			for(var i = 0; i < len; i++)
 			{
@@ -117,11 +107,6 @@ function populateStates()
 				var stateName = data[i]["statename"];
 				$("#stateNameDropDown").append("<option value='" + id + "'>" + stateName + "</option>");
 			}
-		},
-		error : function(data)
-		{
-			console.log('failed');
-			console.log(data);
 		}
 	});
 }
@@ -158,8 +143,8 @@ function addVisit()
 			console.log(data);
 			console.log($("#visitForm").serialize());
 			alert("You have added a visit");
-			populatePeople();
-			displayData();
+			//populatePeople();
+			//displayData();
 		}
 	});
 }

@@ -60,7 +60,7 @@
 				<div class="modal-body">
 					<form method="post" id="visitForm">
 					<select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle">
-					<option>Select a human</option></select>	<br><br><br><br><br><br><br>
+					<option><div id="personOptions"> Select a human </div></option></select>	<br><br><br><br><br><br><br>
 
 					<select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle">
 					<option>Select a State</option> </select>	<br><br><br><br><br><br><br><br><br><br><br>
@@ -83,7 +83,7 @@
 		<br><br>Select a human and learn where they're from and favor food <br><br>
 		<div id="displayInfo">Selected person info will be here</div>
 		<br><br><select id="SelectHumanDropDown" name="SelectHumanDropDown" class="btn btn-success dropdown-toggle">
-		<option>Select a human</option></select>
+		<option><div id="personOptions"> Select a human </div></option></select>
 	</form>
 </center>
 
