@@ -6,12 +6,34 @@ $(document).ready(function(){
 
 	$('#addPersonSubmit').click(function(e){
 		e.preventDefault();
-		addPerson();
+
+		var checkFirstName = $.trim($('#firstName').val());
+		var checkLastName = $.trim($('#lastName').val());
+		var checkFavoriteFood = $.trim($('#favoriteFood').val());
+
+		if(checkFirstName === '' || checkLastName === '' || checkFavoriteFood === '')
+		{
+			alert("Please fill out all input fields");
+		}
+		else
+		{
+			addPerson();
+		}
 	});
 
 	$('#addVisitSubmit').click(function(e){
 		e.preventDefault();
-		addVisit();
+
+		var checkVisit = $.trim($('#dateVisit').val());
+
+		if(checkVisit === '')
+		{
+			alert("Please fill out all input fields");
+		}
+		else
+		{
+			addVisit();
+		}
 	});
 });
 
