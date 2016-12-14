@@ -47,17 +47,24 @@ function displayData()
 				var i = $("#SelectHumanDropDown").val();
 				$("#displayInfo").empty();
 
-				var firstName = data[i]["firstname"];
-				var lastName = data[i]["lastname"];
-				var food = data[i]["food"];
-				var stateName = data[i]["statename"];
-				var dateVisit = data[i]["date_visited"];
+				if(data[i] === undefined)
+				{
+					alert ("You need to add a visit");
+				}
+				else
+				{
+					var firstName = data[i]["firstname"];
+					var lastName = data[i]["lastname"];
+					var food = data[i]["food"];
+					var stateName = data[i]["statename"];
+					var dateVisit = data[i]["date_visited"];
 
-				$("#displayInfo").append(
-				"First name: " + firstName +
-				"<br> Last name: " + lastName +
-				"<br> Favorite food: " + food +
-				"<br> Visited the State : " + stateName + " on " + dateVisit);
+					$("#displayInfo").append(
+					"First name: " + firstName +
+					"<br> Last name: " + lastName +
+					"<br> Favorite food: " + food +
+					"<br> Visited the State : " + stateName + " on " + dateVisit);
+				}
 			}
 		});
 	});
