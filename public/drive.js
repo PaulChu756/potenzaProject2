@@ -43,6 +43,7 @@ function displayData()
 			dataType: "json",
 			success: function(data)
 			{
+				var dataLength = data.length;
 				var i = $("#SelectHumanDropDown").val();
 				$("#displayInfo").empty();
 
@@ -50,14 +51,22 @@ function displayData()
 				var lastName = data[i]["lastname"];
 				var food = data[i]["food"];
 
-				var stateName = data[i]["statename"];
-				var dateVisit = data[i]["date_visited"];
-
 				$("#displayInfo").append(
 				"First name: " + firstName +
 				"<br> Last name: " + lastName +
-				"<br> Favorite food: " + food +
-				"<br> Visited the State : " + stateName + " on " + dateVisit);
+				"<br> Favorite food: " + food);
+
+				for(var i = 0; i < dataLength; i++)
+				{
+					var stateName = data[i]["statename"];
+					var dateVisit = data[i]["date_visited"];
+
+					$("#displayInfo").append(
+					"First name: " + firstName +
+					"<br> Last name: " + lastName +
+					"<br> Favorite food: " + food +
+					"<br> Visited the State : " + stateName + " on " + dateVisit);
+				}
 			}
 		});
 	});
