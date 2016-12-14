@@ -72,8 +72,9 @@ function populatePeople()
 		dataType:"json",
 		success : function(data)
 		{
-			$("#SelectHumanDropDownoption").not("#personOptions").remove();
-			$("#humanNameDropDownoption").not("#personOptions").remove();
+			$("#SelectHumanDropDown option").not("#personOptions").remove();
+			$("#humanNameDropDown option").not("#personOptions").remove();
+
 			var len = data.length;
 			for(var i = 0; i < len; i++)
 			{
