@@ -6,30 +6,12 @@ $(document).ready(function(){
 
 	$('#addPersonSubmit').click(function(e){
 		e.preventDefault();
-		var checkFirstName = $.trim($('#firstName').val());
-		var checkLastName = $.trim($('#lastName').val());
-		var checkFavoriteFood = $.trim($('#favoriteFood').val());
-		if(checkFirstName === '' || checkLastName === '' || checkFavoriteFood === '')
-		{
-			alert("Please fill out all input fields");
-		}
-		else
-		{
 			addPerson();
-		}
 	});
 
 	$('#addVisitSubmit').click(function(e){
 		e.preventDefault();
-		var checkVisit = $.trim($('#dateVisit').val());
-		if(checkVisit === '')
-		{
-			alert("Please fill out all input fields");
-		}
-		else
-		{
 			addVisit();
-		}
 	});
 });
 
@@ -47,12 +29,6 @@ function displayData()
 				var i = $("#SelectHumanDropDown").val();
 				$("#displayInfo").empty();
 
-				if(data[i] === undefined)
-				{
-					alert ("You need to add a visit");
-				}
-				else
-				{
 					var firstName = data[i]["firstname"];
 					var lastName = data[i]["lastname"];
 					var food = data[i]["food"];
@@ -64,7 +40,6 @@ function displayData()
 					"<br> Last name: " + lastName +
 					"<br> Favorite food: " + food +
 					"<br> Visited the State : " + stateName + " on " + dateVisit);
-				}
 			}
 		});
 	});
@@ -127,13 +102,21 @@ function addPerson()
 		url: "api/people",
 		data: $("#personForm").serialize(),
 		dataType: "json",
-		 success: function(data)
+		success: function(data)
 		{
 			console.log(data);
 			console.log($("#personForm").serialize());
 			alert("You have added a person");
 			populatePeople();
 			displayData();
+		},
+		error: function(data, status, xhr)
+		{
+			console.log("Error: ");
+			console.log(data);
+			console.log(status);
+			console.log(xhr);
+			console.log($("#personForm").serialize());
 		}
 	});
 }
@@ -151,8 +134,14 @@ function addVisit()
 			console.log(data);
 			console.log($("#visitForm").serialize());
 			alert("You have added a visit");
-			//populatePeople();
-			//displayData();
+		},
+		error: function(data, status, xhr)
+		{
+			console.log("Error: ");
+			console.log(data);
+			console.log(status);
+			console.log(xhr);
+			console.log($("#personForm").serialize());
 		}
 	});
 }

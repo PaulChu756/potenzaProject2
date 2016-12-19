@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Project 1 with BootStrap</title>
+    <title>Project 2 with BootStrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8"/>
 	<!--Bootstrap CDN method-->

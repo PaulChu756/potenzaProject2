@@ -188,24 +188,24 @@ function getVisits($id=0)
 function insertPerson()
 {
 		global $connection;
-
 		$firstNameEnter = $_POST["firstName"];
 		$lastNameEnter = $_POST["lastName"];
 		$foodEnter = $_POST["favoriteFood"];
 
-		if(!empty($firstNameEnter) && !empty($lastNameEnter) && !empty($foodEnter))
+		if(empty($firstNameEnter) || empty($lastNameEnter) || empty($foodEnter))
 		{
-			// Insert values into table
-			$sql = "INSERT INTO People (firstname, lastname, food)
-			VALUES ('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
-
-			// Check if insert is good
-			if(mysqli_query($connection, $sql))
-			{
-				echo json_encode("You have added a friend: " . " First Name: ". $firstNameEnter . " Last Name: ". $lastNameEnter . " Food: " . $foodEnter);
-			}
+			throw new Exception("Please fill out all inputs", 1);
 		}
 
+		// Insert values into table
+		$sql = "INSERT INTO People (firstname, lastname, food)
+		VALUES ('$firstNameEnter', '$lastNameEnter', '$foodEnter')";
+
+		// Check if insert is good
+		if(mysqli_query($connection, $sql))
+		{
+			echo json_encode("You have added a friend: " . " First Name: ". $firstNameEnter . " Last Name: ". $lastNameEnter . " Food: " . $foodEnter);
+		}
 		else
 		{
 			echo json_encode("Error: " . $sql . "<br>" . $connection->error);
@@ -216,10 +216,14 @@ function insertPerson()
 function insertVisit()
 {
 		global $connection;
-
 		$personEnter = $_POST["humanNameDropDown"];
 		$stateEnter = $_POST["stateNameDropDown"];
 		$visitEnter = $_POST["dateVisit"];
+
+		if(empty($personEnter) || empty($stateEnter) || empty($visitEnter))
+		{
+			throw new Exception("Please fill out all inputs", 1);
+		}
 
 		$sql = "INSERT INTO Visits(p_id, s_id, date_visited)
 		VALUES('$personEnter', '$stateEnter', '$visitEnter')";
@@ -228,10 +232,9 @@ function insertVisit()
 		{
 				echo json_encode("You have added a visit: Person Entered: ". $personEnter . " State Entered: ". $stateEnter . " Visit Entered: " . $visitEnter);
 		}
-
 		else
 		{
-			echo json_code("Error: " . $sql . "<br>" . $connection->error);
+			echo json_encode("Error: " . $sql . "<br>" . $connection->error);
 		}
 }
 
