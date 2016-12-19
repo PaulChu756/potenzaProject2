@@ -35,9 +35,9 @@
 
 				<div class="modal-body">
 					<form method="post" id="personForm">
-					First Name: 	<input type="text" id="firstName" name="firstName">	<br><br>
-					Last Name: 		<input type="text" id="lastName" name="lastName">	<br><br>
-					Favorite Food: 	<input type="text" id="favoriteFood" name="favoriteFood">	<br><br>
+					First Name: 	<input type="text" id="firstName" name="firstName" required="required">	<br><br>
+					Last Name: 		<input type="text" id="lastName" name="lastName" required="required">	<br><br>
+					Favorite Food: 	<input type="text" id="favoriteFood" name="favoriteFood" required="required">	<br><br>
 					<button type="submit" id="addPersonSubmit" name="addPersonSubmit" class="btn btn-success" data-dismiss="modal">Submit</button>
 					</form>
 				</div>
@@ -59,16 +59,16 @@
 
 				<div class="modal-body">
 					<form method="post" id="visitForm">
-					<select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle">
+					<select id="humanNameDropDown" name="humanNameDropDown" class="btn btn-primary dropdown-toggle" required="required">
 					<option id="personOptions"> Select a human </option></select>	<br><br><br><br><br><br><br>
 
-					<select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle">
+					<select id="stateNameDropDown" name="stateNameDropDown" class="btn btn-info dropdown-toggle" required="required">
 					<option>Select a State</option> </select>	<br><br><br><br><br><br><br><br><br><br><br>
 
 					Date Visited:<br>
 					Format: YYYY/MM/DD<br>
 					Example: 1994/07/14<br>
-					<input type="text" id="dateVisit" name="dateVisit"><br><br>
+					<input type="text" id="dateVisit" name="dateVisit" required="required"><br><br>
 					<button type="submit" id="addVisitSubmit" name="addVisitSubmit" class="btn btn-success" data-dismiss="modal">Submit</button>
 					</form>
 				</div>

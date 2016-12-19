@@ -3,15 +3,19 @@ $(document).ready(function(){
 	populatePeople();
 	populateStates();
 	displayData();
+	$("#personForm")[0].reset();
+	$("#visitForm")[0].reset();
 
 	$('#addPersonSubmit').click(function(e){
 		e.preventDefault();
 			addPerson();
+			$("#personForm")[0].reset();
 	});
 
 	$('#addVisitSubmit').click(function(e){
 		e.preventDefault();
 			addVisit();
+			$("#visitForm")[0].reset();
 	});
 });
 
@@ -112,7 +116,7 @@ function addPerson()
 		},
 		error: function(data, status, xhr)
 		{
-			console.log("Error: ");
+			alert("Error: Please fill out all inputs");
 			console.log(data);
 			console.log(status);
 			console.log(xhr);
@@ -137,7 +141,7 @@ function addVisit()
 		},
 		error: function(data, status, xhr)
 		{
-			console.log("Error: ");
+			alert("Error: Please fill out all inputs");
 			console.log(data);
 			console.log(status);
 			console.log(xhr);
