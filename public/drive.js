@@ -23,27 +23,60 @@ $(document).ready(function(){
 function displayData()
 {
 	$("#SelectHumanDropDown").change(function(){
+		var selectPerson = $("#SelectHumanDropDown").val();
 		$.ajax({
 			type: "GET",
-			url: "api/visits",
+			url: "api/visits/" + selectPerson,
 			dataType: "json",
 			success: function(data)
 			{
+				$("#displayPeopleInfo").empty();
+				$("#displayVisitInfo").empty();
 				var dataLength = data.length;
-				var i = $("#SelectHumanDropDown").val();
-				$("#displayInfo").empty();
+				console.log(dataLength);
 
-					var firstName = data[i]["firstname"];
-					var lastName = data[i]["lastname"];
-					var food = data[i]["food"];
-					var stateName = data[i]["statename"];
-					var dateVisit = data[i]["date_visited"];
+				if(dataLength > 0)
+				{
+					var firstName = data[0]["firstname"];
+					var lastName = data[0]["lastname"];
+					var food = data[0]["food"];
 
-					$("#displayInfo").append(
+					$("#displayPeopleInfo").append(
 					"First name: " + firstName +
 					"<br> Last name: " + lastName +
-					"<br> Favorite food: " + food +
-					"<br> Visited the State : " + stateName + " on " + dateVisit);
+					"<br> Favorite food: " + food);
+
+					for(var i = 0; i < dataLength; i++)
+					{
+						var stateName = data[i]["statename"];
+						var dateVisit = data[i]["date_visited"];
+
+						$("#displayVisitInfo").append("Visited the State : " + stateName + " on " + dateVisit + "<br>");
+					}
+				}
+				else
+				{
+					$.ajax({
+						type:"GET",
+						url: "api/people/" + selectPerson,
+						dataType: "json",
+						success: function(data)
+						{
+							$("#displayPeopleInfo").empty();
+							$("#displayVisitInfo").empty();
+
+							var firstName = data[0]["firstname"];
+							var lastName = data[0]["lastname"];
+							var food = data[0]["food"];
+
+							$("#displayPeopleInfo").append(
+							"First name: " + firstName +
+							"<br> Last name: " + lastName +
+							"<br> Favorite food: " + food +
+							"<br> has never travled in their life.");
+						}
+					});
+				}
 			}
 		});
 	});

@@ -81,7 +81,8 @@
 <center>
 	<form>
 		<br><br>Select a human and learn where they're from and favor food <br><br>
-		<div id="displayInfo">Selected person info will be here</div>
+		<div id="displayPeopleInfo">Selected person info will be here</div>
+		<div id="displayVisitInfo"></div>
 		<br><br><select id="SelectHumanDropDown" name="SelectHumanDropDown" class="btn btn-success dropdown-toggle">
 		<option id="personOptions"> Select a human </option></select>
 	</form>
